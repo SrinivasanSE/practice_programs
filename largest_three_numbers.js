@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/find-the-largest-three-elements-in-an-array/
-
+// https://www.geeksforgeeks.org/to-find-smallest-and-second-smallest-element-in-an-array/
+// https://www.geeksforgeeks.org/find-second-largest-element-array/
+// https://www.geeksforgeeks.org/program-to-find-largest-element-in-an-array/
 
 const getThreeLargest = (arr) => {
         let n = arr.length
