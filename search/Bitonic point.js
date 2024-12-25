@@ -30,7 +30,7 @@ findMaximum(arr) {
 }
 
     binarySearch(l, r, arr) {
-        while (l < r) {
+        while (l <= r) {
             const mid = l + Math.floor((r - l)/2)
             if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) {
                 return arr[mid]
