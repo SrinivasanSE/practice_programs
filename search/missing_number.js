@@ -19,7 +19,7 @@ class Solution {
     missingNumber(arr) {
         const n = arr.length + 1
         const sum = arr.reduce((accum, curr) => accum + curr, 0)
-        const expectedSum = ((n)*(n+1))/2
+        const expectedSum = (n*(n+1))/2
         return expectedSum - sum
     }
 }
