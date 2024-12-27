@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/
 
+
+// Hashing for unsorted input
 twoSum(arr, target) {
         const n = arr.length
         if (n <= 1) {
@@ -12,6 +14,31 @@ twoSum(arr, target) {
                 return true
             }
             map.add(arr[i])
+        }
+        
+        return false
+    }
+
+// 2) Two pointer algo for sorted input
+twoSum(arr, target) {
+        const n = arr.length
+        if (n <= 1) {
+            return false
+        }
+        arr.sort((a,b) => a - b) // sort if not sorted
+        
+        let i = 0, j = n - 1
+        while (i < j) {
+            const sum = arr[i] + arr[j]
+            if (sum === target) {
+                return true
+            }
+            
+            if (sum < target) {
+                i++
+            } else {
+                j--
+            }
         }
         
         return false
