@@ -1,4 +1,17 @@
 // https://www.geeksforgeeks.org/find-a-peak-in-a-given-array/
+/*
+
+Key Points:
+If an element is smaller than its next element, at least one peak will exist on the right side of this element.
+
+Why? Because the array increases, and eventually it must decrease somewhere (or end), forming a peak.
+If an element is smaller than its previous element, at least one peak will exist on the left side of this element.
+
+Why? The array decreases, and before the decrease, there must be an increase or start, which forms a peak.
+
+*/
+
+
 
 peakElement(arr) {
         const n = arr.length
