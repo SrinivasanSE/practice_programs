@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/
+// https://www.geeksforgeeks.org/pair-with-given-product-set-1-find-if-any-pair-exists/
 
 
 // Hashing for unsorted input
