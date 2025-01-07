@@ -15,7 +15,7 @@
             map.get(arr[i]).push(i)
         }
         
-        for(let i = 0; i < n - 1; i++) {
+        for(let i = 0; i < n - 2; i++) {
             for(let j = i + 1; j < n; j++) {
                 const sum = arr[i] + arr[j]
                 const reqNum = -sum
