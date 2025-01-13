@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/
+// https://www.geeksforgeeks.org/maximum-element-in-a-sorted-and-rotated-array/
 
 findMin(arr) {
         const n = arr.length
