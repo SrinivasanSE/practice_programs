@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1?page=1&category=Searching&difficulty=Easy&sortBy=submissions
+// Left most and right most index - https://www.geeksforgeeks.org/problems/find-first-and-last-occurrence-of-x0849/1?page=1&category=Searching&difficulty=Easy&sortBy=submissions
 
 class Solution {
     // Function to count the occurrences of x in the array.
