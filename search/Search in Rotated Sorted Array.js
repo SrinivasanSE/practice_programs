@@ -68,19 +68,19 @@ search(arr, key) {
        while (l <= r) {
            const mid = l + Math.floor((r - l)/2)
            
-           if (arr[mid] === key) {
+           if (arr[mid] === key) { // mid is already covered here, so no need to include in below conditions
                return mid
            }
            
            if (arr[l] <= arr[mid]) {
                
-               if (arr[l] <= key && arr[mid] > key) {
+               if (arr[l] <= key && arr[mid] > key) {   // between l & mid
                    r = mid - 1
                } else {
                    l = mid + 1
                }
            } else {
-               if (arr[mid] < key && key <= arr[r]) {
+               if (arr[mid] < key && key <= arr[r]) {  // between mid & r
                    l = mid + 1
                } else {
                    r = mid - 1
