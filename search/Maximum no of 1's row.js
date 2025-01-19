@@ -33,4 +33,22 @@ class Solution{
         
         return res
     }
+
+
+     maxOnes(mat, n, m){
+        let maxCount =-1
+        let r = 0
+        let c = m - 1
+        
+        while (r < n && c >= 0) {
+            if (mat[r][c] === 0) {   // means there are no 1s left anyway once we reach the 0, so we move to the next row
+                r++
+            } else {
+                maxCount = r
+                c--
+            }
+        }
+        
+        return maxCount
+    }
 }
