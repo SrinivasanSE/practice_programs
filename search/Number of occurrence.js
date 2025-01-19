@@ -73,3 +73,38 @@ countFreq(arr, target) {
         
         return count
     }
+
+// https://www.geeksforgeeks.org/problems/first-and-last-occurrences-of-x2041/1?page=2&category=Searching&difficulty=Easy&sortBy=submissions
+
+class Solution:
+
+    def first(self, arr, low, high, x, n):
+        if high >= low:
+            mid = low + (high - low) // 2
+            if (mid == 0 or x > arr[mid - 1]) and arr[mid] == x:
+                return mid
+            elif x > arr[mid]:
+                return self.first(arr, mid + 1, high, x, n)
+            else:
+                return self.first(arr, low, mid - 1, x, n)
+        return -1
+
+    def last(self, arr, low, high, x, n):
+        if high >= low:
+            mid = low + (high - low) // 2
+            if (mid == n - 1 or x < arr[mid + 1]) and arr[mid] == x:
+                return mid
+            elif x < arr[mid]:
+                return self.last(arr, low, mid - 1, x, n)
+            else:
+                return self.last(arr, mid + 1, high, x, n)
+        return -1
+
+    def firstAndLast(self, x, arr):
+        n = len(arr)
+        f = self.first(arr, 0, n - 1, x, n)
+        l = self.last(arr, 0, n - 1, x, n)
+        if f == l and f == -1:
+            return [-1]
+        else:
+            return [f, l]
