@@ -2,7 +2,7 @@
 // https://www.geeksforgeeks.org/boyer-moore-majority-voting-algorithm/
 
 
-//moore algo
+//moore algo - this is efficient because of O(K) complexity instead of O(N)
 countOccurence(arr, k) {
         if (k < 2) {
             return 0
