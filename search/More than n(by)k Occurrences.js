@@ -3,6 +3,7 @@
 
 
 //moore algo - this is efficient because of O(K) complexity instead of O(N)
+Time complexity - O(N*K)
 countOccurence(arr, k) {
         if (k < 2) {
             return 0
