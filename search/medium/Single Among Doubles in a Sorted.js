@@ -19,16 +19,16 @@ class Solution {
             const mid = l + Math.floor((r - l)/2)
             
             if (mid % 2 === 0) {
-                if (arr[mid] !== arr[mid + 1]) {
-                    r = mid // mid also could be the ans
+                if (arr[mid] === arr[mid + 1]) {
+                    l = mid + 1 // we are in the left half if the current ele matches with the next ele, so we move to the right
                 } else {
-                    l = mid + 1
+                    r = mid //the resulting element won't match with the next element, so mid could be the ans
                 }
             } else {
-                if (arr[mid] !== arr[mid - 1]) {
-                    r = mid - 1
-                } else {
+                if (arr[mid] === arr[mid - 1]) {
                     l = mid + 1
+                } else {
+                    r = mid - 1
                 }
             }
         }
