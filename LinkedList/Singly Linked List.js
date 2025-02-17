@@ -45,17 +45,70 @@ class LinkedList {
         let i = 0
         let prev = this.head
         
-        while(i < index - 1 && prev) {
-            prev = prev.next
+        while(i < index - 1 && curr) {
+            curr = curr.next
             i+=1
         }
         
-        if(!prev) {
+        if(!curr) {
             throw new Error("Index is greater than the length of the linked list")
         }
-        node.next = prev.next
-        prev.next = node
+        node.next = curr.next
+        curr.next = node
         this.size += 1
+    }
+
+    // https://www.geeksforgeeks.org/insert-a-node-after-a-given-node-in-linked-list/
+    insertAfter(data, key) {
+        if(!this.head) {
+            throw new Error("No nodes found")
+        }
+        let curr = this.head
+        while(curr) {
+            if(curr.data === key) {
+                break
+            }
+            curr = curr.next
+        }
+        
+        if(!curr) {
+            throw new Error("Node not found")
+        }
+        
+        const node = new Node(data)
+        node.next = curr.next
+        curr.next = node
+        this.size += 1
+        return -1
+    }
+
+    // https://www.geeksforgeeks.org/insert-a-node-in-linked-list-before-a-given-node/
+    insertBefore(data, key) {
+        if(!this.head) {
+            throw new Error("no nodes found")
+        }
+        const node = new Node(data)
+        if(this.head.data === key) {
+            node.next = this.head
+            this.head = node
+            return
+        }
+        
+        let curr = this.head
+        while(curr.next) {
+            if(curr.next.data === key) {
+                break
+            }
+            curr = curr.next
+        }
+        
+        if(!curr.next) {
+            throw new Error("Node not found")
+        }
+        
+        node.next = curr.next
+        curr.next = node
+        
     }
     
     getAt(index) { // O(n)
