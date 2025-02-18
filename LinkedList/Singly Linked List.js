@@ -178,6 +178,24 @@ class LinkedList {
     }
     
     removeAt(index) { // O(n)
+        /*
+        let curr = head
+        if (x === 1) {
+            head = head.next
+            return head
+        }
+        let i = 1
+        let prev = null
+        while(i < x && curr) {
+            prev = curr
+            curr = curr.next
+            i++
+        } 
+        //console.log(curr)
+        prev.next = curr.next
+        return head
+        */
+        
         if (index < 0) {
             throw new Error("Invalid index")
         }
