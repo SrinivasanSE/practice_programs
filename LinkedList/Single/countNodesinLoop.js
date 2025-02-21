@@ -2,6 +2,24 @@
 // https://www.geeksforgeeks.org/floyds-cycle-finding-algorithm/
 // https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/
 
+// similar problem for checking circular ll
+isCircular(head) {
+        // code here
+        let slow = head
+        let fast = head
+        
+        while(fast && fast.next) {
+            fast = fast.next.next
+            slow = slow.next
+            
+            if (slow === fast) {
+                return true
+            }
+        }
+        
+        return false
+    }
+
 //hashset solution is there
 class Solution {
     // Function to find the length of a loop in the linked list.
