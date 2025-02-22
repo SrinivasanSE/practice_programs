@@ -1,0 +1,65 @@
+// https://www.geeksforgeeks.org/intersection-of-two-sorted-linked-lists/
+
+
+// two pointer - O(m + n) & O(min(m,n))
+class Solution {
+
+    findIntersection(head1, head2) {
+        // your code here
+        let p1 = head1
+        let p2 = head2
+        let dummy = new Node(0)
+        let temp = dummy
+        
+        while(p1 && p2) {
+            if (p1.data < p2.data) {
+                p1 = p1.next
+            } else if (p1.data > p2.data) {
+                p2 = p2.next
+            } else {
+                const node = new Node(p1.data)
+                temp.next = node
+                temp = temp.next
+                p1 = p1.next
+                p2 = p2.next
+            }
+        }
+        
+        
+        return dummy.next
+    }
+}
+
+
+//nested loops - O(m*n)
+class Solution {
+
+    findIntersection(head1, head2) {
+        // your code here
+        let p1 = head1
+        let p2 = head2
+        let temp = null
+        let newHead = null
+        while(p1) {
+            p2 = head2
+            while(p2) {
+                //console.log(p1.data, p2.data)
+                if(p2.data === p1.data) {
+                    let node = new Node(p1.data)
+                    if(!temp) {
+                        newHead = node
+                    } else {
+                        temp.next = node
+                    }
+                    temp = node
+                    break
+                }
+                p2 = p2.next
+            }
+            p1 = p1.next
+        }
+        //console.log(newHead)
+        
+        return newHead
+    }
+}
