@@ -1,5 +1,5 @@
 // https://www.geeksforgeeks.org/multiply-two-numbers-represented-linked-lists/
-
+// https://www.geeksforgeeks.org/modulo-1097-1000000007/
 
 class Solution {
     multiplyTwoLists(first, second) {
