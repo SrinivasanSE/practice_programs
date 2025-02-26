@@ -20,3 +20,27 @@ class Solution {
         return ans;
     }
 }
+
+// https://www.geeksforgeeks.org/decimal-equivalent-of-binary-linked-list/
+class Solution {
+    decimalValue(head) {
+        // Define the MOD constant to prevent overflow for large numbers
+        const MOD = 1000000007;
+
+        // Initialize result to store the decimal value of the binary linked list
+        let res = 0;
+
+        // Traverse through the linked list until the end (null)
+        while (head != null) {
+            // Multiply the current result by 2 (shifting left in binary),
+            // add the node's data, and take modulo to avoid overflow
+            res = ((res * 2) % MOD + head.data) % MOD;
+
+            // Move to the next node in the linked list
+            head = head.next;
+        }
+
+        // Return the final decimal value
+        return res;
+    }
+}
