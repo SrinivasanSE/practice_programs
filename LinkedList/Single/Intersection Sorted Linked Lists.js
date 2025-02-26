@@ -1,5 +1,33 @@
 // https://www.geeksforgeeks.org/intersection-of-two-sorted-linked-lists/
 
+// hashing
+findIntersection(head1, head2) {
+        // your code here
+        let p1 = head1
+        let p2 = head2
+        let dummy = new Node(0)
+        let newHead = dummy
+        let temp= newHead
+        
+        let hashmap = new Set()
+        while(p2) {
+            hashmap.add(p2.data)
+            p2 = p2.next
+        }
+        
+        while(p1) {
+            const data = p1.data
+            if(hashmap.has(data)) {
+                const node = new Node(data)
+                temp.next = node
+                temp = node
+            }
+            p1 = p1.next
+        }
+        
+        return newHead.next
+    }
+
 
 // two pointer - O(m + n) & O(min(m,n))
 class Solution {
