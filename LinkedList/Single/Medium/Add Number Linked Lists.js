@@ -128,3 +128,44 @@ class Solution {
         return head
     }
 }
+
+
+// Similar problem, Add 1 to the linked list
+// https://www.geeksforgeeks.org/add-1-number-represented-linked-list/
+class Solution {
+    reverse(head) {
+        let curr = head, prev = null
+        while(curr) {
+            let nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        }
+        
+        return prev
+    }
+    addOne(node) {
+        // your code here
+        node = this.reverse(node)
+        
+        let head = node
+        
+        let carry = 0
+        while(node) {
+            node.data += 1
+            carry = Math.floor(node.data/10)
+            if(!carry) {
+                break
+            }
+            node.data = node.data%10
+            if(!node.next) {
+                node.next = new Node(0)
+            }
+            
+            node = node.next
+        }
+        
+        return this.reverse(head)
+        
+    }
+}
