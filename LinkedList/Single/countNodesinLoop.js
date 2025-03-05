@@ -146,3 +146,23 @@ function removeLoop(head) {
         }
     }
 }
+
+
+// hashing
+function removeLoop(head) {
+    let st = new Set();
+    let prev = null;
+    while (head != null) {
+    
+        // If node is already in the set, remove the loop
+        if (st.has(head)) {
+            prev.next = null;
+            return;
+        }
+        
+        // Add node to the set and move forward
+        st.add(head);
+        prev = head;
+        head = head.next;
+    }
+}
