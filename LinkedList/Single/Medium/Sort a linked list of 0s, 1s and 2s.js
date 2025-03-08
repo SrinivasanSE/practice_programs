@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/sort-linked-list-0s-1s-2s-changing-links/
+// https://www.geeksforgeeks.org/segregate-even-and-odd-elements-in-a-linked-list/
 
 
 class Solution {
