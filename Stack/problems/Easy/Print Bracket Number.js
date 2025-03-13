@@ -22,7 +22,7 @@ class Stack {
         if(!this.head) {
             return
         }
-        const ele = this.head
+        const ele = this.head.data
         this.head = this.head.next
         
         return ele
