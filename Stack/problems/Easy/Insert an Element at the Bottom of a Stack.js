@@ -21,6 +21,7 @@ class Solution {
         return st
     }
 }
+
 //recursion
 class Solution {
     //Function to insert an element at the bottom of a stack.
