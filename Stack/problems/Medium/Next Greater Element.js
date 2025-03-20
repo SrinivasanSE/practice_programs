@@ -1,5 +1,5 @@
 // https://www.geeksforgeeks.org/next-greater-element/
-
+// https://www.geeksforgeeks.org/problems/save-gotham1222/1?page=2&category=Stack&difficulty=Medium&status=unsolved&sortBy=submissions
 
 
 // Brute force
