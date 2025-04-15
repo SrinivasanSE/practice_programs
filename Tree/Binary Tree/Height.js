@@ -39,7 +39,7 @@ class Solution {
     height(node) {
         // code here
         if (node === null) {
-            return -1
+            return -1 // 0 or -1 based on the assumption of initial height as 0 or 1. For 0, use -1, for 1, use 0
         }
         
         const leftHeight = this.height(node.left)
