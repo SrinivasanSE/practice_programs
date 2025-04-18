@@ -9,10 +9,10 @@ class Solution {
         
         while (q.length > 0) {
             let len = q.length
-          let temp = 0
+            let temp = 0
             for(let i = 0; i < len; i++) {
                 let curr = q.shift()
-              temp += curr.data
+                temp += curr.data
                 if (curr.left) q.push(curr.left)
                 if (curr.right) q.push(curr.right)
             }
