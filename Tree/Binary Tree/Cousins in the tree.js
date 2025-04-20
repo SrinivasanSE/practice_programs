@@ -18,7 +18,7 @@ class Solution {
         return this.siblings(root.left, a, b) || this.siblings(root.right, a, b)
     }
     
-    level(node, searchNode, lev) {
+    level(node, searchNode, lev) { // same as depth, instead of returning 0, return -1
         if (node == null) {
             return 0
         }
