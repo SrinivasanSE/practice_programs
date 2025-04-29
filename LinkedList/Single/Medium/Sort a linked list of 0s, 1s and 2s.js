@@ -15,8 +15,7 @@ class Solution {
         let curr = head
         
         while(curr) {
-            const node = new Node(curr.data)
-            
+
             if (curr.data === 0) {
                 zero.next = curr
                 zero = zero.next
