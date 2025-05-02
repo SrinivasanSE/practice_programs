@@ -8,7 +8,7 @@ class Solution {
         let ans = 0
         for(let i = 0; i < n; i++) {
             if (!heap.isEmpty() && heap.getMin() < arr[i]) {
-                ans += (arr[i] - heap.getMin())
+                ans += (arr[i] - heap.getMin()) // This conceptually means we are paying the cost to "raise" the level of the smallest element (heap.getMin()) to match the current element (arr[i]).
                 heap.extractMin()
                 heap.insert(arr[i])
             }
