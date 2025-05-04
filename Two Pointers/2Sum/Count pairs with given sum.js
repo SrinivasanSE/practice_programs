@@ -50,7 +50,7 @@ countPairs(arr, target) {
                 }
                 
                 if (left === right) {
-                    res += c1*(c1 - 1)/2   
+                    res += c1*(c1 - 1)/2   // nc2 for ex: 4c2
                 } else {
                     res += c1*c2
                 }
@@ -64,7 +64,9 @@ countPairs(arr, target) {
 /*
 If the elements are the same (ele1 === ele2):
 
-Use the combination formula 
+Use the combination formula, for any count cnt of repeated elements:
+
+The number of distinct pairs you can form from them is:
 Count of pairs   = cnt1*(cnt1−1)/2
 
 ​where cnt1 is the frequency of ele1.
