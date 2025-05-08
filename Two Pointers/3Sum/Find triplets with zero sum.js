@@ -31,9 +31,49 @@ class Solution {
     }
 }
 
+class Solution {
+    /**
+    * @param number[] arr
+
+    * @returns number[][]
+    */
+    triplets(arr) {
+        // code here
+       arr.sort((a, b) => a - b);
+    const res = [];
+
+    for (let i = 0; i < arr.length - 2; i++) {
+        if (i > 0 && arr[i] === arr[i - 1]) continue; // skip duplicates
+
+        let left = i + 1;
+        let right = arr.length - 1;
+
+        while (left < right) {
+            const sum = arr[i] + arr[left] + arr[right];
+            if (sum === 0) {
+                res.push([arr[i], arr[left], arr[right]]);
+
+                // skip duplicates
+                while (left < right && arr[left] === arr[left + 1]) left++;
+                while (left < right && arr[right] === arr[right - 1]) right--;
+                
+                left++
+                right--
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+
+    return res;
+    }
+}
+
 
 // hashing - O(n ^2) & O(n)
-findTriplets(arr) {
+function findTriplets(arr) {
        let n = arr.length
        const map = new Map()
        const target = 0
@@ -51,4 +91,50 @@ findTriplets(arr) {
        //console.log(map)
        
        return false
+    }
+
+
+    class Solution {
+        /**
+        * @param number[] arr
+    
+        * @returns number[][]
+        */
+        triplets(arr) {
+            // code here
+        const n = arr.length;
+        const tripletSet = new Set();
+        const result = [];
+    
+        for (let i = 0; i < n - 2; i++) {
+            const seen = new Set();
+    
+            for (let j = i + 1; j < n; j++) {
+                const target = -(arr[i] + arr[j]);
+    
+                if (seen.has(target)) {
+                    const triplet = [arr[i], arr[j], target].sort((a, b) => a - b);
+                    const key = triplet.join(',');
+    
+                    if (!tripletSet.has(key)) {
+                        tripletSet.add(key);
+                        result.push(triplet);
+                    }
+                }
+    
+                seen.add(arr[j]);
+            }
+        }
+    
+        // Sort the final list of triplets lexicographically
+        result.sort((a, b) => {
+            for (let i = 0; i < 3; i++) {
+                if (a[i] !== b[i]) return a[i] - b[i];
+            }
+            return 0;
+        });
+    
+        return result;
+    
+        }
     }

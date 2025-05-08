@@ -5,36 +5,14 @@
 class Solution {
     findMissing(arr) {
         // code here
-        const n = arr.length
-        const sum = ((n + 1)/2)*(arr[0] + arr[n - 1])
+        // const sum = ((n + 1)/2)*(arr[0] + arr[n - 1]) // it will fail if the last element is missing
+        const diff = getCommonDifference(arr)
+        if (diff === 0) return arr[0];
+        const totalSum = ((n + 1)/ 2)*(2 * arr[0] + n * diff);  // Sum = n/2 * (2a + (n - 1)d) we use n + 1 because one element is missing
         const currSum = arr.reduce((accum, curr) => curr + accum, 0)
-        return sum - currSum
+        return totalSum - currSum
     }
 }
-
-
-_findMissing(arr, l, r, diff) {
-        const mid = l + Math.floor((r - l)/2)
-        if (arr[mid + 1] - arr[mid] != diff) {
-            return arr[mid] + diff
-        }
-        
-        if (mid > 0 && arr[mid] - arr[mid - 1] != diff) {
-            return arr[mid - 1] + diff
-        }
-        
-        if (arr[mid] === arr[0] + mid*diff) {
-            return this._findMissing(arr, mid + 1, r, diff)
-        }
-        
-        return this._findMissing(arr, l, mid - 1, diff)
-    }
-    findMissing(arr) {
-        // code here
-        const n = arr.length
-        const diff = (arr[n - 1] - arr[0])/n
-        return this._findMissing(arr, 0, n - 1, diff)
-    }
 
 
 class Solution {
@@ -50,12 +28,38 @@ class Solution {
         }
         
         }
-                return arr[r] + diff
+        return arr[r] + diff
     }
     findMissing(arr) {
         // code here
         const n = arr.length
-        const diff = (arr[n - 1] - arr[0])/n
+        const diff = (arr[n - 1] - arr[0])/n // this diff will be wrong if the last element is missing, use the commonDiff function to find the diff
         return this._findMissing(arr, 0, n - 1, diff)
     }
+}
+
+
+function getCommonDifference(arr) {
+    const n = arr.length;
+
+    if (n < 3) {
+        return arr[1] - arr[0]; // trivial case
+    }
+
+    const d1 = arr[1] - arr[0];
+    const dLast = arr[n - 1] - arr[n - 2];
+    const dTotal = (arr[n - 1] - arr[0]) / n;
+
+    // Case 1: Most consistent start and end difference
+    if (d1 === dLast) {
+        return d1;
+    }
+
+    // Case 2: d1 matches average difference over the span
+    if (d1 === dTotal) {
+        return d1;
+    }
+
+    // Case 3: Fall back to last observed difference
+    return dLast;
 }
