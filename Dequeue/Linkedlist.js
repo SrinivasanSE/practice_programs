@@ -61,7 +61,6 @@ class Deque {
     deleteRear() {
         if (this.isEmpty()) console.log("UnderFlow");
         else {
-            const temp = this.rear;
             this.rear = this.rear.prev;
             if (this.rear) this.rear.next = null;
             else this.front = null;
