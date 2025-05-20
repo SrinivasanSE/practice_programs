@@ -47,13 +47,13 @@ class Solution {
                 break
             }
             
-            if (hashmap.has(reqNum)) {
-                start = hashmap.get(reqNum)
+            if (hashmap.has(reqNum)) { // if the hashmap already has the value, that means after that index to the current index, the sum will be the target
+                start = hashmap.get(reqNum) + 1
                 end = i
                 break
             }
             
-            hashmap.set(currSum, i + 1)
+            hashmap.set(currSum, i)
         }
         
         return end === -1 ? [] : [start + 1, end + 1]

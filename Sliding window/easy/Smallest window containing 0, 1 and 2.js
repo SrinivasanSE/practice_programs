@@ -37,7 +37,6 @@ const smallestSubstring = (S) => {
 
 
 class Solution {
-    // Function to check whether the list is palindrome.
     smallestSubstring(S) {
         // your code here
         const n = S.length
