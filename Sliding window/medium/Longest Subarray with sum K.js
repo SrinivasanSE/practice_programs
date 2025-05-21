@@ -1,5 +1,10 @@
 // https://www.geeksforgeeks.org/minimum-removals-for-target-sum/
 
+/*
+If we observe carefully, we can say that after removing the elements whose sum = k, 
+the sum of the remaining elements will be (total sum - k). 
+Since we need to minimize the removals, the problem can be reduced to finding the longest subarray whose sum = (total sum - k).
+*/
 
 class Solution {
     minRemovals(arr, k) {
@@ -16,16 +21,16 @@ class Solution {
         let currSum = 0, start = 0
         let res = -Infinity
         
-        for(let i = 0; i < n; i++) {
-            currSum += arr[i]
+        for(let end = 0; end < n; end++) {
+            currSum += arr[end]
             
-            while (currSum > target && start < i) {
+            while (currSum > target && start < end) {
                 currSum -= arr[start]
                 start += 1
             }
             
             if (currSum === target) {
-                res = Math.max(res, i - start + 1)
+                res = Math.max(res, end - start + 1)
             }
         }
         
