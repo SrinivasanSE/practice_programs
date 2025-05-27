@@ -54,3 +54,39 @@ class Solution {
         return count
     }
 }
+
+// https://www.geeksforgeeks.org/longest-span-sum-two-binary-arrays/
+
+function longestCommonSum(a,b,n)
+{
+    // Find difference between the two
+        let arr = new Array(n);
+        for (let i = 0; i < n; i++)
+            arr[i] = a[i] - b[i];
+ 
+        // Creates an empty hashMap hM
+        let hM = new Map();
+ 
+        let sum = 0;     // Initialize sum of elements
+        let max_len = 0; // Initialize result
+ 
+        // Traverse through the given array
+        for (let i = 0; i < n; i++)
+        {
+            // Add current element to sum
+            sum += arr[i];
+ 
+            // To handle sum=0 at last index
+            if (sum == 0)
+                max_len = i + 1;
+ 
+            // If this sum is seen before,
+            // then update max_len if required
+            if (hM.has(sum))
+                max_len = Math.max(max_len, i - hM.get(sum));
+             
+            else // Else put this sum in hash table
+                hM.set(sum, i);
+        }
+        return max_len;
+}
