@@ -12,7 +12,7 @@ class Solution {
             prefixSum += (arr[i] == 0 ? -1 : 1);
 
             if (prefixSum === 0) {
-                max = Math.max(max, i + 1); 
+                max = i + 1; 
             }
 
             if (prefixSum in hashmap) { // if the prefix sum is already there, that means the elements between that index and current index contributed to 0 sum

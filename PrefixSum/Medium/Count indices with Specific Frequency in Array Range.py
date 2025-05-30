@@ -1,5 +1,8 @@
 # https://www.geeksforgeeks.org/count-indices-with-specific-frequency-in-array-range/
 
+
+# check alternate sols
+
 class Solution:
     def solveQueries(self, N : int, num : int, A : List[int], Q : List[List[int]]) -> List[int]:
         # code here

@@ -26,7 +26,7 @@ class Solution {
 
 /*
 If the remainders are same, prefixSum[i] % k === prefixSum[j] % k, then (prefixSum[i] - prefixSum[j]) % k === 0
-If two different indices give the same remainder, the subarray between them must be divisible by k
+If two different indices give the same remainder, the subarray sum between them must be divisible by k
 */
 
 // https://www.geeksforgeeks.org/count-sub-arrays-sum-divisible-k/
