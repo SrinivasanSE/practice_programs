@@ -15,8 +15,8 @@ class Solution {
         const res = Array.from({length: r1}, () => Array(c2).fill(0))
         
         for(let i = 0; i < r1; i++) {
-            for(let j = 0; j < c1; j++) {
-                for(let k = 0; k < c2; k++) {
+            for(let j = 0; j < c2; j++) {
+                for(let k = 0; k < c1; k++) {
                     res[i][j] += a[i][k]*b[k][j]
                 }
             }
