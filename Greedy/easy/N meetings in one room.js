@@ -26,3 +26,30 @@ class Solution {
         return count
     }
 }
+
+// https://www.geeksforgeeks.org/find-maximum-meetings-in-one-room/
+// return the index of the meeting instead of count
+
+class Solution {
+    maxMeetings(N, S, F) {
+        // code here
+        const meetings = []
+        
+        for(let i = 0; i < N; i++) {
+            meetings.push({start: S[i], finish: F[i], index: i})
+        }
+        
+        meetings.sort((a, b) => a.finish - b.finish)
+        
+        const res = []
+        let last = -1
+        for(let i = 0; i < N; i++) {
+            if (last < meetings[i].start) {
+                res.push(meetings[i].index + 1)
+                last = meetings[i].finish
+            }
+        }
+        res.sort((a, b) => a - b)
+        return res
+    }
+}

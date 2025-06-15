@@ -2,68 +2,6 @@
 
 
 
-class MinHeap {
-    constructor() {
-        this.heap = []
-    }
-    
-    push(x) {
-        this.heap.push(x)
-        this.heapifyUp(this.heap.length - 1)
-    }
-    
-    heapifyUp(i) {
-        while (i > 0) {
-            let parent = Math.floor((i - 1)/2)
-            
-            if (this.heap[parent] > this.heap[i]) {
-                [this.heap[parent], this.heap[i]] = [this.heap[i], this.heap[parent]]
-                i = parent
-             } else {
-                 break
-             }
-        }
-    }
-    
-    pop() {
-        if (this.heap.length === 0) return
-        if (this.heap.length === 1) return this.heap.pop()
-        
-        let min = this.heap[0]
-        this.heap[0] = this.heap.pop()
-        this.heapifyDown(0)
-        return min
-    }
-    
-    heapifyDown(i) {
-        let smallest = i
-        
-        let left = 2*i + 1
-        let right = 2*i + 2
-        
-        if (left < this.heap.length && this.heap[left] < this.heap[smallest]) {
-            smallest = left
-        }
-        
-        if (right < this.heap.length && this.heap[right] < this.heap[smallest]) {
-            smallest = right
-        }
-        
-        if (smallest != i) {
-            [this.heap[smallest], this.heap[i]] = [this.heap[i], this.heap[smallest]]
-            this.heapifyDown(smallest)
-        }
-    }
-    
-    size() {
-        return this.heap.length
-    }
-    
-    top() {
-        return this.heap[0]
-    }
-}
-
 class Solution {
     jobSequencing(deadline, profit) {
         // code here
