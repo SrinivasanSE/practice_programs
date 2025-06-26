@@ -11,7 +11,7 @@ class Solution {
             return -1
         }
         
-        if (S >= 7 && N*6 < M*7) {
+        if (S >= 7 && N*6 < M*7) { // first food should be there for the 1st week
             return -1
         }
         

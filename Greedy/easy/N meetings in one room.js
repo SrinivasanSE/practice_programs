@@ -13,9 +13,9 @@ class Solution {
             c.push([start[i], end[i]])
         }
         
-        c.sort((a, b) => a[1] - b[1])
+        c.sort((a, b) => a[1] - b[1]) // sort by finish time, choose the meetings which ends first
         let count = 0
-        let last = -1
+        let last = -1 // tracks end time of previous meeting
         for(let i = 0; i < start.length; i++) {
             if (last < c[i][0] ) {
                 last = c[i][1]

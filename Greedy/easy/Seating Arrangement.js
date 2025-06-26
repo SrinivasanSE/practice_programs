@@ -19,8 +19,8 @@ class Solution {
                next = seats[i + 1]
            }
            
-           if (prev + next + seats[i] === 0) {
-               i++
+           if (prev + next + seats[i] === 0) { // if prev, current and next seat is empty, the seat is available
+               i++ // skip the next seat since it's already checked
                availableSeats++
            }
         }
