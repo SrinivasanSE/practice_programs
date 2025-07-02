@@ -30,3 +30,19 @@ class Solution {
         return -1
     }
 }
+
+class Solution {
+    // Function to check if we can reach the last index from the 0th index.
+    canReach(arr) {
+        // code here
+        let currLast = 0
+        let farthest = 0
+        const n = arr.length
+        for(let i = 0; i < n; i++) {
+            if (i > farthest) return false
+            farthest = Math.max(farthest, arr[i] + i)
+        }
+        
+        return true
+    }
+}
