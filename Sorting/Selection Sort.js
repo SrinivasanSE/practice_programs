@@ -45,7 +45,7 @@ class Solution {
             
             let key = arr[minIdx]
             while (minIdx > i) {
-                arr[minIdx] = arr[--minIdx]
+                arr[minIdx] = arr[--minIdx] // we just move elements forward by 1
             }
             arr[i] = key
         }
