@@ -72,3 +72,31 @@ function minRemovals(arr, k) {
 
     return maxLen === -1 ? -1 : arr.length - maxLen;
 }
+
+
+// Works only for positive numbers
+class Solution {
+    longestSubarray(nums, k) {
+       let left = 0
+       let sum = 0
+       const n = nums.length
+       let res = 0
+       for(let right = 0; right < n; right++ ) {
+            sum += nums[right]
+            while (sum > k && left <= right) {
+                sum -= nums[left]
+                left += 1
+            }
+
+            if (sum === k) {
+                res = Math.max(res, right - left + 1)
+            }
+       }
+
+       return res
+    }
+}
+
+// Works for both positive & negative numbers
+
+// PrefixSum/Medium/Longest Subarray with Sum K.js

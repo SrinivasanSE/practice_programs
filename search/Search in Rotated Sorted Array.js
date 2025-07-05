@@ -60,7 +60,7 @@ class Solution {
     }
 }
 
-search(arr, key) {
+function search(arr, key) {
         const n = arr.length
        let l = 0
        let r = n - 1

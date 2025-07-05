@@ -4,7 +4,7 @@
 // https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/
 // https://www.geeksforgeeks.org/problems/minimum-number-in-a-sorted-rotated-array-1587115620/1
 
-findMin(arr) {
+function findMin(arr) {
         const n = arr.length
         let l = 0
         let r = n - 1
