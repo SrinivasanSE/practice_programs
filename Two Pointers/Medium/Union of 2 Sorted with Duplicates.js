@@ -1,5 +1,14 @@
 // https://www.geeksforgeeks.org/union-of-two-sorted-arrays/
 
+// Brute force
+// - O(n1 + n2), O(n1 + n2)
+
+// Use set and iterate over the two arrays separately and convert the set to array
+
+
+// Optimal
+// O(n1 + n2), O(1)
+
 class Solution {
     // Function to return a list containing the union of the two arrays.
     findUnion(a, b) {
@@ -8,7 +17,7 @@ class Solution {
         let j = 0;
 
         while (i < a.length && j < b.length) {
-            while (i + 1 < a.length && a[i] === a[i + 1]) i++
+            while (i + 1 < a.length && a[i] === a[i + 1]) i++ // to skip the duplicates
             while (j + 1 < b.length && b[j] === b[j + 1]) j++
             
             if (a[i] < b[j]) {
