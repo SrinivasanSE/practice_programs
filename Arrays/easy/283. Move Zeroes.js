@@ -1,5 +1,6 @@
 // https://leetcode.com/problems/move-zeroes/description/
 
+// Move zeros to end
 
 // Brute force
 // O(n) & O(n)
@@ -28,7 +29,8 @@ var moveZeroes = function(nums) {
     const n = nums.length
     let j = 0 // Tracks the next available spot to place the nonzero element
 
-    for(let i = 0; i < n; i++) {
+    for(let i = 0; i < n; i++) {  // [1, 2, 0, 0, 3, 4, 0, 5]
+                                  //        j     i
         if (nums[i] != 0) {
             [nums[i], nums[j]] = [nums[j], nums[i]]
             j++

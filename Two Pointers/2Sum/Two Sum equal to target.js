@@ -44,3 +44,47 @@ twoSum(arr, target) {
         
         return false
     }
+
+
+// Return indices
+
+
+var twoSum = function(nums, target) {
+    
+    const map = new Map()
+    let req
+    const n = nums.length
+    for(let i = 0; i < n; i++) {
+        req = target - nums[i]
+
+        if (map.has(req)) {
+            return [i, map.get(req)]
+        }
+
+        map.set(nums[i], i)
+    }
+};
+
+
+var twoSum = function(nums, target) {
+    
+    numsWithIndices = nums.map((num, index) => [num, index])
+    numsWithIndices.sort((a, b) => a[0] - b[0])
+    
+    const n = nums.length
+    
+    let l = 0, r = n - 1, sum = 0
+
+    while (l < r) {
+        sum = numsWithIndices[l][0] + numsWithIndices[r][0]
+        if (sum === target) {
+            return [numsWithIndices[l][1], numsWithIndices[r][1]]
+        }
+
+        if (sum < target) {
+            l++
+        } else {
+            r--
+        }
+    }
+};
