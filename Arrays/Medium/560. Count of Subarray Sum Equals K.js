@@ -1,5 +1,6 @@
 // https://leetcode.com/problems/subarray-sum-equals-k/description/
 
+// Variation of PrefixSum/Medium/Longest Subarray with Sum K.js
 
 var subarraySum = function(nums, k) {
     

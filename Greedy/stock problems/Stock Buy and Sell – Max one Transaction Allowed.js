@@ -1,5 +1,6 @@
 // https://www.geeksforgeeks.org/best-time-to-buy-and-sell-stock/
 // https://www.geeksforgeeks.org/all-variations-of-stock-problems/
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 class Solution {
     // Function to find the maximum profit.
@@ -17,6 +18,35 @@ class Solution {
         return maxProfit
     }
 }
+
+// Two Pointer approach
+
+
+var maxProfit = function(prices) {
+    if (!prices || prices.length < 2) {
+        return 0;
+    }
+    
+    let maxProfit = 0;
+    let leftBuy = 0;
+    let rightSell = 1;
+    
+    while (rightSell < prices.length) {
+        const currentPrice = prices[rightSell];
+        const buyPrice = prices[leftBuy];
+        
+        if (buyPrice < currentPrice) {
+            const currentProfit = currentPrice - buyPrice;
+            maxProfit = Math.max(maxProfit, currentProfit);
+        } else {
+            leftBuy = rightSell;
+        }
+        
+        rightSell++;
+    }
+    
+    return maxProfit;
+};
 
 class Solution {
     // Function to find the maximum profit.
