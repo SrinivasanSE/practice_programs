@@ -8,6 +8,7 @@ https://www.geeksforgeeks.org/dsa/find-union-and-intersection-of-two-unsorted-ar
 https://www.geeksforgeeks.org/dsa/union-and-intersection-of-two-sorted-arrays-2/
 
 2) Learn variations of Stock buy and sell
+3) Learn ksum
 
 
 # Algos

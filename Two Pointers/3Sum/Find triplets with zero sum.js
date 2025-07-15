@@ -1,7 +1,9 @@
 // https://www.geeksforgeeks.org/find-triplets-array-whose-sum-equal-zero/
+// https://leetcode.com/problems/3sum
 
 
 // sorting O(n^2) & O(1)
+// Check whether a triplet is available or not
 class Solution {
     // Function to find triplets with zero sum.
     findTriplets(arr) {
@@ -31,6 +33,7 @@ class Solution {
     }
 }
 
+// Return unique pairs
 class Solution {
     /**
     * @param number[] arr
@@ -73,6 +76,7 @@ class Solution {
 
 
 // hashing - O(n ^2) & O(n)
+// Check whether a triplet is available or not
 function findTriplets(arr) {
        let n = arr.length
        const map = new Map()
@@ -93,7 +97,7 @@ function findTriplets(arr) {
        return false
     }
 
-
+// Return unique pairs
     class Solution {
         /**
         * @param number[] arr
