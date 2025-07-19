@@ -1,8 +1,29 @@
 // https://www.geeksforgeeks.org/problems/square-root
 
+/*
+Brute
+O(n) & O(1)
+*/
 
-// JavaScript program to find the square root of given integer
-// using binary search
+
+function floorSqrt(n) {
+    
+    // Start iteration from 1 until the 
+    // square of a number exceeds n
+    let res = 1;
+    while (res * res <= n) {
+        res++;
+    }
+    
+    // return the largest integer whose 
+    // square is less than or equal to n
+    return res - 1;
+}
+
+/*
+Optimal - Binary search
+O(logn) & O(1)
+*/
 
 function floorSqrt(n) {
   
@@ -30,27 +51,5 @@ function floorSqrt(n) {
     return res;
 }
 
-let n = 11;
-console.log(floorSqrt(n));
 
 
-// JavaScript program to find the square root of 
-// given integer using a loop
-
-function floorSqrt(n) {
-    
-    // Start iteration from 1 until the 
-    // square of a number exceeds n
-    let res = 1;
-    while (res * res <= n) {
-        res++;
-    }
-    
-    // return the largest integer whose 
-    // square is less than or equal to n
-    return res - 1;
-}
-
-// Driver Code
-let n = 11;
-console.log(floorSqrt(n));

@@ -31,10 +31,10 @@ class Solution {
            return this.binarySearch(arr, 0, n - 1, key)
        } 
        if (arr[0] <= key) {
-           return this.binarySearch(arr, 0, pivot -1, key)
+           return this.binarySearch(arr, 0, pivot - 1, key)
        }
        
-       return this.binarySearch(arr, pivot + 1, n -1, key)
+       return this.binarySearch(arr, pivot + 1, n - 1, key)
     }
     
     findPivot(arr) {
@@ -60,6 +60,12 @@ class Solution {
     }
 }
 
+/*
+Optimal - without duplicate
+O(logn) & O(1)
+*/
+
+
 function search(arr, key) {
         const n = arr.length
        let l = 0
@@ -72,7 +78,7 @@ function search(arr, key) {
                return mid
            }
            
-           if (arr[l] <= arr[mid]) {
+           if (arr[l] <= arr[mid]) { // if true, all numbers are sorted in ascending order between them.
                
                if (arr[l] <= key && arr[mid] > key) {   // between l & mid
                    r = mid - 1
@@ -90,3 +96,38 @@ function search(arr, key) {
        
        return -1
     }
+
+// with duplicates
+
+var search = function(nums, target) {
+    const n = nums.length
+    let l = 0, r = n - 1
+
+    while (l <= r) {
+        let mid = l + Math.floor((r - l)/2)
+        if (nums[mid] === target) {
+            return true
+        }
+
+        if (nums[l] === nums[mid]) {
+            l++
+            continue
+        }
+
+        if (nums[l] <= nums[mid]) {
+            if (nums[l] <= target && target < nums[mid]) {
+                r = mid - 1
+            } else {
+                l = mid + 1
+            }
+        } else {
+            if (nums[mid] < target && target <= nums[r]  ) {
+                l = mid + 1
+            } else {
+                r = mid - 1
+            }
+        }
+    }
+
+    return false
+};
