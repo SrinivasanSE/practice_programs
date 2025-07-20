@@ -39,49 +39,21 @@ Respect the pageLimit Constraint:
 The entire purpose of the algorithm is to ensure that no student reads more pages than pageLimit. Checking pageSum helps enforce this constraint.
 
 */
-//Time Complexity: O(n*(Sum(arr) – MAX)), where n is the total number of books, sum(arr) is the total number of pages in all the books and MAX is maximum number of pages in any book. Auxiliary Space: O(1)
-findPages(arr, k) {
-        const n = arr.length
-        
-        if (n < k) {
-            return -1
-        }
-        
-        const minLimit = Math.max(...arr)  // 
-        const maxLimit = arr.reduce((accum, num) => num + accum, 0)
-        
-        for(let i = minLimit; i <= maxLimit; i++) {
-            let cnt = 1
-            let sum = 0
-            for(let j = 0; j < n; j++) {
-                if (sum + arr[j] > i) {
-                    cnt++
-                    sum = arr[j]
-                } else {
-                    sum += arr[j]
-                }
-            }
-            
-            if (cnt <= k) {
-                return i
-            }
-        }   
-    }
-
-
-// binarySearch
 
 /*
-
-The maximum number of pages(page limit) that a student can be allocated has a monotonic property:
-
-
-If, at a page limit p, books cannot be allocated to all k students, then we need to reduce the page limit to ensure more students receive books.
-If, at a page limit p, we can allocate books to more than k students, then we need to increase the page limit so that fewer students are allocated books.
+Brute
+O(n*(Sum(arr) – MAX)) & O(1)
 
 */
 
-findPages(arr, k) {
+
+
+
+
+
+class Solution {
+    // Function to find minimum number of pages.
+    findPages(arr, k) {
         const n = arr.length
         
         if (n < k) {
@@ -119,3 +91,51 @@ findPages(arr, k) {
         
         
     }
+}
+
+
+/*
+Optimal - Binary
+O(N * log(sum(arr[])-max(arr[])+1)) & O(1)
+*/
+
+class Solution {
+    // Function to find minimum number of pages.
+    isPossible(arr, page, n, k) {
+        let pages = arr[0]
+        let count = 1
+        for(let i = 1; i < n; i++ ) {
+            if (pages + arr[i] > page) { // if the page count exceeds, we assign it to next student
+                pages = arr[i]
+                count++
+            } else {
+                pages += arr[i]
+            }
+            
+            if (count > k) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    findPages(arr, k) {
+        // your code here
+        const n = arr.length
+        if (n < k) {
+            return -1
+        }
+        let l = Math.max(...arr)
+        let r = arr.reduce((accum, curr) => accum + curr, 0)
+        while (l <= r) {
+            const mid = l + Math.floor((r - l)/2)
+            if (this.isPossible(arr, mid, n,k )) { // we need to reduce the page count
+                r = mid - 1
+            } else {
+                l = mid + 1
+            }
+        }
+        
+        return l
+    }
+}
