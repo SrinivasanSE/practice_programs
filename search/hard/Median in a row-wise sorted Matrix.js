@@ -95,12 +95,10 @@ class Solution {
     
     upperBound(arr, n, target) { 
         let low = 0, high = n - 1
-        let ans = n
         while (low <= high) {
             const mid = low + Math.floor((high - low)/2)
             
             if (arr[mid] > target) {
-                ans = mid
                 high = mid - 1
             } else {
                 low = mid + 1
