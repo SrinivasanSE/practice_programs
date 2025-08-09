@@ -1,22 +1,22 @@
 // https://leetcode.com/problems/reverse-integer/description/
 
 var reverse = function(x) {
-    let pop, rev = 0
-    
+    let rev = 0, rem = 0
+    const limit = Math.pow(2, 31)
     while (x != 0) {
-        pop = x % 10
-        x = (x - pop)/10
-        if (rev > Math.pow(2, 31)/10 || (rev === Math.pow(2, 31)/10 && pop > 7)) {
+        rem = x % 10
+        if (rev > limit/10 || (rev === limit/10 && rem > 7)) {
             return 0
         }
-        if (rev < Math.pow(-2, 31)/10 || (rev === Math.pow(-2, 31)/10 && pop < -8)) {
+
+        if (rev < -limit/10 || (rev === -limit/10 && rem < - 8)) {
             return 0
         }
-        rev = 10*rev + pop
+        rev = 10*rev + rem
+        x = (x - rem) / 10
     }
 
     return rev
-    
 };
 
 /*
@@ -29,7 +29,7 @@ For example:
 -123 / 10 is -12.3, which becomes -12 when using parseInt or just / 10 in JS (since it truncates towards zero).
 Math.floor(-123 / 10) would be -13.
 
-
+pop = -3, x = -123, (-123 + 3 )/10 = -120/10 = -12
 
 Using (x - pop) / 10 ensures that you always get the correct truncated result towards zero, which matches how integer division works in languages like C/C++ and is needed for LeetCode-style problems.
 
