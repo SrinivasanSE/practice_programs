@@ -6,7 +6,7 @@
 // O(n) & O(n)
 var moveZeroes = function(nums) {
     const n = nums.length
-    const temp = new Array(n).fill(0)
+    const temp = new Array(n).fill(0) // fill all with zero
     let j = 0
     for(let i = 0; i < n; i++) {
         if (nums[i] != 0) {

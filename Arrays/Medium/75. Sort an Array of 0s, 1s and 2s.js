@@ -11,7 +11,7 @@ O(N) + O(N) & O(1)
 
 
 var sortColors = function(nums) {
-    let zC = 0, oC = 0, tC = 0
+    let zC = 0, oC = 0
     const n = nums.length
     for(let num of nums) {
         if (num === 0) {

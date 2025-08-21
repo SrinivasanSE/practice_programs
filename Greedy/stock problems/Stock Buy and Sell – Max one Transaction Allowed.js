@@ -2,6 +2,8 @@
 // https://www.geeksforgeeks.org/all-variations-of-stock-problems/
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
+
+
 class Solution {
     // Function to find the maximum profit.
     maximumProfit(prices) {
@@ -38,7 +40,7 @@ var maxProfit = function(prices) {
         if (buyPrice < currentPrice) {
             const currentProfit = currentPrice - buyPrice;
             maxProfit = Math.max(maxProfit, currentProfit);
-        } else {
+        } else { // if buyPrice is greater, buy at the currentPrice
             leftBuy = rightSell;
         }
         

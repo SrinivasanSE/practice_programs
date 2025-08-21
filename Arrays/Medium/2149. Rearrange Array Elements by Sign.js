@@ -21,7 +21,7 @@ var rearrangeArray = function(nums) {
             positives.push(nums[i])
         }
     }
-    for(let i = 0; i < n/2; i++) {
+    for(let i = 0; i < n/2; i++) { // will work only for equal no of positives and negatives
         nums[2*i] = positives[i]
         nums[2*i + 1] = negatives[i]
     }
@@ -53,6 +53,8 @@ var rearrangeArray = function(nums) {
     return res
 };
 
+
+// ---------------------------------------Check this later-------------------------------
 
 // If the count of positive and negatives are not equal
 

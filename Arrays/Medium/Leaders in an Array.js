@@ -1,4 +1,5 @@
 // https://takeuforward.org/data-structure/leaders-in-an-array/
+// https://www.geeksforgeeks.org/dsa/leaders-in-an-array/
 
 /*
 Brute Force

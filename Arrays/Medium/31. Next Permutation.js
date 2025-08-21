@@ -1,5 +1,15 @@
 // https://leetcode.com/problems/next-permutation/description/
 
+
+/*
+Brute
+
+ - Generate all possible subarrays - refer permutations approach
+ - Do linear search and find the current given array position
+ - Return the next index arr
+
+*/
+
 /*
 Optimal
 O(N) & O(1)

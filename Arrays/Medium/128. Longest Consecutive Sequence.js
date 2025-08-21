@@ -52,9 +52,8 @@ O(nlogn) & O(1)
 var longestConsecutive = function(nums) {
     const n = nums.length
     let min = Number.MIN_SAFE_INTEGER
-    if (n === 0) return 0
     nums.sort((a, b) => a - b)
-    let longest = 1, currCount = 0
+    let longest = 0, currCount = 0
     for(let i = 0; i < n; i++ ) {
         if (nums[i] - min === 1) {
                 currCount++
@@ -76,14 +75,13 @@ var longestConsecutive = function(nums) {
 
 Optimal - Use set
 
-O(N) & O(1)
+O(N) & O(N)
 
 */
 
 
 var longestConsecutive = function(nums) {
     const n = nums.length
-    let min = Number.MIN_SAFE_INTEGER
     if (n === 0) return 0
     let count = 0, longest = 1
     const set = new Set()
@@ -91,7 +89,7 @@ var longestConsecutive = function(nums) {
         set.add(nums[i])
     }
     for(let num of set) {
-        if (!set.has(num - 1)) {
+        if (!set.has(num - 1)) { // we use this condition to only check from the first element of the group
             let x = num
             count = 1
 

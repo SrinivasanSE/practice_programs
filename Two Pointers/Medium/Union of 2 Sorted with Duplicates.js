@@ -1,7 +1,7 @@
 // https://www.geeksforgeeks.org/union-of-two-sorted-arrays/
 
 // Brute force
-// - O(n1 + n2), O(n1 + n2)
+// - O((n1 + n2)log(n1 + n2), O(n1 + n2) // inserting into set takes log time
 
 // Use set and iterate over the two arrays separately and convert the set to array
 
