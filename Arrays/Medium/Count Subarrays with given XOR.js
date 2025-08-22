@@ -59,3 +59,46 @@ class Solution {
         return count
     }
 }
+
+
+/*
+## 2. **The Key Property**
+
+Let’s define:
+- **A**: XOR of elements from index 0 to i (**prefix XOR up to i**)
+- **B**: XOR of elements from index i+1 to j (**XOR of subarray (i+1 to j)**)
+- **C**: XOR of elements from index 0 to j (**prefix XOR up to j**)
+
+**Property:**  
+If you XOR two prefixes, you get the XOR of the elements between them:  
+`A ⊕ B = C`  
+So,  
+`B = A ⊕ C`  
+or rearranged,  
+`A = C ⊕ B`
+
+---
+
+## 3. **Applying to Subarray XOR Problems**
+
+Suppose you want to find the number of subarrays whose XOR is **k**.
+
+- For a subarray ending at index `j` and starting at index `i+1`, the XOR is `B`.
+- If the XOR of the prefix up to `j` is `C`, and the XOR up to `i` is `A`, then  
+  `B = C ⊕ A`  
+  (since XORing the prefix up to `i` cancels out the first part of the prefix up to `j`, leaving only the subarray).
+
+- If you want `B = k`,  
+  then `A = C ⊕ k`.
+
+---
+
+## 4. **How to Use This in Practice**
+
+- As you iterate through the array, keep track of the prefix XOR up to each index (`C`).
+- For each index, check if there is a previous prefix XOR (`A`) such that `A = C ⊕ k`.
+- If such an `A` exists, then there is a subarray ending at `j` whose XOR is `k`.
+
+---
+
+*/

@@ -52,12 +52,12 @@ O(m + n) & O(1)
 
 var merge = function(nums1, m, nums2, n) {
     
-    let i = m - 1
+    let i = m - 1 // start from last
     let j = n - 1
     let k = m + n - 1
 
-    while (j >= 0) {
-        if (i >= 0 && nums1[i] > nums2[j]) {
+    while (j >= 0) { // we need to run till all the elements in the nums2 is processed
+        if (i >= 0 && nums1[i] > nums2[j]) { // start setting the elements at the end
             nums1[k--] = nums1[i--]
         } else {
             nums1[k--] = nums2[j--]
@@ -118,7 +118,7 @@ function merge(arr1, arr2, n, m) {
 /*
 
 Optimal - Gap method
-O(m + n) & O(1)
+O((n+m)*log(n+m)) & O(1)
 
 */
 

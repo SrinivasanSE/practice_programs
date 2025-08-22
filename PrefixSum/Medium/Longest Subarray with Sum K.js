@@ -17,7 +17,7 @@ class Solution {
                 if (prefix.has(req)) {
                     max = Math.max(max, i - prefix.get(req))
                 } else {
-                    prefix.set(sum, i)
+                    prefix.set(sum, i) // set sum and not the arr[i]
                 }
             }
         }
@@ -44,7 +44,7 @@ function maxLen(arr) {
             if (hashmap.has(sum)) {
                 res = Math.max(res, i - hashmap.get(sum))
             } else {
-                hashmap.set(sum, i)
+                hashmap.set(sum, i) // set sum and not the arr[i]
             }
         }
     }
