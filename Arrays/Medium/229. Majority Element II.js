@@ -3,6 +3,11 @@
 // Similar to Arrays/easy/169. Majority Element.js
 
 /*
+Better - use hashmap
+O(N) & O(N)
+*/
+
+/*
 
 Optimal - Moore voting algo
 O(N) & O(1)
