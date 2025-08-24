@@ -109,10 +109,11 @@ var search = function(nums, target) {
             return true
         }
 
-        if (nums[l] === nums[mid]) {
+        if (arr[l] === arr[mid] && arr[mid] === arr[r]) { // when low, mid, r are equal, it's not possible to identify the sorted part, so we skip those elements
             l++
+            r--
             continue
-        }
+           }
 
         if (nums[l] <= nums[mid]) {
             if (nums[l] <= target && target < nums[mid]) {

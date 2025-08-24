@@ -24,7 +24,7 @@ class Solution {
                 union.push(a[i++])
             } else if (b[j] < a[i]) {
                 union.push(b[j++])
-            } else {
+            } else { // both are equal, so we take any one
                 union.push(b[j++])
                 i++
             }
