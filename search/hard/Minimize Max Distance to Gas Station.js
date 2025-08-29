@@ -45,12 +45,11 @@ O(nlogn + klogn) & O(n - 1) & O(n - 1) for heap and slots arr
 */
 
 
-
-
 class Solution {
     findSmallestMaxDist(stations, k) {
         // code here
         const n = stations.length
+        if (n === 1) return 0
         let maxGap = -1
         let slots = new Array(n - 1).fill(0)
         const heap = new MaxHeap()

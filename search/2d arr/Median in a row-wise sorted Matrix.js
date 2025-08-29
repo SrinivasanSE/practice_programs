@@ -67,7 +67,7 @@ function median(mat) {
         minHeap.enqueue(mat[i][0], i, 0);
     }
 
-    // Extract elements from the priority queue to find the median
+    // Extract the min elements from the priority queue to find the median, there will be mid count min elements
     while (cnt <= mid) {
         let { value, row, col } = minHeap.dequeue();
         res = value;

@@ -46,7 +46,7 @@ const isPossible = (arr, day, n, m, k) => {
         }
     }
     totalBoq += Math.floor(count/k)
-    return totalBoq
+    return totalBoq >= m
 }
 var minDays = function(bloomDay, m, k) {
     const n = bloomDay.length
@@ -58,8 +58,7 @@ var minDays = function(bloomDay, m, k) {
 
     while (l <= r) {
         const mid = l + Math.floor((r - l)/2)
-        let boq = isPossible(bloomDay, mid, n, m, k)
-        if (boq >= m) { // if we can make more boq than m using this mid days, we can try to move to left to see if we can use less no of days
+        if (isPossible(bloomDay, mid, n, m, k)) { // if we can make more boq than m using this mid days, we can try to move to left to see if we can use less no of days
             r = mid - 1
         } else {
             l = mid + 1

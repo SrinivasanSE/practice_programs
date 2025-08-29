@@ -43,7 +43,7 @@ O(n1 + n2) & O(1)
 
 
 var findMedianSortedArrays = function (nums1, nums2) {
-    let l = 0, r = 0, k = 0, n1 = nums1.length, n2 = nums2.length
+    let l = 0, r = 0,  n1 = nums1.length, n2 = nums2.length
     const n = n1 + n2
     let curr = 0, prev = 0
     for(let i = 0; i <= Math.floor(n/2); i++) {
@@ -93,7 +93,7 @@ var findMedianSortedArrays = function (nums1, nums2) {
         if (mid2 - 1 >= 0) l2 = nums2[mid2 - 1]
 
         if (l1 <= r2 && l2 <= r1) {
-            if (n % 2 === 1) return Math.max(l1, l2)
+            if (n % 2 === 1) return Math.max(l1, l2) // we need to use max for left since max element will be at the last position in left and min element will at the start at the right
             return (Math.max(l1, l2) + Math.min(r1, r2))/2
         }
 

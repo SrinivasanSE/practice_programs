@@ -40,7 +40,7 @@ var minEatingSpeed = function(piles, h) {
     const n = piles.length
     let totalHours = 0
     const maxLimit = Math.max(...piles)
-    let l = 1, r  = maxLimit
+    let l = 1, r = maxLimit
     while (l <= r) {
         const mid = l + Math.floor((r - l)/2)
         totalHours = getHours(piles, mid, n)
