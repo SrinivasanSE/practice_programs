@@ -41,19 +41,15 @@ Final Reversed List: The head of the reversed list is node 5, resulting in the l
 */
 
 
-class Solution {
-    reverseList(head) {
-        // your code here
-        if(head === null || head.next === null) {
-            return head
-        }
-        
-        const rest = this.reverseList(head.next)
-        
-        head.next.next = head
-        
-        head.next = null
-        
-        return rest
+var reverseList = function(head) {
+    if (head === null || head.next === null) {
+        return head
     }
-}
+
+    const newHead = reverseList(head.next) // this will return the last node, 4 -> 5, front = 5, 5.next = 4, 4.next = null 5 -> 4 -> null
+    const front = head.next
+    front.next = head
+    head.next = null
+    return newHead
+   
+};

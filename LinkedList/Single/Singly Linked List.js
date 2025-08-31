@@ -1,4 +1,4 @@
-//https://www.geeksforgeeks.org/singly-linked-list-tutorial/
+// https://www.geeksforgeeks.org/singly-linked-list-tutorial/
 
 class Node {
     constructor(data, next = null) {
@@ -43,7 +43,7 @@ class LinkedList {
             return
         }
         let i = 0
-        let prev = this.head
+        let curr = this.head
         
         while(i < index - 1 && curr) {
             curr = curr.next

@@ -18,7 +18,7 @@ function lowerBound(arr, n, x) {
 
 function lowerBound(arr, n, x) {
     let low = 0, high = n - 1;
-    let ans = n;
+    let ans = n; // important
 
     while (low <= high) {
         let mid = Math.floor((low + high) / 2);

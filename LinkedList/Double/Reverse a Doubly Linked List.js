@@ -3,17 +3,16 @@
 class Solution {
     reverseDLL(head) {
         // code here
-        let prev = null
-        let curr = head
-        let nxt
-        while(curr) {
+        let curr = head, prev = null, nxt
+
+        while (curr) {
             nxt = curr.next
-            curr.next = curr.prev
-            curr.prev = nxt
+            curr.next = prev
+            curr.prev = nxt 
             prev = curr
-            curr = nxt
-            
+            curr = nxt 
         }
+
         return prev
     }
 }

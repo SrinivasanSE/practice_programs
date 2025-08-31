@@ -34,7 +34,49 @@ class Solution {
 }
 
 /*
-Better
+Better - Binary
+O(n*log(m)) & O(1)
+*/
+
+class Solution {
+    // binary search to find first occurrence of 1
+    findCount(arr, l, r) {
+        const n = arr.length;
+        let firstOne = -1;
+
+        while (l <= r) {
+            const mid = l + Math.floor((r - l) / 2);
+
+            if (arr[mid] === 1) {
+                firstOne = mid;
+                r = mid - 1; // keep going left to find first 1
+            } else {
+                l = mid + 1;
+            }
+        }
+
+        if (firstOne === -1) return 0;   // no 1s in this row
+        return n - firstOne;             // number of 1s = total length - first index of 1
+    }
+
+    maxOnes(mat, n, m) {
+        let maxCount = -1;
+        let res = -1;
+
+        for (let i = 0; i < n; i++) {
+            const count = this.findCount(mat[i], 0, m - 1);
+            if (count > maxCount) {
+                maxCount = count;
+                res = i;
+            }
+        }
+
+        return res;
+    }
+}
+
+/*
+Optimal
 O(M + N) & O(1)
 */
 
@@ -55,42 +97,3 @@ O(M + N) & O(1)
         return maxCount
     }
 
-/*
-Optimal - Binary
-O(n*log(m)) & O(1)
-*/
-
-class Solution{
-    
-    findCount(arr, l, r) {
-        const n = arr.length
-        
-        while (l <= r) {
-            const mid = l + Math.floor((r - l)/2)
-            
-            if ((mid === 0 || arr[mid - 1] === 0) && arr[mid] === 1) {
-                return n - mid // for counting 0, just return mid
-            }
-            
-            if (arr[mid] === 0) {
-                l = mid + 1
-            } else {
-                r = mid - 1
-            }
-        }
-    }
-    maxOnes(mat, n, m){
-        let maxCount =-1
-        let res = 0
-        
-        for(let i = 0; i < n; i++) {
-            const count = this.findCount(mat[i], 0, m - 1)
-            if (count > maxCount) {
-                maxCount = count
-                res = i
-            }
-        }
-        
-        return res
-    }
-}

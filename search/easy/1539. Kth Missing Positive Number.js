@@ -31,3 +31,15 @@ var findKthPositive = function(arr, k) {
     
     return l + k
 };
+
+
+/*
+at the end, high will point to the closest number whether the missing numbers are <=k, 
+to find the ans, we need to do arr[high] + more(how many more numbers are needed)
+more = k - missing numbers
+missing numbers = arr[high] - (high + 1)
+arr[high] + k - (arr[high] - high - 1)
+arr[high] + k - arr[high] + high + 1
+high + 1 + k = low + k
+
+*/
