@@ -9,7 +9,6 @@ class Solution {
         let p2 = head2
         let dummy = new Node(0)
         let curr = dummy
-        let node
         while(p1 && p2) {
             
             if(p1.data < p2.data) {

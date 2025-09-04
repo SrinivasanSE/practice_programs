@@ -76,7 +76,7 @@ class Solution {
         // your code here
         const heap = new MinHeap()
         for(let list of arr) {
-            heap.insert(list)
+            heap.insert(list) // this will be just the head of the linked list
         }
         const dummy = new Node(-1)
         let temp = dummy
