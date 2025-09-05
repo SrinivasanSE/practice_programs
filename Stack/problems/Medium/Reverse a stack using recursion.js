@@ -11,13 +11,13 @@ Space Complexity: O(1) We need no extra stack for answer , hence O(1), but for r
 class Solution {
     //Function to reverse a string.
     
-    insertAtBottom(st, n) {
+    insertAtBottom(st, element) {
         if(st.length === 0) {
-            st.push(n)
+            st.push(element)
             return
         } 
-        const top = st.pop()
-        this.insertAtBottom(st, n)
+        const top = st.pop() // [2, 1] n = 3 -> [2], n = 3, [], 3 -> [3] -> Push 2, [3, 2] -> Push 1 -> [3, 2, 1]
+        this.insertAtBottom(st, element) // we pop all the current elements in the stack and push the new element to the bottom and add the previous elements again after that
         st.push(top)
         
     }
