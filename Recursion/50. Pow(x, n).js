@@ -63,7 +63,7 @@ var myPow = function(x, n) {
         res*=res
 
         if (n % 2 === 1) {
-            return res*x
+            return res*x // when odd, we take the extra x and mutiply with res
         }
 
         return res
