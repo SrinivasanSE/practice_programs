@@ -5,8 +5,8 @@
 Time complexity: O(3^n) or O(4^n)
 n is length of input string. Each digit has 3 or 4 letters. For example, if you get "23"(n) as input string, we will create 9 combinations which is O(3^2) = 9
 
-Space complexity: O(n)
-n is length of input string. This is for recursive call stack.
+Space complexity: O(4^n * n) for storage and O(n) for recursive call stack.
+n is length of input string.
 
 */
 
