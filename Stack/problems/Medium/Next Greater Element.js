@@ -23,6 +23,38 @@ class Solution {
 }
 
 
+// O(2n) & O(n)
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    nextLargerElement(arr) {
+        // code here
+        const n = arr.length
+        let res = new Array(n).fill(-1)
+        let s = []
+        let top = -1
+        
+        for(let i = n - 1; i >= 0; i--) {
+            // this will take O(N) complexity, because at max, we will remove at most N elements
+            while(top >= 0 && s[top] <= arr[i] ) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
+                s.pop()
+                top--
+            }
+            
+            if (top >= 0) {
+                res[i] = s[top]
+            }
+            
+            s.push(arr[i])
+            top++
+        }
+        
+        return res
+        
+    }
+}
+
+
+
 /*
 Understanding the Stack Operations
 The key point here is how many times each element is pushed and popped from the stack. While it might seem that the while loop could lead to quadratic complexity because of repeated popping, it does not result in O(n^2) for the following reason:
@@ -67,34 +99,3 @@ Therefore, the total time complexity of the program is dominated by the single p
 Final Time Complexity:
 O(n), where n is the number of elements in the input array.
 */
-
-
-// O(n) & O(n)
-class Solution {
-    // Function to find the next greater element for each element of the array.
-    nextLargerElement(arr) {
-        // code here
-        const n = arr.length
-        let res = new Array(n).fill(-1)
-        let s = []
-        let top = -1
-        
-        for(let i = n - 1; i >= 0; i--) {
-            
-            while(top >= 0 && s[top] <= arr[i] ) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
-                s.pop()
-                top--
-            }
-            
-            if(top >= 0) {
-                res[i] = s[top]
-            }
-            
-            s.push(arr[i])
-            top++
-        }
-        
-        return res
-        
-    }
-}

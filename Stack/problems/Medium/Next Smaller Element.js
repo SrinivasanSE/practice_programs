@@ -2,26 +2,33 @@
 // https://www.geeksforgeeks.org/find-the-nearest-smaller-numbers-on-left-side-in-an-array/
 
 // smallest number on right
-class Solution{
-    help_classmate(arr,n){
-        //code here
-        let stack = []; 
-        let result = new Array(n).fill(-1);
-        
-        for (let i = 0; i < n; i++) { 
-            if (stack.length == 0) { 
-                stack.push(i); 
-                continue; 
-            } 
-            while (stack.length > 0 && arr[stack[stack.length-1]] > arr[i]) { 
-                result[stack[stack.length-1]] = arr[i];
-                stack.pop(); 
-            } 
-            stack.push(i); 
-        } 
-        return result;
+function nextSmallerEle(arr) {
+    let n = arr.length;
+
+    let result = new Array(n).fill(-1);
+
+    let st = [];
+
+    // traverse the array from right to left
+    for (let i = n - 1; i >= 0; i--) {
+
+        // pop elements from stack which are >= current element
+        while (st.length > 0 && st[st.length - 1] >= arr[i]) {
+            st.pop();
+        }
+
+        // if stack is not empty, top element is NSE
+        if (st.length > 0) {
+            result[i] = st[st.length - 1];
+        }
+
+        // push current element onto stack
+        st.push(arr[i]);
     }
+
+    return result;
 }
+
 
 // smallest number on left
 class Solution {
@@ -29,7 +36,7 @@ class Solution {
       //code here
       let stk = []
       let res = new Array(n).fill(-1)
-      for(let i = 0; i < arr.length; i++) {
+      for(let i = 0; i < arr.length; i++) { // iterate from start
           
           while(stk.length > 0 && stk[stk.length - 1] >= arr[i]) {
               stk.pop()
