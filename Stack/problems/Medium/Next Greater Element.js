@@ -81,12 +81,12 @@ class Solution {
         
         for(let i = n - 1; i >= 0; i--) {
             
-            while(top >= 0 && s[top] <= arr[i] ) {
+            while(top >= 0 && s[top] <= arr[i] ) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
                 s.pop()
                 top--
             }
             
-            if(top >=0) {
+            if(top >= 0) {
                 res[i] = s[top]
             }
             
