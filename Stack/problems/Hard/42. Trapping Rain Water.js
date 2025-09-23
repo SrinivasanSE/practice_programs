@@ -37,7 +37,7 @@ var trap = function(height) {
 
 /*
 
-Optimal
+Optimal - Understand this sol more
 
 O(n) & O(1)
 

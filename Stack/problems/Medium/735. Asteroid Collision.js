@@ -1,5 +1,11 @@
 // https://www.geeksforgeeks.org/reduce-array-by-replacing-adjacent-opposite-sign-pairs-with-their-absolute-maximum/
 
+/*
+
+O(2n) & O(n) at most will push n elements to the stack and pop it, so while loop will run only n times in total
+
+*/
+
 
 class Solution {
     //Function to find out the remaining asteroids.
@@ -10,7 +16,7 @@ class Solution {
         let flag
         for(let ele of a) {
             flag = 1
-            while(stk.length > 0 && stk[stk.length - 1] > 0 && ele < 0) {
+            while(stk.length > 0 && stk[stk.length - 1] > 0 && ele < 0) {  
                 if (Math.abs(ele) > stk[stk.length - 1]) {
                     stk.pop()
                 } else if (Math.abs(ele) === stk[stk.length - 1]) {
