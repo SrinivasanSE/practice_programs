@@ -26,25 +26,25 @@ so, we reverse the whole array.
 var nextPermutation = function(nums) {
     const n = nums.length
     let idx = -1
-    for(let i = n - 2; i >= 0; i--) {
-        if (nums[i] < nums[i + 1]) {
+    for(let i = n - 2; i >= 0; i--) { // [1, 2, 3]
+        if (nums[i] < nums[i + 1]) { // 2 < 3
             idx = i
             break
         }
     }
-    if (idx === -1) {
+    if (idx === -1) { // [3, 2, 1]
         reverse(nums, 0, n - 1)
         return
     }
 
     for(let i = n - 1; i > idx; i--) {
         if (nums[idx] < nums[i]) {
-            [nums[idx], nums[i]] = [nums[i], nums[idx]]
+            [nums[idx], nums[i]] = [nums[i], nums[idx]] // [1, 3, 2]
             break
         }
     }
 
-    reverse(nums, idx + 1, n - 1)   
+    reverse(nums, idx + 1, n - 1)   // after idx + 1, just reverse the elements a
 };
 
 const reverse = (arr, start, end) => {
