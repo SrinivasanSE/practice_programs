@@ -50,7 +50,7 @@ class Solution {
     isPossible(arr, dist, k) {
         let count = 1, last = arr[0]
         for (let i = 1; i < arr.length; i++) {
-            if (arr[i] - last >= dist) {
+            if (arr[i] - last >= dist) { // the cows should be at least at a diff of dist, it can be greater also
                 count++
                 last = arr[i]
             }
