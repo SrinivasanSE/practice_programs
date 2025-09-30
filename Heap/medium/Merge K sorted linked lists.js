@@ -1,5 +1,15 @@
 // https://www.geeksforgeeks.org/merge-k-sorted-linked-lists-set-2-using-min-heap/
 
+// LinkedList/Single/Medium/Merge K sorted linked lists.js
+
+/*
+
+O(NLogk) & O(k)
+
+where k is the number of linked lists and N is the total no of nodes. Each node is inserted/extracted once, Each is O(log k) because the heap contains at most k elements at any time.
+
+*/
+
 
 class MinHeap {
     constructor() {
