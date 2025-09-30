@@ -61,13 +61,13 @@ class MinHeap {
         return this.heap.length === 0 ? null : this.heap[0];
     }
 
-    decreaseKey(index, newVal) {
+    decreaseKey(index, newVal) { // to decrease the value of a node, since we decrease it, we move the node up
         if (index >= this.heap.length || newVal > this.heap[index]) return;
         this.heap[index] = newVal;
         this.heapifyUp(index);
     }
 
-    increaseKey(index, newVal) {
+    increaseKey(index, newVal) { 
         if (index >= this.heap.length || newVal < this.heap[index]) return;
         this.heap[index] = newVal;
         this.heapifyDown(index);
