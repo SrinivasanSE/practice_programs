@@ -1,12 +1,14 @@
 // https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/
 // https://leetcode.com/problems/find-median-from-data-stream/description/
 
+// Check the follow up questions in LC
+
 
 class Solution {
     maxHeap = new PriorityQueue((a, b) => b - a) // this holds the lower half of numbers, ex: [2, 1]  for [1, 2, 3, 4]
     minHeap = new PriorityQueue((a, b) => a - b) // this holds the upper half of numbers, [3, 4]
     
-    addNumber(num) {
+    addNumber(num) { // O(logN)
         if (this.maxHeap.isEmpty() || this.maxHeap.peek() >= num) { 
             this.maxHeap.enqueue(num) // push the small numbers
         } else {
@@ -21,7 +23,7 @@ class Solution {
         }
     }
     
-    findMedian() {
+    findMedian() { // O(1)
         // The largest of the lower half (maxHeap top)
         //  and smallest of the upper half (minHeap top) are exactly the middle elements needed to compute the median.
         if (this.maxHeap.size() > this.minHeap.size()) { // if maxHeap contains more elements,than it's top is the median, maxHeap = [2, 1] minHeap = [3]
@@ -30,7 +32,7 @@ class Solution {
         return (this.maxHeap.peek() + this.minHeap.peek())/2.0 // if they contain same no of elements, top of both will be median
         // maxHeap - [2, 1] minHeap = [3, 4] median = (2 + 3)/2
     }
-    getMedian(arr) {
+    getMedian(arr) { // O(NlogN)
         // code here
         let out = []
         for(let num of arr) {
