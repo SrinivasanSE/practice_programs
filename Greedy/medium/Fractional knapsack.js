@@ -1,5 +1,12 @@
 // https://www.geeksforgeeks.org/fractional-knapsack-problem/
 
+/*
+
+Greedy - Sorting
+O(nlogn) * O(n)
+
+*/
+
 class Solution {
     fractionalknapsack(val, wt, capacity) {
         // code here
@@ -10,7 +17,7 @@ class Solution {
             items.push({val: val[i], wt: wt[i]})
         }
         
-        items.sort((a, b) => (b.val/b.wt) - (a.val/a.wt))
+        items.sort((a, b) => (b.val/b.wt) - (a.val/a.wt)) // sort by val/weight to add the things with high val/unit first
         let total = 0
         for(let i = 0; i < n; i++) {
             if (items[i].wt <= capacity) {

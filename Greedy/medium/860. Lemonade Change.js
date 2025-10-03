@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/dsa/lemonade-stand-change-challenge/
+// https://leetcode.com/problems/lemonade-change/description/
 
 function lemonadeChange(N, bills) {
 

@@ -14,9 +14,9 @@ class Solution {
                 stk.push(i)
             } else {
                 stk.pop()
-                if (stk.length === 0) {
-                    stk.push(i)
-                } else {
+                if (stk.length === 0) { // we set the current index as base
+                    stk.push(i) // Resetting with stk.push(i) when stack is empty ensures we don’t count across unmatched ).
+                } else { // the initial unmatched index base will be in the stack, so it will come to else block
                     res = Math.max(res, i - stk[stk.length - 1])
                 }
             }
@@ -36,6 +36,7 @@ class Solution {
         let maxLength = 0
         let open = 0, close = 0
         
+        // forward traversal
         for(let i = 0; i < s.length; i++) {
             
             if(s[i] === "(") {
@@ -46,11 +47,12 @@ class Solution {
             
             if (open === close) {
                 maxLength = Math.max(maxLength, close*2)
-            } else if (close > open) {
+            } else if (close > open) { // if we find more close brackets at the beginning, reset
                 open = close = 0
             }
         }
         
+        // backward traversal
         open = close = 0
         for(let i = s.length - 1; i >= 0; i--) {
             if(s[i] === "(") {
@@ -61,7 +63,7 @@ class Solution {
             
             if (open === close) {
                 maxLength = Math.max(maxLength, close*2)
-            } else if (open > close) {
+            } else if (open > close) { // if we find more open brackets at the end, reset
                 open = close = 0
             }
         }
