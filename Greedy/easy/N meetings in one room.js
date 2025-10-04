@@ -2,6 +2,12 @@
 
 // Check the dp approach for this
 
+
+/*
+
+O(nlogn) + O(2n) & O(3n)
+*/
+
 class Solution {
     // Function to find the maximum number of meetings that can
     // be performed in a meeting room.
@@ -36,7 +42,7 @@ class Solution {
         const meetings = []
         
         for(let i = 0; i < N; i++) {
-            meetings.push({start: S[i], finish: F[i], index: i})
+            meetings.push({start: S[i], finish: F[i], index: i}) // track the index also to find the meeting order
         }
         
         meetings.sort((a, b) => a.finish - b.finish)
