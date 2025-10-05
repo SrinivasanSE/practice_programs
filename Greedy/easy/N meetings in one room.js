@@ -19,7 +19,7 @@ class Solution {
             c.push([start[i], end[i]])
         }
         
-        c.sort((a, b) => a[1] - b[1]) // sort by finish time, choose the meetings which ends first
+        c.sort((a, b) => a[1] - b[1]) // sort by finish time, choose the meetings which ends first for max meetings
         let count = 0
         let last = -1 // tracks end time of previous meeting
         for(let i = 0; i < start.length; i++) {
@@ -51,7 +51,7 @@ class Solution {
         let last = -1
         for(let i = 0; i < N; i++) {
             if (last < meetings[i].start) {
-                res.push(meetings[i].index + 1)
+                res.push(meetings[i].index + 1) // add the index
                 last = meetings[i].finish
             }
         }

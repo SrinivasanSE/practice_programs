@@ -20,32 +20,29 @@ O(nlogn) + O(2n) & O(n)
 
 */
 
-/**
- * @param {number[][]} intervals
- * @return {number[][]}
- */
 var merge = function(intervals) {
     const n = intervals.length
-    intervals.sort((a, b) => a[0] - b[0])
+    intervals.sort((a, b) => a[0] - b[0]) // sort by first index
     let res = [], start, end
 
     for(let i = 0; i < n; i++) {
         start = intervals[i][0]
         end = intervals[i][1]
 
-        if (res.length > 0 && res[res.length - 1][1] >= end) { // if the interval is already added, we skip it. [2, 3] is already included in [1, 6]
+        if (res.length > 0 && res[res.length - 1][1] >= end) { // res end and end comparison, if the interval is already added, we skip it. [2, 3] is already included in [1, 6]
             continue
         }
 
         for(let j = i + 1; j < n; j++) {
-            if (end >= intervals[j][0]) { // [1, 3]  & [2, 6] 3 >= 2, so we merge those two
-                end = Math.max(end, intervals[j][1])
+            if (end < intervals[j][0]) {  // since the array is sorted, there won't be any overlap anymore,  we can break here
+                break
             } else {
-                break // since the array is sorted, there won't be any overlap anymore,  we can break here
+                end = Math.max(end, intervals[j][1]) // [1, 3]  & [2, 6] 3 >= 2, so we merge those two
+                break 
             }
         }
 
-        res.push([start, end])
+        res.push([start, end]) // add to the res
     }
 
     return res
@@ -62,7 +59,7 @@ O(nlogn) & O(n)
 
 var merge = function(intervals) {
     const n = intervals.length
-    intervals.sort((a, b) => a[0] - b[0])
+    intervals.sort((a, b) => a[0] - b[0]) // sort by start
     let res = []
 
     for(let i = 0; i < n; i++) {

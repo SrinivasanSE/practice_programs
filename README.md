@@ -16,3 +16,5 @@ https://www.geeksforgeeks.org/dsa/union-and-intersection-of-two-sorted-arrays-2/
 2) Dutch National Flag Algo
 3) Moore's Voting Algo
 4) Kadane's algo
+5) Shortest Remaining Time First (Preemptive SJF) Scheduling Algorithm
+6) Page Replacement Algorithms

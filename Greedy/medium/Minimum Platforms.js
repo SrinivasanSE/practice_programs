@@ -21,7 +21,7 @@ class Solution {
 
             for (let j = 0; j < n; j++) {
                 if (i != j) {
-                    if ((arr[i] >= arr[j] && arr[i] <= dep[j]) || (arr[j] >= arr[i] && arr[j] <= dep[i])) { // checking for overlap
+                    if ((arr[i] >= arr[j] && arr[i] <= dep[j]) || (arr[j] >= arr[i] && arr[j] <= dep[i])) { // checking for overlap, arr[i] is btw arr[j] - dep[j] or arr[j] is btw arr[i] - dep[i]
                         platforms++
                     }
                 }
@@ -66,7 +66,7 @@ class Solution {
                 j++
             }
 
-             max = Math.max(max, platforms)
+             max = Math.max(max, platforms) // keep tracking max no of platforms allocated at any time
         }
 
         return max

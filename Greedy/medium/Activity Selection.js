@@ -1,6 +1,13 @@
 // https://www.geeksforgeeks.org/dsa/activity-selection-problem-greedy-algo-1/
 
-// check naive sol for this
+// Same as N meetings in one room
+
+/*
+
+Optimal - Sorting
+O(nlogn) & O(n)
+
+*/
 
 class Solution {
     activitySelection(start, finish) {
@@ -29,6 +36,12 @@ class Solution {
     }
 }
 
+/*
+
+Optimal - Heap
+O(nlogn) & O(n)
+
+*/
 
 function activitySelection(start, finish)
 {

@@ -18,8 +18,8 @@ const findJumps = (nums, idx, jumps) => {
         return jumps
     }
     let min = Number.MAX_SAFE_INTEGER
-    for (let i = 1; i <= nums[idx]; i++) {
-        min = Math.min(min, findJumps(nums, idx + i, jumps + 1))
+    for (let i = 1; i <= nums[idx]; i++) { // i should start from 1 and not 0
+        min = Math.min(min, findJumps(nums, idx + i, jumps + 1)) // jump to each place and calc min
     }
 
     return min
@@ -71,20 +71,3 @@ class Solution {
         return -1
     }
 }
-
-// O(n) & O(1)
-
-var canJump = function(nums) {
-    let maxReach = 0
-
-    const n = nums.length
-
-    for (let i = 0; i < n; i++) {
-        if (maxReach < i) return false
-        maxReach = Math.max(maxReach, i + nums[i])
-        if (maxReach >= n - 1) return true
-        
-    }
-
-    return true
-};

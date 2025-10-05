@@ -25,7 +25,7 @@ class Solution {
                 capacity -= items[i].wt
             } else {
                 total += (items[i].val/items[i].wt)*capacity  // calculate the value per unit and multiply with the remaining capacity
-                break
+                break // break since the capacity will become 0
             }
         }
         

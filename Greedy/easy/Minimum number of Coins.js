@@ -14,14 +14,14 @@ class Solution {
         // code here
         const d = [ 1, 2, 5, 10, 20, 50, 100, 200, 500, 2000 ]
         let res = []
-        for(let i = d.length - 1; i >= 0; i--) {
+        for(let i = d.length - 1; i >= 0; i--) { // to minimise the no of coins, we start from larger denomination coins
             let c = d[i]
             while (amt >= c) { // keep decreasing the coin val from the amt
                 amt-=c
                 res.push(c)
             }
             
-            if (amt === 0) {
+            if (amt === 0) { // if the amt already becomes 0, break
                 break
             }
         }

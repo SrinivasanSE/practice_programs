@@ -1,30 +1,37 @@
 // https://www.geeksforgeeks.org/problems/seating-arrangement--170647/1?page=1&category=Greedy&difficulty=Easy&status=unsolved&sortBy=submissions
 
+// O(m) & O(1)
 
 class Solution {
-    // Function to check whether it is possible to get all seats occupied.
     is_possible_to_get_seats(n, m, seats) {
-        // your code here
         let prev, next, availableSeats = 0
-        for(let i = 0; i < m; i++) {
-           if (i === 0) {
-               prev = 0
-           } else {
-               prev = seats[i - 1]
-           }
-           
-           if (i === m - 1) {
-               next = 0
-           } else {
-               next = seats[i + 1]
-           }
-           
-           if (prev + next + seats[i] === 0) { // if prev, current and next seat is empty, the seat is available
-               i++ // skip the next seat since it's already checked
-               availableSeats++
-           }
+        for (let i = 0; i < m; i++) {
+            
+            // 1️⃣ Find the left neighbor (prev)
+            if (i === 0) {
+                prev = 0 // first seat → no left neighbor, assume empty
+            } else {
+                prev = seats[i - 1]
+            }
+
+            // 2️⃣ Find the right neighbor (next)
+            if (i === m - 1) {
+                next = 0 // last seat → no right neighbor, assume empty
+            } else {
+                next = seats[i + 1]
+            }
+
+            // 3️⃣ Check if we can seat someone here
+            if (prev + next + seats[i] === 0) {
+                i++ // skip the next seat (can't place adjacent)
+                availableSeats++
+            }
+
+            // 4️⃣ If enough seats filled, done early
+            if (availableSeats >= n) return true
         }
-        
-        return availableSeats >= n
+
+        // 5️⃣ Not enough seats
+        return false
     }
 }
