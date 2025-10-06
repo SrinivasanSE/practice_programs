@@ -23,7 +23,7 @@ var isNStraightHand = function(hand, groupSize) {
     }
 
     for (let key of map.keys()) { // O(MlogM) , M - no of unique cards 
-        heap.insert(key) // // contains unique cards
+        heap.insert(key) // contains unique cards
     }
     let currentCard, temp
     while (!heap.isEmpty()) {
