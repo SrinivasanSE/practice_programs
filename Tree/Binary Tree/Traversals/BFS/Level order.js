@@ -17,7 +17,7 @@ var levelOrder = function(root) {
     const traversal = (node, level) => {
         if (node == null) return
 
-        if (!res[level]) {
+        if (!res[level]) { // res.length <= level
             res[level] = []
         }
 

@@ -1,16 +1,22 @@
 // https://www.geeksforgeeks.org/write-c-code-to-determine-if-two-trees-are-identical/
 // https://www.geeksforgeeks.org/check-if-two-trees-are-mirror/
+// https://leetcode.com/problems/same-tree/description/
+
+/*
+
+Recursion
+
+O(n) & O(n)
+
+*/
 
 class Solution {
     // Function to check if two trees are identical.
     isIdentical(r1, r2) {
         // your code here
-        if (r1 === null && r2 === null) {
-            return true
-        }
         
         if (r1 === null || r2 === null) {
-            return false
+            return r1 == r2
         }
         
         return r1.data === r2.data && this.isIdentical(r1.left, r2.left) && this.isIdentical(r1.right, r2.right)

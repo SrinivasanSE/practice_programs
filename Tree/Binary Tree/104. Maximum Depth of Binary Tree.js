@@ -1,12 +1,15 @@
 // https://www.geeksforgeeks.org/find-the-maximum-depth-or-height-of-a-tree/
+// https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
 
+/*
+
+Brute - Level order traversal
+
+O(n) & O(n)
+
+*/
 
 class Solution {
-    /**
-     * @param {Node} node
-     * @returns {number}
-     */
-
     height(node) {
         // code here
         let level = 0
@@ -30,12 +33,16 @@ class Solution {
 }
 
 
-class Solution {
-    /**
-     * @param {Node} node
-     * @returns {number}
-     */
+/*
 
+Recursion
+
+O(n) & O(n)
+
+*/
+
+
+class Solution {
     height(node) {
         // code here
         if (node === null) {
@@ -45,6 +52,6 @@ class Solution {
         const leftHeight = this.height(node.left)
         const rightHeight = this.height(node.right)
         
-        return Math.max(leftHeight, rightHeight) + 1
+        return 1 + Math.max(leftHeight, rightHeight)
     }
 }
