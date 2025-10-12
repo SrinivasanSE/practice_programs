@@ -104,3 +104,42 @@ var postorderTraversal = function (root) {
 
     return nodes
 };
+
+
+
+/*
+
+Iterative - Morris traversal
+
+O(n) & O(n)
+
+*/
+
+
+var postorderTraversal = function(root) { // we use modified pre order, root - right - left
+    let res = []
+    let curr = root, prev
+
+    while (curr) {
+        if (curr.right == null) {
+            res.push(curr.val)
+            curr = curr.left
+        } else {
+            prev = curr.right
+            while (prev.left && prev.left != curr) {
+                prev = prev.left
+            }
+
+            if (prev.left == null) {
+                prev.left = curr
+                res.push(curr.val) // visit in Root->Right->Left order
+                curr = curr.right
+            } else {
+                prev.left = null
+                curr = curr.left
+            }
+        }
+    }
+
+    return res.reverse() // return the reversed list
+};

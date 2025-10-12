@@ -77,22 +77,22 @@ var findMedianSortedArrays = function (nums1, nums2) {
 
     const n = n1 + n2
     const left = Math.floor((n + 1)/2) // to find how many elements should be in the left side, for odd elements, left will have one extra element and for even, both will have same
-    let low = 0, high = n1
+    let low = 0, high = n1 // [INMPORTANT] it's n1 and not n, we traverse the smaller array, we can take all the elements from the nums1 in the left
 
     while(low <= high) {
         const mid1 = low + Math.floor((high - low)/2)
-        const mid2 = left - mid1
+        const mid2 = left - mid1 // how many elements from nums2 should be in the left side
 
         let l1 = Number.MIN_SAFE_INTEGER, l2 = Number.MIN_SAFE_INTEGER
         let r1 = Number.MAX_SAFE_INTEGER, r2 = Number.MAX_SAFE_INTEGER
 
-        if (mid1 < n1) r1 = nums1[mid1]
+        if (mid1 < n1) r1 = nums1[mid1] // it's n1 and not n
         if (mid2 < n2) r2 = nums2[mid2]
 
         if (mid1 - 1 >= 0) l1 = nums1[mid1 - 1]
         if (mid2 - 1 >= 0) l2 = nums2[mid2 - 1]
 
-        if (l1 <= r2 && l2 <= r1) {
+        if (l1 <= r2 && l2 <= r1) { // this condition makes sure that left side elements <= right side elements
             if (n % 2 === 1) return Math.max(l1, l2) // we need to use max for left since max element will be at the last position in left and min element will at the start at the right
             return (Math.max(l1, l2) + Math.min(r1, r2))/2
         }
@@ -107,8 +107,30 @@ var findMedianSortedArrays = function (nums1, nums2) {
 };
 
 /*
-l2 > r1
-There is at least one element (l2) on the left that is bigger than an element (r1) on the right.
-This means the cut in a is too far to the left (we have not included enough large elements from a in the left partition).
-So, we need to move the cut in a to the right (increase mid1), so the left side of a includes more (and possibly larger) elements.
+
+Why l1 <= r2 and l2 <= r1?
+
+Let’s reason intuitively.
+
+We are creating a virtual merged array from two halves:
+
+nums1: [ ... l1 | r1 ... ]
+nums2: [ ... l2 | r2 ... ]
+
+
+For this partition to correctly divide the merged array:
+
+l1 (the rightmost element on nums1’s left side) must not be greater than anything in the right side of nums2.
+⇒ hence l1 ≤ r2.
+
+Similarly, l2 (the rightmost element on nums2’s left side) must not be greater than anything in the right side of nums1.
+⇒ hence l2 ≤ r1.
+
+If both hold, the left half indeed contains the smallest 6 elements overall.
+
+🧩 Step 8: What if they don’t hold?
+Condition	Meaning	Fix
+l1 > r2	Too many large elements in left of nums1	Move left → high = mid1 - 1
+l2 > r1	Too few elements in left of nums1	Move right → low = mid1 + 1
+
 */

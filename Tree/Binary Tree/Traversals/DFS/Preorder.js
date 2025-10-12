@@ -54,3 +54,42 @@ var preorderTraversal = function(root) {
    
     return nodes
 };
+
+
+/*
+
+Iterative - Morris traversal
+
+O(n) & O(1)
+
+
+*/
+
+
+var preorderTraversal = function(root) { // root - left - right
+    let res = []
+    let curr = root, prev
+
+    while (curr) {
+        if (curr.left == null) { // if left is null, we add the node and move to right
+            res.push(curr.val)
+            curr = curr.right
+        } else {
+            prev = curr.left
+            while (prev.right && prev.right != curr) {
+                prev = prev.right
+            }
+
+            if (prev.right == null) { // for preorder, we need to add the root first, so before moving to left, we add the node and then move to left
+                prev.right = curr
+                res.push(curr.val) // similar to inorder traversal except this, we add the val in if block instead of else
+                curr = curr.left
+            } else {
+                prev.right = null
+                curr = curr.right
+            }
+        }
+    }
+
+    return res
+};

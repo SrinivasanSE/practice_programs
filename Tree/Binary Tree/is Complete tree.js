@@ -34,26 +34,6 @@ class Solution {
 }
 
 
-
-// User function Template for javascript
-
-// User function Template for javascript
-
-/**
- * @param {Node} root
- * @returns {boolean}
- */
-
-/*
-class Node{
-    constructor(data){
-        this.data = data;
-        this.left = null;
-        this.right = null;
-    }
-}
-*/
-
 class Solution {
 
     // Function to check whether a binary tree is balanced or not.

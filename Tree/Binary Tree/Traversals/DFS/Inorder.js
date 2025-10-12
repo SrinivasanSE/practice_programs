@@ -28,6 +28,8 @@ var inorderTraversal = function (root) { // left -> root -> right
 
 /*
 
+Better
+
 Iterative - Stack
 
 O(n) & O(n)
@@ -57,4 +59,46 @@ var inorderTraversal = function (root) {
     }
 
     return nodes
+};
+
+
+
+/*
+
+Optimal - Morris traversal
+
+O(n) & O(1)
+
+*/
+
+
+
+var inorderTraversal = function(root) { // left - root - right
+    let res = []
+    let curr = root, prev
+
+    while (curr) {
+        if (curr.left == null) { // if left is null, add the root and move to right
+            res.push(curr.val)
+            curr = curr.right
+        } else {
+            prev = curr.left // move to left
+
+            while (prev.right && prev.right != curr) {  // move to right as much as possible
+                prev = prev.right
+            }
+
+            if (prev.right == null) { // if the right is null, there is no thread created yet, create the link to the root and move to left
+                prev.right = curr
+                curr = curr.left
+            } else { // the right is pointing to the curr node and left is already traversed, so remove the link and add the curr node since the left is already done and move to right
+                prev.right = null
+                res.push(curr.val)
+                curr = curr.right
+            }
+
+        }
+    }
+
+    return res
 };
