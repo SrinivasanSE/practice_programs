@@ -1,4 +1,13 @@
 // https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+// https://leetcode.com/problems/search-in-a-binary-search-tree/description/
+
+/*
+
+Recursion
+
+O(n) & O(h)
+
+*/
 
 
 class Solution {
@@ -17,6 +26,14 @@ class Solution {
         return this.search(root.left, x)
     }
 }
+
+/*
+
+Iterative 
+
+O(n) & O(1)
+
+*/
 
 class Solution {
     // Function to search a node in BST.

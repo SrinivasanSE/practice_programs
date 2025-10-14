@@ -31,36 +31,6 @@ class Solution {
 }
 
 
-class Solution {
-    // Function to check whether a Binary Tree is BST or not.
-
-    Inorder(node, prev) {
-        if (node === null) {
-            return true
-        }
-        
-        if(!this.Inorder(node.left, prev)) {
-            return false
-        }
-        
-        if (prev[0] >= node.data) {
-            return false
-        }
-        
-        prev[0] = node.data
-        
-        return this.Inorder(node.right, prev)
-        
-    }
-     
-    isBST(root) {
-        // your code 
-        let prev = [-Infinity]
-        return this.Inorder(root, prev)
- 
-    }
-}
-
 
 // Morris Inorder traversal
 class Solution {
