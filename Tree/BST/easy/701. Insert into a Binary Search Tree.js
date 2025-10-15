@@ -35,4 +35,28 @@ O(n) & O(1)
 
 */
 
+var insertIntoBST = function(root, val) {
+
+    let curr = root
+    const node = new TreeNode(val)
+    if (curr == null) return node
+    while (curr) {
+        if (curr.val < val) {
+            if (curr.right == null) {
+                curr.right = node
+                break
+            }
+            curr = curr.right
+        } else {
+            if (curr.left == null) {
+                curr.left = node
+                break
+            }
+            curr = curr.left
+        }
+
+    }
+    return root
+};
+
 

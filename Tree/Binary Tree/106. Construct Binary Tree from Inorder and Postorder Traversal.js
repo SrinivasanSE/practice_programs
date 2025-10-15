@@ -51,7 +51,7 @@ var buildTree = function (inorder, postorder) {
     for (let i = 0; i < inorder.length; i++) {
         inOrderMap.set(inorder[i], i)
     }
-    let postOrderIndex = postorder.length - 1 //
+    let postOrderIndex = postorder.length - 1 // start from end
     const dfs = (start, end) => {
         if (start > end) return null
 

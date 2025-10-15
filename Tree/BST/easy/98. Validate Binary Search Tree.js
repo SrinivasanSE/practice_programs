@@ -1,42 +1,39 @@
 // https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
+// https://leetcode.com/problems/validate-binary-search-tree/
 
+/*
 
-class Solution {
-    // Function to check whether a Binary Tree is BST or not.
+Recursion
 
-    _isBST(node, min, max) {
-        if (node === null) {
-            return true
-        }
-        
-        if (node.data < min || node.data > max) {
+O(n) & O(n)
+
+*/
+
+var isValidBST = function(root) { // we check whether each node is in the required range or not
+    const isValid = (node, min, max) => {
+        if (node == null) return true
+
+        if (node.val >= max || node.val <= min) {
             return false
         }
-        
-        return this._isBST(node.left, min, node.data - 1) && this._isBST(node.right, node.data + 1, max)
+
+        return isValid(node.left, min, node.val) && isValid(node.right, node.val, max) // left side node should be lesser than the parent and right side node should be greater than the parent
     }
-     
-    isBST(root) {
-        // your code 
-        
-        if (root == null) {
-            return true
-        }
-        
-        return this._isBST(root, -Infinity, Infinity)
-        
-        
-        
-    }
-}
+
+    return isValid(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+    
+};
+
+/*
+
+Iterative - Morris Inorder traversal
+
+O(n) & O(1)
+
+*/
 
 
-
-// Morris Inorder traversal
-class Solution {
-    // Function to check whether a Binary Tree is BST or not.
-
-     
+class Solution { // inorder traversal returns the nodes in sorted order for BST, so if the prev >= current node's val, that means it's not a valid bst
     isBST(root) {
         // your code 
         
