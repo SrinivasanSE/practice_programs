@@ -1,37 +1,118 @@
 // https://www.geeksforgeeks.org/inorder-predecessor-in-binary-search-tree/
 
+
+/*
+
+Brute
+
+O(n) + O(logn) & O(n)
+
+*/
+
+
+const lowerBound = (arr, val) => {
+    let l = 0, r = arr.length - 1;
+    while (l <= r) {
+        const mid = l + Math.floor((r - l) / 2);
+        if (arr[mid] < val) {
+            l = mid + 1;
+        } else {
+            r = mid - 1;
+        }
+    }
+    return r;
+}
+
 class Solution {
-    // returns the inorder predecessor of the Node x in BST (rooted at 'root')
     inOrderPredecessor(root, x) {
-        x = x.data;
-        if (root === null) {
-            return -1;
-        }
-
-        let curr;
-
-        // Case 1: If node has a left child → predecessor is the rightmost in left subtree
-        if (root.data === x && root.left !== null) {
-            curr = root.left;
-            while (curr.right !== null) {
+        let inOrder = [];
+        let curr = root, prev;
+        while (curr) {
+            if (curr.left == null) {
+                inOrder.push(curr.data);
                 curr = curr.right;
-            }
-            return curr.data;
-        }
-
-        // Case 2: Traverse the tree looking for predecessor
-        let pred = -1;
-        curr = root;
-
-        while (curr !== null) {
-            if (curr.data < x) {
-                pred = curr.data;       // Possible predecessor
-                curr = curr.right;      // Try to find closer value
             } else {
-                curr = curr.left;       // Go left to find smaller values
+                prev = curr.left;
+                while (prev.right && prev.right != curr) {
+                    prev = prev.right;
+                }
+                if (prev.right == null) {
+                    prev.right = curr;
+                    curr = curr.left;
+                } else {
+                    prev.right = null;
+                    inOrder.push(curr.data);
+                    curr = curr.right;
+                }
             }
         }
+        const index = lowerBound(inOrder, x.data);
+        return index < 0 ? -1 : inOrder[index];
+    }
+}
 
-        return pred;
+
+/*
+
+Better - Morris traversal and return when we find the element greater than the given element
+
+O(n) & O(1)
+
+*/
+
+
+class Solution {
+    inOrderPredecessor(root, x) {
+        let curr = root, prev;
+        let result = -1;
+        while (curr) {
+            if (curr.left == null) {
+                if (curr.data < x.data) {
+                    result = curr.data;
+                }
+                curr = curr.right;
+            } else {
+                prev = curr.left;
+                while (prev.right && prev.right != curr) {
+                    prev = prev.right;
+                }
+                if (prev.right == null) {
+                    prev.right = curr;
+                    curr = curr.left;
+                } else {
+                    prev.right = null;
+                    if (curr.data < x.data) {
+                        result = curr.data;
+                    }
+                    curr = curr.right;
+                }
+            }
+        }
+        return result;
+    }
+}
+
+
+/*
+
+Optimal - Move the node based on the given val and store the res, if the curr.val is greater than the given val
+
+O(h) & O(1)
+
+*/
+
+
+class Solution {
+    inOrderPredecessor(root, x) {
+        let curr = root, res = -1;
+        while (curr) {
+            if (curr.data < x.data) {
+                res = curr.data;
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return res;
     }
 }

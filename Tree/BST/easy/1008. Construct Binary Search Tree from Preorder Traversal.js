@@ -75,6 +75,9 @@ O(n) & O(n)
 
 */
 
+// We don't need to care about lower bound. When we construct the tree, we try to create left node first. 
+// If the condition fails (i.e. current number is greater than the parent node value), 
+// then we try to create the right node which automatically satisfies the condition, hence no lower bound is needed.
 
 var bstFromPreorder = function (preorder) {
     let i = 0

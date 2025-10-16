@@ -68,3 +68,19 @@ function upperBound(arr, x, n) {
     }
     return ans;
 }
+
+
+const upperBound = (arr, val) => {
+    let l = 0, r = arr.length - 1
+    while (l <= r) {
+        const mid = l + Math.floor((r - l)/2)
+        
+        if (arr[mid] > val) {
+            r = mid - 1
+        } else {
+            l = mid + 1
+        }
+    }
+    
+    return l
+}
