@@ -18,3 +18,42 @@ class Solution {
         return left + right + 1
     }
 }
+
+
+
+class Solution {
+    /**
+     * @param Node node
+     * @returns number
+     */
+    getSize(node) {
+        let count = 0;
+        let curr = node;
+
+        while (curr) {
+            if (curr.left == null) {
+                count++;
+                curr = curr.right;
+            } else {
+                // Find the inorder predecessor of curr
+                let prev = curr.left;
+                while (prev.right && prev.right !== curr) {
+                    prev = prev.right;
+                }
+
+                if (prev.right == null) {
+                    // Make a temporary link to curr
+                    prev.right = curr;
+                    curr = curr.left;
+                } else {
+                    // Remove the temporary link
+                    prev.right = null;
+                    count++;
+                    curr = curr.right;
+                }
+            }
+        }
+
+        return count;
+    }
+}
