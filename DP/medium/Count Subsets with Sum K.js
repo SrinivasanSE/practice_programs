@@ -99,7 +99,7 @@ class Solution {
         const n = arr.length
         const dp = Array.from({ length: n }, () => new Array(k + 1).fill(0))
 
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) { // if the target is 0, it will be 1
             dp[i][0] = 1
         }
         if (arr[0] <= k) {

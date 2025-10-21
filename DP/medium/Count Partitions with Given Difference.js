@@ -27,7 +27,7 @@ class Solution {
         // code here
         const totalSum = arr.reduce((accum, curr) => accum + curr)
         if (totalSum - d < 0 || (totalSum - d) % 2) return 0 // S2 should be a integer and can't be decimal, so totalSum - d should be even and also it can't be negative
-        const target = (totalSum - d) / 2
+        const target = (totalSum - d) / 2 // can be (totalSum + d)/2 as well
         return this.countSubsetSum(arr, target) // Same as DP/medium/Count Subsets with Sum K.js
         
     }
