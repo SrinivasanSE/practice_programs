@@ -13,7 +13,7 @@ class Solution {
         }
         
         while ( l < r) {
-            res = Math.max(res, Math.min(arr[l], arr[r])*(r - l))
+            res = Math.max(res, Math.min(arr[l], arr[r])*(r - l))  // take the min since the water can hold upto min of both only height only
             //console.log(res, arr[l], arr[r])
             if (arr[l] < arr[r]) {
                 l++
