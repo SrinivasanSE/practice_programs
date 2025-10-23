@@ -3,52 +3,13 @@
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 
+/*
 
-class Solution {
-    // Function to find the maximum profit.
-    maximumProfit(prices) {
-        // your code here
-        let maxProfit = 0
-        
-        const n = prices.length
-        let minPrice = prices[0]
-        for(let i = 1; i < n; i++) {
-            maxProfit = Math.max(maxProfit, prices[i] - minPrice)
-            minPrice = Math.min(prices[i], minPrice)
-        }
-        
-        return maxProfit
-    }
-}
+Brute
 
-// Two Pointer approach
+O(n^2) & O(1)
 
-
-var maxProfit = function(prices) {
-    if (!prices || prices.length < 2) {
-        return 0;
-    }
-    
-    let maxProfit = 0;
-    let leftBuy = 0;
-    let rightSell = 1;
-    
-    while (rightSell < prices.length) {
-        const currentPrice = prices[rightSell];
-        const buyPrice = prices[leftBuy];
-        
-        if (buyPrice < currentPrice) {
-            const currentProfit = currentPrice - buyPrice;
-            maxProfit = Math.max(maxProfit, currentProfit);
-        } else { // if buyPrice is greater, buy at the currentPrice
-            leftBuy = rightSell;
-        }
-        
-        rightSell++;
-    }
-    
-    return maxProfit;
-};
+*/
 
 class Solution {
     // Function to find the maximum profit.
@@ -69,3 +30,60 @@ class Solution {
         return maxProfit
     }
 }
+
+/*
+
+Optimal
+
+O(n) & O(1)
+
+*/
+
+
+
+class Solution {
+    // Function to find the maximum profit.
+    maximumProfit(prices) {
+        // your code here
+        let maxProfit = 0
+        
+        const n = prices.length
+        let minPrice = prices[0]
+        for(let i = 1; i < n; i++) { // we keep tracking the minPrice while we move right
+            maxProfit = Math.max(maxProfit, prices[i] - minPrice)
+            minPrice = Math.min(prices[i], minPrice)
+        }
+        
+        return maxProfit
+    }
+}
+
+// Two Pointer approach
+
+
+var maxProfit = function(prices) {
+    if (!prices || prices.length < 2) {
+        return 0;
+    }
+    
+    let maxProfit = 0;
+    let leftBuy = 0;
+    let rightSell = 1;
+    
+    while (rightSell < prices.length) { // not l < r, run till n
+        const currentPrice = prices[rightSell];
+        const buyPrice = prices[leftBuy];
+        
+        if (buyPrice < currentPrice) { // we will stay at the same buyPrice
+            const currentProfit = currentPrice - buyPrice;
+            maxProfit = Math.max(maxProfit, currentProfit);
+        } else { // if buyPrice is greater, buy at the currentPrice and change the buyPrice
+            leftBuy = rightSell;
+        }
+        
+        rightSell++; // keep moving
+    }
+    
+    return maxProfit;
+};
+
