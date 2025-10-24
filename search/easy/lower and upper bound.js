@@ -18,13 +18,11 @@ function lowerBound(arr, n, x) {
 
 function lowerBound(arr, n, x) {
     let low = 0, high = n - 1;
-    let ans = n; // important
 
     while (low <= high) {
         let mid = Math.floor((low + high) / 2);
         // maybe an answer
         if (arr[mid] >= x) {
-            ans = mid;
             // look for smaller index on the left
             high = mid - 1;
         }
@@ -32,7 +30,7 @@ function lowerBound(arr, n, x) {
             low = mid + 1; // look on the right
         }
     }
-    return ans;
+    return low;
 }
 
 

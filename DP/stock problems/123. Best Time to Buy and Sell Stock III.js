@@ -12,6 +12,12 @@ O(2^n) & O(n)
  * 
  * Goal: Maximize profit with at most 2 transactions (buy+sell pairs)
  * Each transaction = 1 buy + 1 sell
+ * 
+ *  tCount = 0 → canBuy (first buy)
+    tCount = 1 → canSell (first sell)
+    tCount = 2 → canBuy (second buy)
+    tCount = 3 → canSell (second sell)
+
  */
 
 var maxProfit = function(prices) {
@@ -130,7 +136,7 @@ O(n*4) & O(n*4)
 var maxProfit = function (prices) {
     const n = prices.length;
     const cap = 2;
-    const dp = Array.from({ length: n + 1 }, () => new Array(cap * 2 + 1).fill(0));
+    const dp = Array.from({ length: n + 1 }, () => new Array(cap * 2 + 1).fill(0)); // The maximum profit you can achieve starting from day i given that you’ve already made tCount buy/sell actions so far.
 
     for (let i = n - 1; i >= 0; i--) { // go from end
         for (let tCount = cap * 2 - 1; tCount >= 0; tCount--) { // go from end, we are doing + 1 below, so we can't start from 0
@@ -148,7 +154,7 @@ var maxProfit = function (prices) {
         }
     }
 
-    return dp[0][0]; 
+    return dp[0][0]; // maximum profit starting at day 0, allowed to buy
 };
 
 
