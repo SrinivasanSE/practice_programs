@@ -61,20 +61,21 @@ O(2n) & O(n)
 
 */
 
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function(heights) { // find the pse and nse on the fly
     const n = heights.length
     let area = 0, stk = [], nse, pse, curr
     for(let i = 0; i < n; i++) {
-        while (stk.length > 0 && heights[stk[stk.length - 1]] > heights[i]) {
+        while (stk.length > 0 && heights[stk[stk.length - 1]] > heights[i]) { // when we find that the current height is lesser than the stack's top element's height, 
+        // the current element becomes the next smallest element for the stack's top element and the element after that top element becomes the previous smallest element
             curr = stk.pop()
-            nse = i, pse = stk.length ? stk[stk.length - 1] : -1
+            nse = i, pse = stk.length ? stk[stk.length - 1] : -1 // nse becomes the current element and pse is the stack top's after popping the top
             area = Math.max(area, heights[curr]*(nse - pse - 1))
         }
 
         stk.push(i)
     }
 
-    while (stk.length) {
+    while (stk.length) { // if the stack still has elements, that means those elements doesn't have next smaller elements, so take nse as n, if pse is not there, we consider it as -1
         curr = stk.pop()
         pse = stk.length ? stk[stk.length - 1] : -1
         area = Math.max(area, heights[curr]*(n - pse - 1))
