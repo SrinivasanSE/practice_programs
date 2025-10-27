@@ -27,18 +27,6 @@ class Solution {
 // Using Max Heap
 
 
-
-
-
-// User function Template for javascript
-
-/**
- * @param {number[]} arr
- * @param {number} n
- * @param {number} k1
- * @param {number} k2
- * @return {number}
- */
 class MaxHeap {
     constructor() {
         this.heap = [];
