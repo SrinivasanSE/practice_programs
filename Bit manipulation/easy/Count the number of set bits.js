@@ -14,7 +14,7 @@ class Solution {
         let count = 0
         
         while (n > 0) {
-            count += (n % 2)
+            count += (n % 2) // we count the bits while converting to binary
             n = Math.floor(n/2)
         }
 
@@ -37,7 +37,7 @@ class Solution {
         
         while (n != 0) {
             count += (n & 1) // we count the number of 1 bits and move the bits to right 
-            n = n >> 1
+            n = n >> 1 // equivalent to n/2
         }
         
         return count

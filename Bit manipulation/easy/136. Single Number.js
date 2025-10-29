@@ -45,42 +45,41 @@ O(n) & O(n)
 
 */
 
-var singleNumber = function(nums) {
-   const map = new Map()
-    const n = nums.length
+var singleNumber = function (nums) {
+  const map = new Map()
+  const n = nums.length
 
-    for(let i = 0; i < n; i++) {
-        map.set(nums[i], (map.get(nums[i]) || 0) + 1)
-    }
+  for (let i = 0; i < n; i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + 1)
+  }
 
-    for(let [num, count] of map) {
-        if (count === 1) {
-            return num
-        }
+  for (let [num, count] of map) {
+    if (count === 1) {
+      return num
     }
+  }
 };
 
 /*
-    Better - 2
 
-    O(nlogn) & O(1)
+Better - 2
+
+O(nlogn) & O(1)
 
 
 */
 
-var singleNumber = function(nums) {
-  if(nums.length==1) return nums[0]
+var singleNumber = function (nums) {
+  if (nums.length == 1) return nums[0]
   nums = nums.sort()
-  for(let i = 0 ; i <nums.length ; i+=2)
-  {
-    if(nums[i]!=nums[i+1])
-    {
-        return nums[i]
+  for (let i = 0; i < nums.length; i += 2) {
+    if (nums[i] != nums[i + 1]) {
+      return nums[i]
     }
 
-  }  
+  }
 
-  return nums[nums.length-1]
+  return nums[nums.length - 1]
 };
 
 /*
@@ -90,13 +89,13 @@ O(n) & O(1)
 
 */
 
-var singleNumber = function(nums) {
-    const n = nums.length
+var singleNumber = function (nums) {
+  const n = nums.length
 
-    let xor = 0
-    for(let i = 0; i < n; i++) {
-        xor ^= nums[i]
-    }
+  let xor = 0
+  for (let i = 0; i < n; i++) {
+    xor ^= nums[i]
+  }
 
-    return xor
+  return xor
 };
