@@ -53,5 +53,5 @@ var maxFrequency = function(nums, k) {
 
     }
 
-    return n - left 
+    return n - left // return num of elements can be made equal
 };

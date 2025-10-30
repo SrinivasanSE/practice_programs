@@ -13,7 +13,7 @@ var reverse = function(x) {
             return 0
         }
         rev = 10*rev + rem
-        x = (x - rem) / 10
+        x = (x - rem) / 10 // check the reason below
     }
 
     return rev
