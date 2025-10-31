@@ -18,7 +18,7 @@ var check = function(arr) {
         for(let i = 0; i < n; i++) {
             if (arr[(rotation + i) % n] != sorted[i]) { // check if the given input rotated array pos matches with the sorted arr
                 isMatch = false
-                break
+                break 
             }
         }
 

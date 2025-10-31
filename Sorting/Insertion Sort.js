@@ -12,6 +12,7 @@ class Solution {
             j = i - 1
             key = arr[i]
             
+            // Shift elements greater than key to the right
             while (j >= 0 && arr[j] > key) {
                 arr[j + 1] = arr[j]
                 j--

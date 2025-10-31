@@ -30,8 +30,9 @@ class Solution {
         }
         
         for(let i = n - 1; i >= 0; i--) {
-            [arr[i], arr[0]] = [arr[0], arr[i]]
-            this.heapify(arr, i, 0)
+            [arr[i], arr[0]] = [arr[0], arr[i]] // swap the first element which is the largest with the last element, so the max element is now at the end
+            this.heapify(arr, i, 0) // i is the size of the tree now, we have ignored the last element since it's already sorted,
+            //  0 should be constant since we have swapped the root, so from the root, we need to heapify
         }
     }
 }
