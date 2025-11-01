@@ -1,9 +1,10 @@
 // https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/
 // https://www.geeksforgeeks.org/pair-with-given-product-set-1-find-if-any-pair-exists/
 // https://leetcode.com/problems/two-sum/description/
+// https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
 
 // Hashing for unsorted input
-twoSum(arr, target) {
+var twoSum = (arr, target) => {
         const n = arr.length
         if (n <= 1) {
             return false
@@ -21,7 +22,7 @@ twoSum(arr, target) {
     }
 
 // 2) Two pointer algo for sorted input
-twoSum(arr, target) {
+function twoSum(arr, target) {
         const n = arr.length
         if (n <= 1) {
             return false

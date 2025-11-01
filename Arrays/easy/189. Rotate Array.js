@@ -73,7 +73,7 @@ class Solution {
 }
 
 
-/*****************************************************************Right rotate************************************************************** */
+/***************************************************************** Right rotate ************************************************************** */
 
 // Brute force
 // O(n*d) & O(1)
@@ -83,7 +83,7 @@ var rotate = function(nums, k) {
 
     for(let i = 0; i < k; i++) {
         let last = nums[n - 1]
-        for(let j = n - 2; j >= 0; j--) {
+        for(let j = n - 2; j >= 0; j--) { // should traverse from back, if we go from front, we will overwrite the value again and again
             nums[j + 1] = nums[j]
         }
         nums[0] = last

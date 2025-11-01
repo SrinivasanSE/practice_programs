@@ -4,25 +4,28 @@
 class Solution {
     longestSubarray(arr, k) {
         // code here
-        let sum = 0
+        let sum = 0, req, max = 0
+        let prefixSum = new Map()
         const n = arr.length
-        let prefix = new Map()
-        let max = 0
+
         for (let i = 0; i < n; i++) {
             sum += arr[i]
-            const req = sum - k
+            req = sum - k
+
             if (req === 0) {
                 max = i + 1
-            } else {
-                if (prefix.has(req)) {
-                    max = Math.max(max, i - prefix.get(req))
-                } else {
-                    prefix.set(sum, i) // set sum and not the arr[i]
-                }
+            }
+
+            if (prefixSum.has(req)) {
+                max = Math.max(max, i - prefixSum.get(req))
+            }
+
+            if (!prefixSum.has(sum)) {
+                prefixSum.set(sum, i)
             }
         }
-        return max
 
+        return max
     }
 }
 

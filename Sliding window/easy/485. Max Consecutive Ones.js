@@ -2,13 +2,13 @@
 
 // Optimal
 // O(n) & O(1)
-var findMaxConsecutiveOnes = function(nums) {
-    
+var findMaxConsecutiveOnes = function (nums) {
+
     let max = 0
     let count = 0
 
-    for(let i = 0; i < nums.length; i++) {
-        if (nums[i] === 0 ) {
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
             count = 0
         } else {
             count++
@@ -23,7 +23,7 @@ var findMaxConsecutiveOnes = function(nums) {
 // Optimal - Sliding window
 // O(n) & O(1)
 
-var findMaxConsecutiveOnes = function(nums) {
+var findMaxConsecutiveOnes = function (nums) {
     let res = 0;
     let left = 0;
 
@@ -35,5 +35,5 @@ var findMaxConsecutiveOnes = function(nums) {
         }
     }
 
-    return res;    
+    return res;
 };
