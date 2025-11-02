@@ -53,15 +53,15 @@ var sortColors = function(nums) {
     const n = nums.length
     let low = 0, mid = 0, high = n - 1
 
-    while (mid <= high) {
-        if (nums[mid] === 2) {
+    while (mid <= high) { // notice the condition
+        if (nums[mid] === 2) { // we swap high with mid and the high index might contain 0/1, we don't move the mid since the mid will contain 0 or 1s which needs to be moved
             [nums[high], nums[mid]] = [nums[mid], nums[high]]
             high--
-        } else if (nums[mid] === 0) {
+        } else if (nums[mid] === 0) { // if it's 0, we move it to the left part and the low will contain 1, so we swap it and extend the mid
             [nums[mid], nums[low]] = [nums[low], nums[mid]]
             low++
             mid++
-        } else {
+        } else { // if the mid is already having 1, we just shrink the window
             mid++
         }
     }

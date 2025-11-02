@@ -39,11 +39,6 @@ class Solution {
 // Return unique pairs
 
 class Solution {
-    /**
-    * @param number[] arr
-
-    * @returns number[][]
-    */
     triplets(arr) {
         // code here
         arr.sort((a, b) => a - b);
@@ -104,11 +99,7 @@ function findTriplets(arr) {
 
 // Return unique pairs
 class Solution {
-    /**
-    * @param number[] arr
- 
-    * @returns number[][]
-    */
+
     triplets(arr) {
         // code here
         const n = arr.length;

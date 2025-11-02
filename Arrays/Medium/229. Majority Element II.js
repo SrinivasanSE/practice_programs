@@ -16,44 +16,46 @@ O(N) & O(1)
 
 // There can be at most max 2 elements with the frequency greater than n/3, so we can keep two pointers and track
 
-var majorityElement = function(nums) {
-    let cnt1 = 0, cnt2 = 0, ele1, ele2
-
+var majorityElement = function (nums) {
     const n = nums.length
 
-    for(let i = 0; i < n; i++) {
+    let count1 = 0, count2 = 0
+    let candidate1, candidate2
 
-        if (cnt1 === 0 && nums[i] != ele2) {
-            cnt1++
-            ele1 = nums[i]
-        } else if (cnt2 === 0 && nums[i] != ele1) {
-            cnt2++
-            ele2 = nums[i]
-        } else if (ele1 === nums[i]) {
-            cnt1++
-        } else if (ele2 === nums[i]) {
-            cnt2++
+    for (let num of nums) {
+        if (candidate1 === num) {
+            count1++
+        }
+        else if (candidate2 === num) {
+            count2++
+        }
+        else if (count1 === 0) {
+            count1 = 1
+            candidate1 = num
+
+        } else if (count2 === 0) {
+            count2 = 1
+            candidate2 = num
         } else {
-            cnt1--
-            cnt2--
+            count1--
+            count2--
         }
     }
 
-    cnt1 = 0, cnt2 = 0
-
-    for(let i = 0; i < n; i++) {
-        if (nums[i] === ele1) {
-            cnt1++
-        } else if (nums[i] === ele2) {
-            cnt2++
-        }
+    count1 = 0, count2 = 0
+    for (let num of nums) {
+        if (num === candidate1) count1++
+        if (num === candidate2) count2++
     }
+
     const res = []
-    if (cnt1 > Math.floor(n/3)) {
-        res.push(ele1)
-    } 
-    if (cnt2 > Math.floor(n/3)) {
-        res.push(ele2)
+
+    if (count1 > Math.floor(n / 3)) {
+        res.push(candidate1)
+    }
+
+    if (count2 > Math.floor(n / 3)) {
+        res.push(candidate2)
     }
 
     return res

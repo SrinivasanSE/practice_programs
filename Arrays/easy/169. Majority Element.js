@@ -48,6 +48,8 @@ var majorityElement = function(nums) {
             count--
         }
     }
+    // NOTE: we can directly return the candidate here, if the majority element will be there for sure
+    
     // After this, the candidate is the major repeating element, but it might be not be occuring more than N/2, so we verify
     count = 0
     for(let num of nums ) {
