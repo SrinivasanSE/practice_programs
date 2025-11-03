@@ -31,38 +31,60 @@ O(nlogn) *& O(n)
 */
 
 const merge = (arr, low, mid, high) => {
-    let left = low
-    let right = mid + 1
-    const temp = new Array(high - low)
-    let k = 0, count = 0
+    let left = low;        // Pointer for the left subarray (low → mid)
+    let right = mid + 1;   // Pointer for the right subarray (mid+1 → high)
+    const temp = new Array(high - low); // Temporary array for merging
+    let k = 0;             // Index for temp array
+    let count = 0;         // Count of inversions
+
+    // -------------------------------------------------------------
+    // Merge both halves while counting inversions
+    // -------------------------------------------------------------
     while (left <= mid && right <= high) {
         if (arr[left] <= arr[right]) {
-            temp[k] = arr[left]
-            left++
+            // If current element in left half is smaller,
+            // it does NOT contribute to inversions
+            temp[k] = arr[left];
+            left++;
         } else {
-            count += (mid - left) + 1
-            temp[k] = arr[right]
-            right++
+            // If current element in right half is smaller,
+            // then all remaining elements in left half
+            // (from arr[left] to arr[mid]) are greater than arr[right].
+            // Each of them forms an inversion.
+            count += (mid - left) + 1;
+            temp[k] = arr[right];
+            right++;
         }
-        k++
+        k++;
     }
-    
+
+    // -------------------------------------------------------------
+    // Copy any remaining elements from the left subarray
+    // -------------------------------------------------------------
     while (left <= mid) {
-        temp[k++] = arr[left]
-        left++
+        temp[k++] = arr[left];
+        left++;
     }
-    
+
+    // -------------------------------------------------------------
+    // Copy any remaining elements from the right subarray
+    // -------------------------------------------------------------
     while (right <= high) {
-        temp[k++] = arr[right]
-        right++
+        temp[k++] = arr[right];
+        right++;
     }
-    
-    for(let i = low; i <= high; i++) {
-        arr[i] = temp[i - low]
+
+    // -------------------------------------------------------------
+    // Copy the merged, sorted subarray back into the original array
+    // -------------------------------------------------------------
+    for (let i = low; i <= high; i++) {
+        arr[i] = temp[i - low];
     }
-    return count
-    
-}
+
+    // Return the number of inversions found in this merge step
+    return count;
+};
+
 
 const mergeSort = (arr, low, high) => {
     let cnt = 0

@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/number-subarrays-product-less-k/
 
+// Check the binary search approach
+
 
 class Solution {
     // Function to count number of subarrays with product less than k.

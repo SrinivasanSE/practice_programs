@@ -44,7 +44,7 @@ function maxLen(arr) {
         if (sum === 0) {
             res = i + 1
         } else {
-            if (hashmap.has(sum)) {
+            if (hashmap.has(sum)) { // if the sum is already there, that means the numbers from that index till the current index sums to only 0
                 res = Math.max(res, i - hashmap.get(sum))
             } else {
                 hashmap.set(sum, i) // set sum and not the arr[i]

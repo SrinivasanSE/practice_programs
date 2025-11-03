@@ -49,7 +49,7 @@ class Solution {
             xor ^= arr[i]
             rem = xor^k // xor with k to get the remaining required, if k is 6, and xor is 4 and arr[i] is 6, 4^6 = 2 & 2 ^ 6 = 4
             
-            if (hashmap.has(rem)) {
+            if (hashmap.has(rem)) { // we know the xor upto the current index and also the subarray's target which is k, if the xor of them is available in the hashmap, that means it's possible to get the subarray with xor k
                 count += hashmap.get(rem)
             }
             

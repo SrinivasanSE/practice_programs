@@ -6,12 +6,12 @@ Brute - loops
 O(n^2) & O(1)
 */
 
-var reversePairs = function(nums) {
+var reversePairs = function (nums) {
     let cnt = 0
     const n = nums.length
-    for(let i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
-            if (nums[i] > 2*nums[j]) {
+            if (nums[i] > 2 * nums[j]) {
                 cnt++
             }
         }
@@ -32,7 +32,7 @@ const merge = (arr, low, mid, high) => {
     let k = 0
     while (left <= mid && right <= high) {
         if (arr[left] <= arr[right]) {
-            temp[k]= arr[left++]
+            temp[k] = arr[left++]
         } else {
             temp[k] = arr[right++]
         }
@@ -47,7 +47,7 @@ const merge = (arr, low, mid, high) => {
         temp[k++] = arr[right++]
     }
 
-    for(let i = low; i <= high; i++) {
+    for (let i = low; i <= high; i++) {
         arr[i] = temp[i - low]
     }
 }
@@ -55,8 +55,8 @@ const merge = (arr, low, mid, high) => {
 const countPairs = (arr, low, mid, high) => {
     let right = mid + 1
     let cnt = 0
-    for(let i = low; i <= mid; i++) {
-        while (right <= high && arr[i] > 2* arr[right]) right++
+    for (let i = low; i <= mid; i++) {
+        while (right <= high && arr[i] > 2 * arr[right]) right++
         cnt += (right - (mid + 1))
     }
 
@@ -66,7 +66,7 @@ const countPairs = (arr, low, mid, high) => {
 const mergeSort = (arr, low, high) => {
     let cnt = 0
     if (low >= high) return cnt
-    const mid = low + Math.floor((high - low)/2)
+    const mid = low + Math.floor((high - low) / 2)
     cnt += mergeSort(arr, low, mid)
     cnt += mergeSort(arr, mid + 1, high)
     cnt += countPairs(arr, low, mid, high)
@@ -74,7 +74,7 @@ const mergeSort = (arr, low, high) => {
     return cnt
 }
 
-var reversePairs = function(nums) {
+var reversePairs = function (nums) {
     return mergeSort(nums, 0, nums.length - 1)
-    
+
 };
