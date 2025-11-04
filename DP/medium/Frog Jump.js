@@ -22,7 +22,7 @@ class Solution {
         const left = this.findCost(ind - 1, heights) + Math.abs(heights[ind - 1] - heights[ind]) // finding the cost for jumping one step
         let right = Number.MAX_SAFE_INTEGER
         if (ind > 1) {
-        right = this.findCost(ind - 2, heights) + Math.abs(heights[ind - 2] - heights[ind] ) // // finding the cost for jumping 2 steps
+        right = this.findCost(ind - 2, heights) + Math.abs(heights[ind - 2] - heights[ind] ) // finding the cost for jumping 2 steps
         }
         
         return Math.min(left, right)

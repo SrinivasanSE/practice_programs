@@ -63,5 +63,27 @@ var missingNumber = function(nums) {
 
 
 
+// Using cycle sort since the range is from [0/1 to n]
 
 
+var missingNumber = function(nums) { // this is for 0 to n
+    const n = nums.length
+    
+    let i = 0
+
+    while (i < n) {
+        let correctIndex = nums[i]
+        if (nums[i] < n && nums[i] != nums[correctIndex]) { // if it's not at the right place, swap it, for ex: [3,0,1], i = 1 and value is 0, 
+        // so 0 should be at 0 index, nums[1] != nums[0], so we swap it
+            [nums[i], nums[correctIndex]] = [nums[correctIndex], nums[i]]
+        } else { // if it's at the right place, move i
+            i++
+        }
+    }
+
+    for (let i = 0; i < n; i++) { // now the array is sorted, so just check if the elements are at the right index
+        if (i != nums[i]) return i
+    }
+
+    return n
+};

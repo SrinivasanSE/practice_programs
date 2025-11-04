@@ -50,14 +50,48 @@ var findDuplicate = function(nums) { // array is modified
     let curr
     for (let i = 0; i < n; i++) {
         curr = Math.abs(nums[i])
-        if (nums[curr] > 0) { // if it's not already negative
-            nums[curr] *= -1
+        if (nums[curr - 1] > 0) { // if it's not already negative
+            nums[curr - 1] *= -1
         } else {
             return curr
         }
     }
 };
 
+/*
+
+Optimal - Cycle sort
+
+O(n) & O(1)
+
+*/
+
+var findDuplicate = function(nums) {
+    const n = nums.length; // Get the length of the array
+    let i = 0; // Start from the first index
+
+    // Loop through the array to place numbers at their correct positions
+    while (i < n) {
+        // If the current number is not at its correct position
+        // (i.e., value v should be at index v-1)
+        if (nums[i] != i + 1) {
+            let curr = nums[i] - 1; // Find the correct index for nums[i]
+
+            // If the correct position does not already have the same number,
+            // swap the numbers to move nums[i] to its correct position
+            if (nums[i] != nums[curr]) {
+                [nums[i], nums[curr]] = [nums[curr], nums[i]]; // Swap
+            } else {
+                // If the correct position already has the same number,
+                // this means nums[i] is the duplicate
+                return nums[i];
+            }
+        } else {
+            // If the current number is already at its correct position, move to the next index
+            i++;
+        }
+    }
+};
 
 /*
 

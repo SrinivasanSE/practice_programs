@@ -67,6 +67,42 @@ class Solution {
     }
 }
 
+/*
+
+Optimal - Cycle sort
+
+O(n) & O(1)
+
+*/
+
+
+var findErrorNums = function(nums) {
+    const n = nums.length
+
+    let missing, repeating, i = 0, crtIdx
+
+    while (i < n) {
+        crtIdx = nums[i] - 1
+        if (nums[i] != nums[crtIdx]) {
+            [nums[i], nums[crtIdx]] = [nums[crtIdx], nums[i]]
+        } else {
+            i++
+        }
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (nums[i] != i + 1) {
+            missing = i + 1
+            repeating = nums[i]
+            break
+        }
+    }
+
+    return [repeating, missing]
+
+};
+
+
 
 /*
 
