@@ -9,7 +9,7 @@ O((sum - max + 1)*n) & O(1)
 
 
 const totalDays = (arr, capacity, n) => {
-    let days = 1
+    let days = 1 // start with 1
     let load = 0
     for(let i = 0; i < n; i++) {
        if (load + arr[i] > capacity) {

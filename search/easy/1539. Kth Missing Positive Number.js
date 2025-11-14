@@ -1,6 +1,5 @@
 // https://leetcode.com/problems/kth-missing-positive-number/description/
 
-// understand the code
 
 
 var findKthPositive = function(arr, k) {
@@ -34,7 +33,7 @@ var findKthPositive = function(arr, k) {
 
 
 /*
-at the end, high will point to the closest number whether the missing numbers are <=k, 
+at the end, high will point to the closest number where the missing numbers are <=k, 
 to find the ans, we need to do arr[high] + more(how many more numbers are needed)
 more = k - missing numbers
 missing numbers = arr[high] - (high + 1)

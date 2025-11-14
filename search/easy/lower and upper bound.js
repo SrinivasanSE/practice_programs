@@ -48,26 +48,6 @@ function upperBound(arr, x, n) {
 }
 
 
-function upperBound(arr, x, n) {
-    let low = 0, high = n - 1;
-    let ans = n;
-
-    while (low <= high) {
-        let mid = Math.floor((low + high) / 2);
-        // maybe an answer
-        if (arr[mid] > x) {
-            ans = mid;
-            //look for smaller index on the left
-            high = mid - 1;
-        }
-        else {
-            low = mid + 1; // look on the right
-        }
-    }
-    return ans;
-}
-
-
 const upperBound = (arr, val) => {
     let l = 0, r = arr.length - 1
     while (l <= r) {

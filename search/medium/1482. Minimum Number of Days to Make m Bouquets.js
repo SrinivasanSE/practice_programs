@@ -5,12 +5,6 @@ Brute force
 O((max(arr[])-min(arr[])+1) * N) & O(1)
 */
 
-/**
- * @param {number[]} bloomDay
- * @param {number} m
- * @param {number} k
- * @return {number}
- */
 
 var minDays = function(bloomDay, m, k) {
     const n = bloomDay.length

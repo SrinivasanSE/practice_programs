@@ -36,10 +36,8 @@ var merge = function(intervals) {
         for(let j = i + 1; j < n; j++) {
             if (end < intervals[j][0]) {  // since the array is sorted, there won't be any overlap anymore,  we can break here
                 break
-            } else {
-                end = Math.max(end, intervals[j][1]) // [1, 3]  & [2, 6] 3 >= 2, so we merge those two
-                break 
             }
+            end = Math.max(end, intervals[j][1]) // [1, 3]  & [2, 6] 3 >= 2, so we merge those two
         }
 
         res.push([start, end]) // add to the res

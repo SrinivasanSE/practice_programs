@@ -10,8 +10,8 @@ var largestInteger = function(nums, k) {
         return Math.max(...nums);
     }
 
-    for (let i = 0; i <= n - k; i++) {
-        for (let j = 0; j < k; j++) {
+    for (let i = 0; i <= n - k; i++) { // run upto n - k only
+        for (let j = 0; j < k; j++) { // run upto k only
             freq.set(nums[i + j], (freq.get(nums[i + j]) || 0) + 1) // count the frequencies in each window
         }
     }

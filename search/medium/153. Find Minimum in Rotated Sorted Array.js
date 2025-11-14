@@ -1,26 +1,21 @@
 // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+// https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/
 
 // without duplicates
 
 var findMin = function(nums) {
-    const n = nums.length
-    let l = 0, r = n - 1
-
-    while (l < r) {
-        let mid = l + Math.floor((r - l)/2)
-
-        if (nums[l] <= nums[r]) {
-            return nums[l]
-        }
-
+    let l = 0, r = nums.length - 1;
+    while (l < r) { //should be l < r and not l <= r, when l === r, that's the min index
+        let mid = l + Math.floor((r - l) / 2);
         if (nums[mid] < nums[r]) {
-            r = mid
+            // Minimum is in the left part including mid
+            r = mid;
         } else {
-            l = mid + 1
+            // Minimum is in the right part excluding mid
+            l = mid + 1;
         }
     }
-
-    return nums[l]
+    return nums[l];
 };
 
 // with duplicates
