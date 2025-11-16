@@ -61,7 +61,7 @@ class Solution {
     aggressiveCows(stalls, k) {
         // your code here
         const n = stalls.length
-        stalls.sort((a, b) => a - b)
+        stalls.sort((a, b) => a - b) // Important, sorting required
         let l = 1, r = stalls[n - 1] - stalls[0]  // l will be min diff btw two items and r will be max diff btw smallest and largest
 
         while (l <= r) {
@@ -72,6 +72,6 @@ class Solution {
                 r = mid - 1
             }
         }
-        return r
+        return r // we return r since l is initially at the valid value and it will be at the invalid value at the end
     }
 }

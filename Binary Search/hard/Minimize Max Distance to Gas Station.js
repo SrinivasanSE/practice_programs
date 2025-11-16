@@ -49,7 +49,7 @@ class Solution {
     findSmallestMaxDist(stations, k) {
         // code here
         const n = stations.length
-        if (n === 1) return 0
+        if (n === 1) return 0 // base condition is important
         let maxGap = -1
         let slots = new Array(n - 1).fill(0)
         const heap = new MaxHeap()
@@ -115,7 +115,7 @@ class Solution {
             high = Math.max(stations[i + 1] - stations[i], high)
         }
         while (high - low > limit) {
-            const mid = (low + high)/2.0
+            const mid = (low + high)/2.0 // only this will work, don't use l + math.floor(r - l)/2
             if (this.isPossible(stations, k, mid, n)) { // if possible, move to left because we need to minimise the gap
                 high = mid
             } else { // if more stations can be placed at this mid, move to right to reduce the stations to less than or equal to k
