@@ -8,21 +8,24 @@ and all the indices less than that index will have the similar elements in both 
 
 class Solution {
     findExtra(a, b) {
-        const n = Math.max(a.length, b.length)
-        let l = 0, r = n - 1, ans = n
+        // code here
+        const n = a.length
+        let res = n - 1
         
-        while (l <= r) {
+        let l = 0, h = n - 2, mid // we need to run only from 0 to n - 2 as one element is lesser in b array, 
+        // if the last element is missing in b, we will return the default value which is n - 1
+        
+        while (l <= h) {
+            mid = l + Math.floor((h - l)/2)
             
-            const mid = l + Math.floor(( r- l)/2)
-            
-            if (a[mid] != b[mid]) {
-                ans = mid
-                r = mid - 1
-            } else {
+            if (a[mid] === b[mid]) {
                 l = mid + 1
+            } else {
+                h = mid - 1
+                res = mid
             }
         }
         
-        return ans
+        return res
     }
 }

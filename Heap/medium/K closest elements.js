@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/find-k-closest-elements-given-value/
 
+// Add Binary search approach
+
 
 const compare = (a, b) => {
     if (a.diff != b.diff)

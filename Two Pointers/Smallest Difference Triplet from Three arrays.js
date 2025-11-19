@@ -1,4 +1,6 @@
-  smallestDifferenceTriplet(arr1, arr2, arr3) {
+// https://www.geeksforgeeks.org/dsa/smallest-difference-triplet-from-three-arrays/
+
+function smallestDifferenceTriplet(arr1, arr2, arr3) {
         // code here
         let diff = Infinity
         let res;
@@ -17,7 +19,7 @@
                 res = [max, sum - max - min, min]
             }
             
-            if (min === arr1[i]) { // we are checking min to decrease the diff btw max and min, since the next element will be larger than the curr
+            if (min === arr1[i]) { // To potentially reduce the difference further, move the pointer that points to the current minimum value forward (since the arrays are sorted, the next value will be larger).
                 i++
             } else if (min === arr2[j]) {
                 j++

@@ -1,19 +1,11 @@
 // https://www.geeksforgeeks.org/count-numbers-difference-number-digit-sum-greater-specific-value/
+// https://www.geeksforgeeks.org/problems/all-numbers-with-specific-difference3558/1
 
 /*
 
-if k – sumofdigit(k) >= diff then
-above equation will be true for (k+1)
-also because we know that sumofdigit(k+1)
-is not greater than sumofdigit(k) + 1
-so, k + 1 - sumofdigit(k + 1) >= 
-k - sumofdigit(k)
-but we know that right side of above 
-inequality is greater than diff, 
-so left side will also be greater than 
-diff.
-So, finally we can say that if a number k satisfies the difference condition then (k + 1) will also satisfy same equation so our job is to find the smallest number which satisfies the difference condition then all numbers greater than this and up to N will satisfy the condition so our answer will be N – smallest number we found. 
-We can find the smallest number satisfying this condition using binary search so total time complexity of solution will be O(log N) 
+Suppose for some integer k, the condition k - digitSum(k) >= d holds. Now consider any integer k' > k. 
+Since k' > k, the numeric value has increased, and while the digit sum digitSum(k') may increase as well, it increases much slower than k' because each digit can only contribute at most 9. Therefore, the gap k' - digitSum(k') grows with increasing k'. 
+This implies that if the condition holds for k, it must also hold for any k' > k, making the predicate monotonic and thus suitable for binary search.
 
 */
 
@@ -41,8 +33,8 @@ class Solution
            
            if (mid - this.sumOfDigits(mid) < k) {
                l = mid + 1 // to increase the diff, l will point to the smallest number which satisfies the given condition
-           } else {
-               r = mid - 1 // high is the largest number that does not satisfy the condition.
+           } else { // if it's greater, all the numbers after mid will be greater anyway, so search in the left to find the first number which is greater
+               r = mid - 1 // the largest number that does not satisfy the condition.
            }
        }
        return n - r // The calculation N - high gives the count of numbers from this smallest number up to ( N ) that satisfy the condition.

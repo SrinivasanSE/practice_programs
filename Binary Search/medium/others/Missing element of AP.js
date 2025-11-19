@@ -2,17 +2,13 @@
 // https://www.geeksforgeeks.org/find-repeating-element-sorted-array-size-n/
 
 
-class Solution {
-    findMissing(arr) {
-        // code here
-        // const sum = ((n + 1)/2)*(arr[0] + arr[n - 1]) // it will fail if the last element is missing
-        const diff = getCommonDifference(arr)
-        if (diff === 0) return arr[0];
-        const totalSum = ((n + 1)/ 2)*(2 * arr[0] + n * diff);  // Sum = n/2 * (2a + (n - 1)d) we use n + 1 because one element is missing
-        const currSum = arr.reduce((accum, curr) => curr + accum, 0)
-        return totalSum - currSum
-    }
-}
+/*
+
+Better
+
+O(nlogn) & O(1)
+
+*/
 
 
 class Solution {
@@ -21,14 +17,14 @@ class Solution {
         while (l <= r) {        
         const mid = l + Math.floor((r - l)/2)
         
-        if (arr[mid] === arr[0] + mid*diff) {
+        if (arr[mid] === arr[0] + mid*diff) { // a + (n - 1)*d =  n - 1 in 1 based index = 2 + 1*2 = 4 -> 2 element in the AP series with diff 2 is 4, but the index is 1
             l = mid + 1
         } else {
             r = mid - 1
         }
         
         }
-        return arr[r] + diff
+        return arr[r] + diff // After the loop, r points to the last index where the sequence was correct.
     }
     findMissing(arr) {
         // code here
@@ -62,4 +58,26 @@ function getCommonDifference(arr) {
 
     // Case 3: Fall back to last observed difference
     return dLast;
+}
+
+
+/*
+
+Optimal
+
+O(n) & O(1)
+
+*/
+
+
+class Solution {
+    findMissing(arr) {
+        // code here
+        // const sum = ((n + 1)/2)*(arr[0] + arr[n - 1]) // it will fail if the last element is missing
+        const diff = getCommonDifference(arr)
+        if (diff === 0) return arr[0];
+        const totalSum = ((n + 1)/ 2)*(2 * arr[0] + n * diff);  // Sum = n/2 * (2a + (n - 1)d) we use n + 1 because one element is missing
+        const currSum = arr.reduce((accum, curr) => curr + accum, 0)
+        return totalSum - currSum
+    }
 }

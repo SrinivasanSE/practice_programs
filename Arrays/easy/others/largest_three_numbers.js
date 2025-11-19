@@ -31,6 +31,4 @@ const getThreeLargest = (arr) => {
         return res
 }
 
-let arr = [12, 13, 1, 10, 34, 1];
-let res = getThreelargest(arr);
-console.log(res.join(' '));
+

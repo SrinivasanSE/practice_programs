@@ -1,6 +1,8 @@
 // https://www.geeksforgeeks.org/element-1st-array-count-elements-less-equal-2nd-array/
 
-countEleLessThanOrEqual(a, b) {
+// Add other approaches
+
+function countEleLessThanOrEqual(a, b) {
         // code here
         let res = []
         b.sort((n1, n2) => n1 - n2)

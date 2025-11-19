@@ -6,7 +6,6 @@ twoRepeated(n, arr) {
         // your code here
         for(let i = 0; i < n + 2; i++) {
             const index = Math.abs(arr[i])
-            //console.log(index, arr)
             if (arr[index - 1] > 0) {
                 arr[index - 1]*=-1
             } else {
