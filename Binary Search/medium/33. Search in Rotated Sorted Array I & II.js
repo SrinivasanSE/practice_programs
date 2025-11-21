@@ -78,7 +78,7 @@ function search(arr, key) {
                return mid
            }
            
-           if (arr[l] <= arr[mid]) { // if true, all numbers are sorted in ascending order between them.
+           if (arr[l] <= arr[mid]) { // !Important, should be <= and not <. if true, all numbers are sorted in ascending order between them.
                
                if (arr[l] <= key && arr[mid] > key) {   // between l & mid
                    r = mid - 1

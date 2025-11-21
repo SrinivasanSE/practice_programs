@@ -15,36 +15,81 @@ We take log2N in binary search and our check() function takes log5N time so the 
 Auxiliary Space: O(1)
 */
 
-check(num, n) {
-        let count = 0, f = 5
-        
-        while (f <= num) {
-            count += Math.floor(num/f)
-            f*=5
-        }
-        
-        return count >= n
-    }
-    
 
-    findNum(n){
-        //code here
-        let l = 0, r = 5*n
-        
-        if (n === 1) {
-            return 5
+/*
+
+Brute
+
+O(nlogn) & O(1)
+
+*/
+
+
+class Solution {
+    findNum(n) {
+        // code here
+        if (n === 1) return 5
+
+        let num = 1, count = 0
+
+        while (true) { // count the number of 5 will give us no of zeros, we keep checking from 1 till we find n zeros
+            let temp = num
+
+            while (temp % 5 === 0) {
+                count++ // keep adding the count
+                temp = temp / 5
+            }
+
+            if (count >= n) return num
+
+            num++
         }
-        
-        while(l < r) {
-            let mid = l + Math.floor((r - l)/2)
-            if (this.check(mid, n)) {
-                r = mid
+
+    }
+}
+
+
+/*
+
+Optimal - Binary Search
+
+O(logn*logn) & O(1)
+
+*/
+
+// Trailing 0s in x! = Count of 5s in prime factors of x!  = floor(x/5) + floor(x/25) + floor(x/125) + .... 
+
+const isPossible = (num, n) => {
+    let count = 0, factor = 5
+
+    while (factor <= num) {
+        count += Math.floor(num / factor)
+        factor *= 5
+    }
+
+    return count >= n
+}
+
+
+class Solution {
+    findNum(n) {
+        if (n === 1) return 5
+
+        let l = 1, r = 5 * n, mid // upper bound is safe since every 5 adds a trailing zero
+
+        while (l <= r) {
+            mid = l + Math.floor((r - l) / 2)
+
+            if (isPossible(mid, n)) { // for every num, check if that num! has n zeros
+                r = mid - 1
             } else {
                 l = mid + 1
             }
-            
-            
         }
-        
-        return r
+
+        return l
     }
+}
+
+
+
