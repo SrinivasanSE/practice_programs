@@ -44,7 +44,7 @@ O(nlogm) & O(1)
 
 // doing binary search on col and max element in row
 
-const findMaxElementIndex = (arr, n, col) => {
+var findMaxElementIndex = (arr, n, col) => {
     let maxRow = 0
     for(let i = 1; i < n; i++) {
         if (arr[maxRow][col] < arr[i][col]) {
@@ -84,12 +84,7 @@ var findPeakGrid = function (mat) {
 // doing binary search on rol and max element in col
 
 
-/**
- * @param {number[][]} mat
- * @return {number[]}
- */
-
-const findMaxElementIndex = (arr, col, row) => {
+var findMaxElementIndex = (arr, col, row) => {
     let maxCol = 0
     for(let i = 1; i < col; i++) {
         if (arr[row][maxCol] < arr[row][i]) {
