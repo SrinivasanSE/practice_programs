@@ -32,13 +32,13 @@ var isPalindrome = function(head) {
     }
     let newHead = reverse(slow)
     let first = head, second = newHead
-    while (first && second) {
+    while (first && second) { // the first will be the full linked list and second will be the reversed linked list, the second ll will become null first
         if (first.val != second.val) {
             return false
         }
         first = first.next
         second = second.next
     }
-    reverse(newHead)
+    reverse(newHead) // we reset it again at the end
     return true
 };
