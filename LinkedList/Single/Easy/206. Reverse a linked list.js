@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/reverse-a-linked-list/
+// https://leetcode.com/problems/reverse-linked-list/
 
 class Solution {
     reverseList(head) {

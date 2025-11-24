@@ -1,7 +1,7 @@
 // https://www.geeksforgeeks.org/count-pairs-two-linked-lists-whose-sum-equal-given-value/
 
 
-// O(n1*logn1) + O(n2*logn2) 
+// O(n1*logn1) + O(n2*logn2) & O(1)
 function countPairs(head1, head2, x){
     let count = 0;
      
