@@ -2,11 +2,6 @@
 
 
 class Solution {
-    /**
-     * @param {Node} head
-     * @param {number} k
-     * @returns {Node}
-     */
      
     _reverse(head) {
         if (!head) {

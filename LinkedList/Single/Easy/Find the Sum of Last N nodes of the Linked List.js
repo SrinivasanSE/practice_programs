@@ -17,55 +17,55 @@ class Solution {
         // code here
         let ref = head
         let main = head
-        
+
         let sum = 0
         let temp = 0
-        
-        while(n) {
+
+        while (n) {
             n--
-            sum+= ref.data
+            sum += ref.data
             ref = ref.next
         }
-        
-        while(ref) {
+
+        while (ref) {
             sum += ref.data
             temp += main.data
             ref = ref.next
             main = main.next
         }
-        
-        return sum - temp
+
+        return sum - temp // sum will contain all the nodes value and temp will contain the sum of the nodes till n, so sum - temp will give the last n nodes data
     }
 }
 
 
 class Solution {
-    
+
     reverse(head) {
         let curr = head
         let nxt
         let prev = null
-        while(curr) {
+        while (curr) {
             nxt = curr.next
             curr.next = prev
             prev = curr
             curr = nxt
         }
-        
+
         return prev
     }
     sumOfLastN_Nodes(head, n) {
         // code here
         head = this.reverse(head)
-        
+
         let i = 0
         let sum = 0
-        while(i < n) {
-            sum+= head.data
+        while (i < n) {
+            sum += head.data
             i++
             head = head.next
         }
-        
+
         return sum
     }
 }

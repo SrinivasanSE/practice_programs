@@ -2,14 +2,14 @@
 
 
 class Solution {
-    
+
     append(dest, source) {
         const node = new Node(source.data)
         let last = dest[0]
-        if(!last) {
+        if (!last) {
             dest[0] = node
         } else {
-            while(last.next) {
+            while (last.next) {
                 last = last.next
             }
             last.next = node
@@ -19,52 +19,53 @@ class Solution {
         // code here
         let a = [], b = []
         let curr = head
-        
-        while(curr) {
+
+        while (curr) {
             this.append(a, curr)
             curr = curr.next
-            if(curr) {
+            if (curr) {
                 this.append(b, curr)
                 curr = curr.next
             }
-            
-            
+
+
         }
-        
+
         return [a[0], b[0]]
-        
-}
+
+    }
 }
 
-alternatingSplitList(head) {
+class Solution {
+    alternatingSplitList(head) {
         // code here
-        let head1 = null,head2 = null,first = null,second = null
-        
-        let i = 0
-        while(head) {
-            let nxt = head.next
+        let head1 = null, head2 = null, first = null, second = null
+        let curr = head, i = 0
+        while (curr) {
             if (i % 2 === 0) {
-                if(!head1) {
-                    head1 = head
-                    first = head1
+                if (!head1) {
+                    head1 = curr
+                    first = curr
                 } else {
-                    first.next = head
-                    first = head
+                    first.next = curr
+                    first = first.next
                 }
-                first.next = null
             } else {
-                if(!head2) {
-                    head2 = head
-                    second = head2
+                if (!head2) {
+                    head2 = curr
+                    second = curr
                 } else {
-                    second.next = head
-                    second = head
+                    second.next = curr
+                    second = second.next
                 }
-                second.next = null
             }
             i++
-            head = nxt
+            curr = curr.next
         }
-        
+        if (first)
+            first.next = null
+        if (second)
+            second.next = null
         return [head1, head2]
     }
+}

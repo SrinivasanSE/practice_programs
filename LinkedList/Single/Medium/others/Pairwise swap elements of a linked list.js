@@ -5,6 +5,25 @@
 class Solution {
     pairWiseSwap(head) {
         // your code here
+        let curr = head;
+
+    while (curr !== null && curr.next !== null) {
+        
+        [curr.data, curr.next.data] = [curr.next.data, curr.data];
+
+        // Move to the next pair
+        curr = curr.next.next;
+    }
+    
+    return head
+        
+    }
+}
+
+
+class Solution {
+    pairWiseSwap(head) {
+        // your code here
         if(!head || !head.next) {
             return head
         }
@@ -33,20 +52,3 @@ class Solution {
     }
 }
 
-class Solution {
-    pairWiseSwap(head) {
-        // your code here
-        let curr = head;
-
-    while (curr !== null && curr.next !== null) {
-        
-        [curr.data, curr.next.data] = [curr.next.data, curr.data];
-
-        // Move to the next pair
-        curr = curr.next.next;
-    }
-    
-    return head
-        
-    }
-}

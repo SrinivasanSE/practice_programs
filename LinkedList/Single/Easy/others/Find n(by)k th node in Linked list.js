@@ -28,6 +28,13 @@ class Solution {
         
     }
 }
+/*
+
+The idea is based on the fact that we need to move the result node after every k. 
+So we traverse the list and whenever the current position becomes multiple of k, we move the result to the next of its current value.
+
+*/
+
 
 class Solution {
     // Function to find the fractional node in the linked list.

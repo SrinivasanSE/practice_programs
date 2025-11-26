@@ -32,7 +32,6 @@ class Solution {
             let curr = null
             let temp = null
             for(let j = 0; j < m; j++) {
-                //console.log(mat[i][j])
                 const node = new Node(mat[i][j])
                 if(!temp) {
                     temp = node
@@ -42,18 +41,15 @@ class Solution {
                 } 
                 if(curr) {
                     curr.right = node
-                    //console.log(curr)
                 }
                 if(prev) {
                     prev.down = node
                     prev = prev.right
                 }
                 curr = node
-                //console.log(curr)
             }
             
             prev = temp
-            //console.log(prev, temp)
             
         }
         
