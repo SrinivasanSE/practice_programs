@@ -13,70 +13,70 @@ Space: O(n) for the array + recursion stack depth n (output space not counted).
 // without consecutive 1s
 
 const generate = (arr, n, i, ans) => {
-    if (i === n) {
-        ans.push([...arr].join(""))
-        return
-    }
-    
-    arr[i] = 0
-    generate(arr, n, i + 1, ans)
-    if (i === 0 || arr[i - 1] === 0) { // removing this condition will print all the substrings
+  if (i === n) {
+    ans.push([...arr].join(""))
+    return
+  }
+
+  arr[i] = 0
+  generate(arr, n, i + 1, ans)
+  if (i === 0 || arr[i - 1] === 0) { // removing this condition will print all the substrings
     arr[i] = 1
     generate(arr, n, i + 1, ans)
-    }
+  }
 }
 
 class Solution {
-    // Function to generate all binary strings of n bits.
-    generateBinaryStrings(n) {
-        // your code here
-        let ans = []
-        let arr = new Array(n).fill(0)
-        generate(arr, n, 0, ans)
-        return ans
-    }
+  // Function to generate all binary strings of n bits.
+  generateBinaryStrings(n) {
+    // your code here
+    let ans = []
+    let arr = new Array(n).fill(0)
+    generate(arr, n, 0, ans)
+    return ans
+  }
 }
 
 // another variation
 
 var validStrings = function (n) {
-    let ans = []
+  let ans = []
 
-    const generate = (current, prev) => {
-        if (n === current.length) {
-            ans.push(current)
-            return
-        }
-
-        if (prev !== '0') {
-            generate(current + '0', '0')
-        }
-
-        generate(current + '1', '1')
+  const generate = (current, prev) => {
+    if (n === current.length) {
+      ans.push(current)
+      return
     }
-    generate('', '')
-    return ans
+
+    if (prev !== '0') {
+      generate(current + '0', '0')
+    }
+
+    generate(current + '1', '1')
+  }
+  generate('', '')
+  return ans
 };
 
 
 // Iterative
 
 var validStrings = function (n) {
-    let ans = ['0', '1']
+  let ans = ['0', '1']
 
-    for(let i = 2; i <= n; i++) {
-        let temp = []
-        for(let str of ans) {
-            let prev = str[str.length - 1]
-            if (prev != '0')
-                temp.push(str + '0')
-            temp.push(str + '1')
-        }
-
-        ans = temp
+  for (let i = 2; i <= n; i++) {
+    let temp = []
+    for (let str of ans) {
+      let prev = str[str.length - 1]
+      if (prev != '0')
+        temp.push(str + '0')
+      temp.push(str + '1')
     }
 
-    return ans
+    ans = temp
+  }
+
+  return ans
 };
 
 

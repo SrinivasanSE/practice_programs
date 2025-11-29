@@ -1,14 +1,23 @@
 // https://leetcode.com/problems/generate-parentheses/description/
 
-// understand time complexity
+/*
+
+Catalan numbers are a famous sequence of natural numbers that appear in many counting problems, especially those involving recursive or balanced structures.
+
+Cn​=(2n)!​ / (n+1)!*n!
+
+*/
 
 /*
+
 Iterative
+
+O(Cn​*n) & O(Cn​*n)
 
 */
 
 
-var generateParenthesis = function(n) {
+var generateParenthesis = function (n) {
     let res = []
     let queue = [{ path: "", open: 0, closed: 0 }]
 
@@ -35,11 +44,14 @@ var generateParenthesis = function(n) {
 }
 
 /*
+
 Recursion - backtracking
+
+O(Cn​*n) & O(Cn​*n)
 
 */
 
-var generateParenthesis = function(n) {
+var generateParenthesis = function (n) {
     const res = []
 
     const backtrack = (open, closed, path) => {

@@ -33,6 +33,7 @@ Using Recursion
 This sorts in ascending order, pop output is in descending order
 O(n*n) & O(n)
 */
+
 class GfG {
     // Function to sort the stack
     sort(s) {
