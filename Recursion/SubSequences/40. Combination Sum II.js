@@ -28,3 +28,33 @@ var combinationSum2 = function (candidates, target) {
     findCombination(0, 0, [])
     return res
 };
+
+
+var combinationSum2 = function(candidates, target) {
+    const res = []
+
+    candidates.sort((a, b) => a - b)
+
+    const n = candidates.length
+
+    const generate = (i, sum, arr) => {
+        if (sum === target) {
+            res.push([...arr])
+            return
+        }
+
+        if (sum > target || i === n) return
+
+        for (let index = i; index < n; index++) {
+            if (index > i && candidates[index] === candidates[index - 1]) continue
+
+            if (sum + candidates[index] > target) break
+            arr.push(candidates[index])
+            generate(index + 1, sum + candidates[index], arr)
+            arr.pop()
+        }
+    }
+
+    generate(0, 0, [])
+    return res
+};

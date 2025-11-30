@@ -11,8 +11,8 @@ n is length of input string.
 */
 
 
-var letterCombinations = function(digits) {
-    
+var letterCombinations = function (digits) {
+
     const n = digits.length
     const res = []
     const mapping = {
@@ -24,13 +24,13 @@ var letterCombinations = function(digits) {
         7: "pqrs",
         8: "tuv",
         9: "wxyz"
-        }
+    }
     const findCombinations = (index, curr) => {
         if (index === n) {
             res.push(curr)
             return
         }
-        for(let char of mapping[digits[index]]) {
+        for (let char of mapping[digits[index]]) {
             findCombinations(index + 1, curr + char)
         }
     }

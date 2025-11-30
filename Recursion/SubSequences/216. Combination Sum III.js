@@ -37,3 +37,33 @@ var combinationSum3 = function(k, target) {
     return res
 };
 
+
+var combinationSum3 = function (k, n) {
+    const res = []
+    const generate = (num, arr, count, sum) => {
+        if (sum > n) {
+            return
+        }
+
+        if (count === k) {
+            if (sum === n) {
+                res.push([...arr])
+            }
+            return
+        }
+
+        for (let i = num; i <= 9; i++) {
+            if (sum + i > n) break
+
+            arr.push(i)
+            generate(i + 1, arr, count + 1, sum + i)
+            arr.pop()
+
+        }
+
+
+    }
+
+    generate(1, [], 0, 0)
+    return res
+};
