@@ -1,5 +1,45 @@
 // https://leetcode.com/problems/word-search/description/
 
+
+/*
+
+Without any optimization
+
+O(m × n × 4^L) & O(l)
+
+*/
+
+var exist = function(board, word) {
+    const rows = board.length
+    const cols = board[0].length
+
+    const n = word.length
+
+    const dfs = (r, c, i) => {
+        if (i === n) return true
+
+        if (r < 0 || r >= rows || c < 0 || c >= cols || board[r][c] != word[i]) return false
+
+        const temp = board[r][c]
+
+        board[r][c] = "#"
+
+        const isFound = dfs(r + 1, c, i + 1) || dfs(r, c + 1, i + 1) || dfs(r - 1, c, i + 1) || dfs(r, c - 1, i + 1)
+
+        board[r][c] = temp
+
+        return isFound
+    }
+
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (dfs(i, j, 0)) return true
+        }
+    }
+
+    return false
+};
+
 /*
 
 Let's analyze the **Time Complexity (TC)** and **Space Complexity (SC)** for the optimized Word Search solution with pruning:
@@ -85,7 +125,7 @@ var exist = function (board, word) {
         }
     }
 
-    for (let char of word) {
+    for (let char of word) { // if any of the char from the word is not present, we can return false here itself
         if (!boardFreq[char]) return false
         boardFreq[char]--
     }

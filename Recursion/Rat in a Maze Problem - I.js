@@ -7,58 +7,86 @@ O(4^(rows*cols)) & O(rows*cols)
 */
 
 class Solution {
-    // Function to find all possible paths
-    
     ratInMaze(maze) {
         // code here
-        
-        const rows = maze.length
-        const cols = maze[0].length
-        
-        let ans = []
-        let visited = Array.from({length: rows} , () => new Array(cols).fill(0))
-        
-        const solve = (row, col, path) => {
-            if (row === rows - 1 && col === cols - 1) {
-                ans.push(path)
+        const n = maze.length
+        const visited = Array.from({ length: n }, () => new Array(n).fill(0))
+        const res = []
+
+        const findPaths = (row, col, path) => {
+            if (row === n - 1 && col === n - 1) {
+                res.push(path)
                 return
             }
-            // we iterate in lexicographical order, Down -> Left -> Right -> Up
-            
-            // downward
-            
-            if (row + 1 < rows && !visited[row][col] && maze[row][col] === 1) {
-                visited[row][col] = 1
-                solve(row + 1, col, path + 'D')
+            // lexico DLRU
+            // down
+            if (row + 1 < n && visited[row + 1][col] != 1 && maze[row + 1][col] === 1) {
+                visited[row][col] = 1 // we mark the curr row and col as visited and not row + 1 and col to not revisit this again.
+                findPaths(row + 1, col, path + 'D')
                 visited[row][col] = 0
             }
-            
-            // leftward
-            
-            if (col - 1 >= 0 && !visited[row][col] && maze[row][col] === 1) {
+            // left
+            if (col - 1 >= 0 && visited[row][col - 1] != 1 && maze[row][col - 1] === 1) {
                 visited[row][col] = 1
-                solve(row, col - 1, path + 'L')
+                findPaths(row, col - 1, path + 'L')
                 visited[row][col] = 0
             }
-            
-            // rightward
-            
-            if (col + 1 < cols && !visited[row][col] && maze[row][col] === 1) {
+            // right
+            if (col + 1 < n && visited[row][col + 1] != 1 && maze[row][col + 1] === 1) {
                 visited[row][col] = 1
-                solve(row, col + 1, path + 'R')
+                findPaths(row, col + 1, path + 'R')
                 visited[row][col] = 0
             }
-            
-            // upward
-            
-            if (row - 1 >= 0 && !visited[row][col] && maze[row][col] === 1) {
+            // top
+            if (row - 1 >= 0 && visited[row - 1][col] != 1 && maze[row - 1][col] === 1) {
                 visited[row][col] = 1
-                solve(row - 1, col, path + 'U')
+                findPaths(row - 1, col, path + 'U')
                 visited[row][col] = 0
             }
         }
-        
-        if (maze[0][0] === 1) solve(0, 0, "")
-        return ans
+
+        if (maze[0][0] === 1) findPaths(0, 0, "")
+        return res
+    }
+}
+
+// Optimal - using for loop
+
+
+class Solution {
+    ratInMaze(maze) {
+        // code here
+        const n = maze.length
+        const visited = Array.from({ length: n }, () => new Array(n).fill(0))
+        const res = []
+
+        const dirRow = [1, 0, 0, -1] //  D L R U. row + 1, row + 0, row + 0, row - 1
+        const dirCol = [0, -1, 1, 0] //  D L R U. col + 0, col - 1, col + 1, col + 0
+        const dirChar = ['D', 'L', 'R', 'U']
+
+        const findPaths = (row, col, path) => {
+            if (row === n - 1 && col === n - 1) {
+                res.push(path)
+                return
+            }
+
+            let newRow, newCol
+
+            for (let d = 0; d < 4; d++) {
+                newRow = row + dirRow[d]
+                newCol = col + dirCol[d]
+
+                if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < n && visited[newRow][newCol] != 1 && maze[newRow][newCol] == 1) {
+                    visited[row][col] = 1
+                    findPaths(newRow, newCol, path + dirChar[d])
+                    visited[row][col] = 0
+                }
+            }
+
+
+        }
+
+        if (maze[0][0] === 1) findPaths(0, 0, "")
+        return res
     }
 }

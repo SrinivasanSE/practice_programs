@@ -31,3 +31,21 @@ var solveNQueens = function(n) {
     solve(0)
     return ans
 };
+
+// why do we use row + col and n - 1 + col - row ?
+
+/*
+
+Downward diagonal
+
+We use row + col for the downward ("\") diagonal because all cells on the same diagonal share this sum. This lets us quickly check for conflicts in O(1) time using an array.
+
+Upward diagonal
+
+The value of col - i can range from -(n-1) to n-1.
+Array indices can't be negative, so we shift the range to all positive indices by adding n - 1.
+
+For example, if n = 8, then col - i ranges from -7 to 7.
+Adding n-1 = 7 shifts the range to 0 to 14.
+
+*/
