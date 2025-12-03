@@ -36,3 +36,24 @@ var subsetsWithDup = function(nums) {
 
 };
 
+var subsetsWithDup = function(nums) {
+    
+    const n = nums.length
+    const res = []
+    nums.sort((a, b) => a - b)
+
+    const findSubsets = (index, curr) => {
+        res.push([...curr]) // understand why we are adding without checking index === n
+        for (let i = index; i < n; i++) {
+            if (i > index && nums[i] === nums[i - 1]) continue
+
+            curr.push(nums[i])
+            findSubsets(i + 1, curr)
+            curr.pop()
+        }
+    }
+
+    findSubsets(0, [])
+    return res
+
+};

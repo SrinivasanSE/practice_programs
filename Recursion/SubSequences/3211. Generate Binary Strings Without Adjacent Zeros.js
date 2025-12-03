@@ -37,7 +37,7 @@ class Solution {
   }
 }
 
-// another variation
+// Without consecutive 0s
 
 var validStrings = function (n) {
   let ans = []

@@ -1,11 +1,67 @@
 // https://leetcode.com/problems/n-queens/description/
 
 
+const canPlace = (board, row, col, n) => {
+    let tRow = row
+    let tCol = col
+
+    // upper diagonal
+    while (tRow >= 0 && tCol >= 0) {
+        if (board[tRow][tCol] === 'Q') return false
+        tRow--
+        tCol--
+    }
+
+    tCol = col
+    // check same row left side
+    while (tCol >= 0) {
+        if (board[row][tCol] === 'Q') return false
+        tCol--
+    }
+
+    tRow = row
+    tCol = col
+    // down diagonal
+    while (tRow < n && tCol >= 0) {
+        if (board[tRow][tCol] === 'Q') return false
+        tRow++
+        tCol--
+    }
+
+    return true
+
+}
+
+var solveNQueens = function(n) {
+    const board = Array.from({length: n}, () => new Array(n).fill('.'))
+
+    const res = []
+
+    const generate = (col) => {
+        if (col === n) {
+            res.push(board.map(arr => arr.join('')))
+            return
+        }
+
+        for (let i = 0; i < n; i++) {
+            if (canPlace(board, i, col, n)) {
+                board[i][col] = 'Q'
+                generate(col + 1)
+                board[i][col] = '.'
+            }
+        }
+    }
+
+    generate(0)
+    return res
+};
+
+
 var solveNQueens = function(n) {
     const ans = []
     let board = Array.from({length: n}, () => new Array(n).fill('.'));
     const left = new Array(n).fill(0)
-    const upDiagonal = new Array(2*n - 1).fill(0)
+    const upDiagonal = new Array(2*n - 1).fill(0) // 2*n - 1
     const downDiagonal = new Array(2*n - 1).fill(0)
 
     const solve = (col) => {

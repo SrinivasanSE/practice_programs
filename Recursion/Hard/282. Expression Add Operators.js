@@ -1,4 +1,7 @@
 // https://leetcode.com/problems/expression-add-operators/description/
+// https://www.youtube.com/watch?v=tunRDBsP7OQ
+
+// O(4^n) & O(n)
 
 var addOperators = function(num, target) {
     
@@ -21,8 +24,9 @@ var addOperators = function(num, target) {
             }
             else {
             solve(i + 1, exp + '+' + currNum, sum + currNum, currNum )
-            solve(i + 1, exp + '-' + currNum, sum - currNum, -currNum )
+            solve(i + 1, exp + '-' + currNum, sum - currNum, -currNum ) // prev should be negative
             solve(i + 1, exp + '*' + currNum, sum - prev + currNum*prev, currNum*prev) // special case for multiplication case
+            // exp = 1 + 2, currNum = 3, sum = 3, prev = 2. We need to multiply 3 with 2, so we need to adjust the sum, sum - prev will give 1, currNum*prev = 3*2
             }
         }
     }
