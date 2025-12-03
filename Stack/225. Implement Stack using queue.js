@@ -1,6 +1,42 @@
 // https://www.geeksforgeeks.org/implement-stack-using-queue/
 
-// refer above link for two queue approach
+// Using two queues
+
+
+var MyStack = function () {
+    this.q1 = []
+    this.q2 = []
+};
+
+
+MyStack.prototype.push = function (x) {
+    this.q2.push(x)
+    while (this.q1.length > 0) { // move all the elements from q1 to q2, so that the latest pushed element is at the 0th index and all the other elements are at the back
+        this.q2.push(this.q1[0])
+        this.q1.shift()
+    }
+
+    [this.q1, this.q2] = [this.q2, this.q1] // swap, so that q1 contains all the elements and q2 will be empty
+
+};
+
+
+MyStack.prototype.pop = function () {
+    if (this.q1.length === 0) return -1
+    return this.q1.shift()
+};
+
+
+MyStack.prototype.top = function () {
+    return this.q1.length === 0 ? -1 : this.q1[0]
+};
+
+
+MyStack.prototype.empty = function () {
+    return this.q1.length === 0
+};
+
+
 
 // using one queue
 
@@ -55,38 +91,30 @@ var MyStack = function() {
     this.q = new QueueL()
 };
 
-/** 
- * @param {number} x
- * @return {void}
- */
+
 MyStack.prototype.push = function(x) {
     const size = this.q.length()
-    this.q.enqueue(x)
+    this.q.enqueue(x) // x= 5, q = [1, 2, 3, 4, 5]
     for(let i = 0; i < size; i++) { // except the last added element, we move everything to the back
-        this.q.enqueue(this.q.top())
-        this.q.dequeue()
+        this.q.enqueue(this.q.top()) // [1, 2, 3, 4, 5, 1] - 1 from the front added to at the back
+        this.q.dequeue() // 1 is removed now
     }
+    // at the end, it will become [5, 1, 2, 3, 4], 5 is in the front, which is the latest element we pushed
 };
 
-/**
- * @return {number}
- */
+
 MyStack.prototype.pop = function() {
     const data = this.q.top()
     this.q.dequeue()
     return data
 };
 
-/**
- * @return {number}
- */
+
 MyStack.prototype.top = function() {
     return this.q.top()
 };
 
-/**
- * @return {boolean}
- */
+
 MyStack.prototype.empty = function() {
     return this.q.length() === 0
 };

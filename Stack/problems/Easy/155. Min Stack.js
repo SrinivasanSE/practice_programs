@@ -6,17 +6,14 @@ var MinStack = function () {
     this.minEle = -1
 };
 
-/** 
- * @param {number} val
- * @return {void}
- */
+
 MinStack.prototype.push = function (val) {
-    if (this.stack.length === 0) {
+    if (this.stack.length === 0) { 
         this.stack.push(val)
         this.minEle = val
     } else {
         if (val < this.minEle) {
-            this.stack.push(2 * val - this.minEle) // we push the encoded value when the new val is lesser than the existing min
+            this.stack.push(2 * val - this.minEle) // we push the encoded value when the new val is lesser than the existing min, so that we will have access to the previous min
             this.minEle = val
         } else {
             this.stack.push(val)
@@ -24,30 +21,25 @@ MinStack.prototype.push = function (val) {
     }
 };
 
-/**
- * @return {void}
- */
+
 MinStack.prototype.pop = function () {
     if (this.stack.length === 0) return
-    const top = this.stack.pop()
+    const top = this.stack.pop() // the top could be the minEle, so we need to find the minEle before this val was pushed to the stk
 
     if (top < this.minEle) { // if top is lesser than the minEle, that means top element is a encoded value and it's the min element, so we need to find the previous min from the encoded value
+        // top = 2*this.minEle - prevMin, we assign the val to minEle, so it's same as val only
         this.minEle = 2*this.minEle - top
     }
 };
 
-/**
- * @return {number}
- */
+
 MinStack.prototype.top = function () {
     if (this.stack.length === 0) return
     const top = this.stack[this.stack.length - 1]
     return top < this.minEle ? this.minEle : top // if top is lesser than the minEle, that means it's an encoded value and minEle holds the actual value
 }
 
-/**
- * @return {number}
- */
+
 MinStack.prototype.getMin = function () {
     return this.minEle
 };
