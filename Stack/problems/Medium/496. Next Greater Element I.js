@@ -1,5 +1,6 @@
 // https://www.geeksforgeeks.org/next-greater-element/
 // https://www.geeksforgeeks.org/problems/save-gotham1222/1?page=2&category=Stack&difficulty=Medium&status=unsolved&sortBy=submissions
+// https://leetcode.com/problems/next-greater-element-i/description/
 
 
 // Brute force
@@ -32,31 +33,84 @@ class Solution {
         let res = new Array(n).fill(-1)
         let s = []
         let top = -1
-        
-        for(let i = n - 1; i >= 0; i--) {
+
+        for (let i = n - 1; i >= 0; i--) { // we are traversing in reverse
             // this will take O(N) complexity, because at max, we will remove at most N elements
-            while(top >= 0 && s[top] <= arr[i] ) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
+            while (top >= 0 && s[top] <= arr[i]) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
                 s.pop()
                 top--
             }
-            
+
             if (top >= 0) {
                 res[i] = s[top]
             }
-            
+
             s.push(arr[i])
             top++
         }
-        
+
         return res
-        
+
     }
 }
+
+/*
+
+O(n) & O(n)
+
+*/
+
+var nextGreaterElement = function (nums1, nums2) {
+    const res = []
+    let stk = []
+
+    const map = new Map()
+
+    for (let i = nums2.length - 1; i >= 0; i--) { // we are traversing in reverse
+        while (stk.length > 0 && stk[stk.length - 1] <= nums2[i]) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
+            stk.pop()
+
+        }
+        if (stk.length === 0) {
+            map.set(nums2[i], -1)
+        } else {
+            map.set(nums2[i], stk[stk.length - 1])
+        }
+        stk.push(nums2[i])
+    }
+
+    for (let num of nums1) {
+        res.push(map.get(num))
+    }
+
+    return res
+};
+
+// Another approach to traverse from beginning
+
+
+var nextGreaterElement = function (nums1, nums2) {
+    const map = new Map();
+    let stack = [];
+    for (const num of nums2) { // we iterate from the start, [1, 3, 4, 2]
+        while (stack.length && num > stack[stack.length - 1]) { // let's say num = 3 and stk = [1], since 1 < 3, the while loop executes, for 1, 3 is the next greater element, so we set in the map
+            let top = stack.pop();
+            map.set(top, num);
+        }
+        stack.push(num);
+    }
+    while (stack.length) { // for the remaining elements in stack, there are no next greater element, so we set it as -1
+        map.set(stack.pop(), -1);
+    }
+    return nums1.map(x => map.get(x));
+};
 
 
 
 /*
-Understanding the Stack Operations
+
+Understanding the Time Complexity
+
 The key point here is how many times each element is pushed and popped from the stack. While it might seem that the while loop could lead to quadratic complexity because of repeated popping, it does not result in O(n^2) for the following reason:
 
 Each element is pushed onto the stack once.

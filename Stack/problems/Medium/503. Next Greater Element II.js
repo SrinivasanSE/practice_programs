@@ -2,6 +2,35 @@
 
 
 /*
+
+Brute
+
+O(n^2) & O(1)
+
+*/
+
+var nextGreaterElements = function(nums) {
+   
+    const n = nums.length
+    const res = new Array(n).fill(-1)
+
+    let ind
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < i + n; j++) { // traverse till i + n elements
+            ind = j % n
+            if (nums[ind] > nums[i]) {
+                res[i] = nums[ind]
+                break
+            }
+        }
+    }
+
+    return res
+};
+
+
+/*
 O(4n) * O(n)
 
 */

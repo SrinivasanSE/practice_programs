@@ -50,6 +50,7 @@ class Solution {
                 stk.pop()
             } else {
                 // ^ has right to left associativity, so for it, precedency cannot be equal
+                // for input h^m^q^(7-4), output should be hmq74-^^^, if we remove the char check for ^, the output will be hm^q^74-^ which is wrong.
                 while (stk.length > 0 && ((findPrec(char) < findPrec(stk[stk.length - 1])) || (findPrec(char) === findPrec(stk[stk.length - 1]) && char !== '^'))) {
                     res += stk.pop()
                 }
