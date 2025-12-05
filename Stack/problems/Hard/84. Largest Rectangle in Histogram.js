@@ -29,7 +29,7 @@ const findNSE = (arr, n) => {
     let res = [], stk = []
 
     for(let i = n - 1; i >= 0; i--) {
-        while (stk.length > 0 && arr[stk[stk.length - 1]] > arr[i]) {
+        while (stk.length > 0 && arr[stk[stk.length - 1]] >= arr[i]) {
             stk.pop()
         }
 
@@ -61,6 +61,7 @@ O(2n) & O(n)
 
 */
 
+
 var largestRectangleArea = function(heights) { // find the pse and nse on the fly
     const n = heights.length
     let area = 0, stk = [], nse, pse, curr
@@ -82,4 +83,27 @@ var largestRectangleArea = function(heights) { // find the pse and nse on the fl
     }
 
     return area
+};
+
+// Similar to 907 problem
+
+var largestRectangleArea = function(heights) {
+    const stk = []
+    const n = heights.length
+
+    let maxArea = 0, pse, nse, curr
+
+    for (let i = 0; i <= n; i++) {
+        while (stk.length > 0 && (i === n || heights[stk[stk.length - 1]] > heights[i] )) {
+            curr = stk.pop()
+            nse = i
+            pse = stk.length === 0 ? -1 : stk[stk.length - 1]
+
+            maxArea = Math.max(maxArea, (nse - pse - 1) * heights[curr])
+        }
+
+        stk.push(i)
+    }
+
+    return maxArea
 };

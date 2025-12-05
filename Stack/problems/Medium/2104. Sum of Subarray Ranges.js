@@ -1,6 +1,5 @@
 // https://leetcode.com/problems/sum-of-subarray-ranges/description/
 
-// Optimise the sol
 
 /*
 
@@ -109,4 +108,47 @@ const subArrMin = (nums) => {
 
 var subArrayRanges = function(nums) {
     return subArrMax(nums) - subArrMin(nums)
+};
+
+
+// Optimised version
+
+const sumMin = (arr) => {
+    let pse, nse, left, right, sum = 0, stk = [], curr
+    const n = arr.length
+    for (let i = 0; i <= n; i++) {
+        while (stk.length > 0 && (i === n || arr[stk[stk.length - 1]] > arr[i])) {
+            curr = stk.pop()
+            pse = stk.length === 0 ? -1 : stk[stk.length - 1]
+            nse = i
+            left = curr - pse
+            right = nse - curr
+            sum += (left * right * arr[curr])
+        }
+        stk.push(i)
+    }
+
+    return sum
+}
+
+const sumMax = (arr) => {
+    let pge, nge, left, right, sum = 0, stk = [], curr
+    const n = arr.length
+    for (let i = 0; i <= n; i++) {
+        while (stk.length > 0 && (i === n || arr[stk[stk.length - 1]] < arr[i])) {
+            curr = stk.pop()
+            pge = stk.length === 0 ? -1 : stk[stk.length - 1]
+            nge = i
+            left = curr - pge
+            right = nge - curr
+            sum += (left * right * arr[curr])
+        }
+        stk.push(i)
+    }
+
+    return sum
+}
+
+var subArrayRanges = function(nums) {
+    return sumMax(nums) - sumMin(nums)
 };

@@ -104,7 +104,7 @@ function celebrity(mat) {
     
     const c = top // down can also be used
     for(let i = 0; i < n; i++) {
-        if (i === c) { // at diagonal, it will always be 0
+        if (i === c) { // at diagonal, it will always be 1
             continue
         }
         if (mat[i][c] === 0 || mat[c][i] === 1) {

@@ -6,32 +6,8 @@ Optimal - Used 84 solution here
 
 O(rows*cols) & (O(cols) + O(cols)) - for heights arr and stack inside the largestRectangleAre func
 
-O(rows)
-    - O(cols) + O(cols) = O(cols)
-= O(rows)*O(cols)
 */
 
-var largestRectangleArea = function(heights) {
-    const n = heights.length
-    let area = 0, stk = [], nse, pse, curr
-    for(let i = 0; i < n; i++) {
-        while (stk.length > 0 && heights[stk[stk.length - 1]] > heights[i]) {
-            curr = stk.pop()
-            nse = i, pse = stk.length ? stk[stk.length - 1] : -1
-            area = Math.max(area, heights[curr]*(nse - pse - 1))
-        }
-
-        stk.push(i)
-    }
-
-    while (stk.length) {
-        curr = stk.pop()
-        pse = stk.length ? stk[stk.length - 1] : -1
-        area = Math.max(area, heights[curr]*(n - pse - 1))
-    }
-
-    return area
-};
 
 
 var maximalRectangle = function(matrix) {
@@ -49,7 +25,7 @@ var maximalRectangle = function(matrix) {
         for (let j = 0; j < cols; j++) { // O(cols)
             if (matrix[i][j] === '1') {
                 heights[j]++;
-            } else {
+            } else { // when it's 0, it should reset to 0
                 heights[j] = 0;
             }
         }
