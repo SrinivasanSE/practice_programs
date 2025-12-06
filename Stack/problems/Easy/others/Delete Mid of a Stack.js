@@ -6,28 +6,26 @@ class Solution {
     deleteMid(s) {
         // code here
         let temp = []
-        
-        const mid = Math.floor(s.length/2)
+
+        const mid = Math.floor(s.length / 2)
         let i = 0
-        
+
         while (i < mid) {
             temp.push(s.pop())
             i++
         }
-        
+
         s.pop()
-        
-        while(temp.length != 0) {
+
+        while (temp.length != 0) {
             s.push(temp.pop())
         }
-        
+
         return s
     }
 }
 
-
-//Back-end complete function Template for javascript
-//   User function Template for JavaScript
+// Using recursion without using additional data structure
 
 class Solution {
     // Function to delete middle element of a stack.

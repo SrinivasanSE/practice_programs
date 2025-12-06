@@ -75,7 +75,6 @@ class LFUCache {
                 const list = this.freqMap.get(this.minFreq)
                 const node = list.removeTail()
                 this.keyMap.delete(node.key)
-                this.size--
             }
 
             const node = new Node(key, value)
@@ -84,7 +83,6 @@ class LFUCache {
             list.insertNodeAtFront(node)
             this.freqMap.set(1, list)
             this.minFreq = 1
-            this.size++
         }
     }
 

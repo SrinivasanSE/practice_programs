@@ -1,5 +1,5 @@
 // https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/
-// /Easy/Insert an Element at the Bottom of a Stack.js
+// https://www.geeksforgeeks.org/program-to-insert-an-element-at-the-bottom-of-a-stack/
 
 /*
 Time Complexity: O(n*n) Since we need to call fun() and it recursively call insert_at_bottom which is again calling itself for recursion, hence O(n*n)

@@ -1,5 +1,13 @@
 // https://www.geeksforgeeks.org/printing-frequency-of-each-character-just-after-its-consecutive-occurrences/
 
+/*
+
+Without stack
+
+O(n) & O(1)
+
+*/
+
 
 function transform(s) {
     let res = "";
@@ -23,6 +31,15 @@ function transform(s) {
 
     return res;
 }
+
+
+/*
+
+With Stack
+
+O(n) & O(n)
+
+*/
 
 function transform(s) {
     let res = "";

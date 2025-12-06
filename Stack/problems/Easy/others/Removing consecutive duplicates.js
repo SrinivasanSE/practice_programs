@@ -28,7 +28,6 @@ class Solution
     //Function to remove consecutive duplicates from given string using Stack.
     removeConsecutiveDuplicates(s)
     {
-        //your code here
         let temp = s.split("")
         
         let stack = []
@@ -40,7 +39,7 @@ class Solution
         for(let i = 1; i < temp.length; i++) {
             
             if (temp[i] != stack[top]) {
-                res+= stack[top]
+                res+= stack[top] // adding stack top to the res
                 stack.pop()
                 stack.push(temp[i])
             }

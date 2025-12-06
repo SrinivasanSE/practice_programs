@@ -23,7 +23,7 @@ class Solution {
                     
 
             } else {
-                stk.push(BigInt(c))
+                stk.push(BigInt(c)) // we only push the numbers to the stk
             }
             
         }

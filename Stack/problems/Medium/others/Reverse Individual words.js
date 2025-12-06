@@ -16,7 +16,7 @@ function reverseWords(s) {
                 found = true
             }
             
-            if(found) {
+            if(found) { // this is for adding space after the word, we might have extra spaces at the end
                 res += " "
             }
         } else {
@@ -24,7 +24,7 @@ function reverseWords(s) {
         }
     }
     
-    while(stk.length != 0) {
+    while(stk.length != 0) { // Adding last word if present
         res += stk.pop()
     }
     
