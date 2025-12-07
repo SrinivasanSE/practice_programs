@@ -1,7 +1,16 @@
 // https://www.geeksforgeeks.org/next-smaller-element/
 // https://www.geeksforgeeks.org/find-the-nearest-smaller-numbers-on-left-side-in-an-array/
 
+/*
+
+Optimal - Stack (Monotonically Increasing)
+
+O(n) & O(n)
+
+*/
+
 // smallest number on right
+
 function nextSmallerEle(arr) {
     let n = arr.length;
 

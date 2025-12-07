@@ -24,37 +24,10 @@ class Solution {
 }
 
 
-// O(2n) & O(n)
-class Solution {
-    // Function to find the next greater element for each element of the array.
-    nextLargerElement(arr) {
-        // code here
-        const n = arr.length
-        let res = new Array(n).fill(-1)
-        let s = []
-        let top = -1
-
-        for (let i = n - 1; i >= 0; i--) { // we are traversing in reverse
-            // this will take O(N) complexity, because at max, we will remove at most N elements
-            while (top >= 0 && s[top] <= arr[i]) { // we remove all the smaller elements than the current element, so that the top can contain an element greater than the current element
-                s.pop()
-                top--
-            }
-
-            if (top >= 0) {
-                res[i] = s[top]
-            }
-
-            s.push(arr[i])
-            top++
-        }
-
-        return res
-
-    }
-}
 
 /*
+
+Optimal - Stack (Monotonically Decreasing)
 
 O(n) & O(n)
 
@@ -93,8 +66,8 @@ var nextGreaterElement = function (nums1, nums2) {
     const map = new Map();
     let stack = [];
     for (const num of nums2) { // we iterate from the start, [1, 3, 4, 2]
-        while (stack.length && num > stack[stack.length - 1]) { // let's say num = 3 and stk = [1], since 1 < 3, the while loop executes, for 1, 3 is the next greater element, so we set in the map
-            let top = stack.pop();
+        while (stack.length && stack[stack.length - 1] < num ) { // let's say num = 3 and stk = [1], since 1 < 3, the while loop executes, for 1, 3 is the next greater element, so we set in the map
+            let top = stack.pop(); // for this top, current element is the NGE
             map.set(top, num);
         }
         stack.push(num);

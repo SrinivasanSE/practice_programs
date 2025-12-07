@@ -103,7 +103,7 @@ class Solution {
                     res += stk.pop()
                 }
                 stk.pop()
-            } else {
+            } else { // since we traverse from reverse, right associative becomes left, so we pop for ^ and not pop for *,/ for equal precedence
                 while (stk.length > 0 && (precedence(stk[stk.length - 1]) > precedence(char) || (precedence(stk[stk.length - 1]) === precedence(char) && char === '^'))) { // small modification, char should be equal to '^
                     res += stk.pop()
                 }

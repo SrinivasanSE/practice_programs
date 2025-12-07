@@ -2,6 +2,7 @@
 
 // Using two queues
 
+// Operation in Push
 
 var MyStack = function () {
     this.q1 = []
@@ -35,6 +36,53 @@ MyStack.prototype.top = function () {
 MyStack.prototype.empty = function () {
     return this.q1.length === 0
 };
+
+// Operation in Pop
+
+class myStack {
+    constructor() {
+        this.q1 = [];
+        this.q2 = [];
+    }
+
+    // insert element
+    push(x) {
+        this.q1.push(x);
+    }
+
+    // remove top element
+    pop() {
+        if (this.q1.length === 0)
+            return;
+
+        while (this.q1.length !== 1) {
+            this.q2.push(this.q1.shift());
+        }
+        this.q1.shift();
+        [this.q1, this.q2] = [this.q2, this.q1];
+    }
+
+    // return top element
+    top() {
+        if (this.q1.length === 0)
+            return -1;
+
+        while (this.q1.length !== 1) {
+            this.q2.push(this.q1.shift());
+        }
+        let temp = this.q1.shift();
+        this.q2.push(temp);
+        [this.q1, this.q2] = [this.q2, this.q1];
+        return temp;
+    }
+
+    // return current size
+    size() {
+        return this.q1.length;
+    }
+}
+
+
 
 
 
