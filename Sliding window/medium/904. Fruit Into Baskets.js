@@ -68,7 +68,7 @@ var totalFruit = function(fruits) {
 
         if (fruit === lastFruit) { // if it matches the lastfruit, increment the count, else reset the streak
             lastFruitStreak++
-        } else {
+        } else { // we reset the streak here and drop the oldest fruit
             lastFruitStreak = 1
             secondLastFruit = lastFruit
             lastFruit = fruit

@@ -27,16 +27,34 @@ class Solution {
             
             res = Math.max(res, end - start + 1)
             
-            
         }
         
         return res
     }
 }
 
+// Using if block instead of while and map should use used to store the index
+
+var lengthOfLongestSubstring = function(s) {
+    let left = 0, length = 0
+    const n = s.length
+
+    const map = new Map()
+
+    for (let right = 0; right < n; right++) {
+        if (map.has(s[right]) && map.get(s[right]) >= left) { // ex: abcc, left = 0, map.get(c) = 2, so we update left to 2 + 1 = 3
+            left = map.get(s[right]) + 1
+        }
+
+        map.set(s[right], right) // store the index as value
+        length = Math.max(length, right - left + 1)
+    }
+    return length
+};
+
 /*
 
-Optimal
+Optimal - Only works if the string only contains alphabets
 
 O(n) & O(1)
 

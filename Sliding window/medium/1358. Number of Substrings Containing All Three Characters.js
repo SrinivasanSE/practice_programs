@@ -1,5 +1,36 @@
 // https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
 
+/*
+
+Brute
+
+O(n^2) & O(1)
+
+*/
+
+var numberOfSubstrings = function(s) {
+    
+    const n = s.length
+    let aC = 0, bC = 0, cC = 0, count = 0
+
+    for (let i = 0; i < n; i++) {
+        aC = 0, bC = 0, cC = 0
+        for (let j = i; j < n; j++) {
+            if (s[j] === "a") aC++
+            else if (s[j] === "b") bC++
+            else cC++
+
+            if (aC > 0 && bC > 0 && cC > 0) {
+                count += (n - j)
+                break
+            }
+
+        }
+    }
+
+    return count
+};
+
 
 /*
 
@@ -12,7 +43,7 @@ O(2n) & O(1)
 var numberOfSubstrings = function(s) {
     const n = s.length
     let count = 0, left = 0
-    const hashmap = new Map()
+    const hashmap = new Map() // we can use new Array(3) as well since only 3 chars a,b,c will be present
 
     for (let right = 0; right < n; right++) {
         hashmap.set(s[right], (hashmap.get(s[right]) || 0) + 1)
@@ -57,7 +88,7 @@ var numberOfSubstrings = function(s) {
     for(let i = 0; i < n; i++) {
         hashmap[s[i]] = i
         min = Math.min(hashmap.a, hashmap.b, hashmap.c) // if all the chars are there, we can get the min leftMost position,
-        //  if it's 2 for ex, substr starting from 0, 1 also is valid, so doing min + 1 will give all the valid substr ending at max(a, b, c) index
+        //  if it's 2 for ex, substr starting from 0, 1 also is valid, so doing min + 1 will give all the valid substr ending at max(a, b, c) index. If any of the char is not there, we will get min as -1, so min + 1 will be zero only
         count += min + 1
     }
     return count

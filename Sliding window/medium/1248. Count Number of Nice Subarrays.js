@@ -3,6 +3,7 @@
 // Similar to 930
 
 // O(n) & O(n)
+
 var numberOfSubarrays = (nums, k) => {
     const n = nums.length
     let sum = 0, count = 0
@@ -22,6 +23,7 @@ var numberOfSubarrays = (nums, k) => {
 }
 
 // O(2n*2) & O(1)
+
 const atMost = (nums, k) => {
     const n = nums.length
     let left = 0, count = 0
@@ -46,6 +48,26 @@ var numberOfSubarrays = function(nums, k) {
 
 // O(n) & O(1)
 
+/*
+
+In this algorithm, prefix represents the number of valid starting positions (left indices) for subarrays ending at the current right index that contain exactly k odd numbers.
+
+More intuitively:
+
+When the window [left, right] contains exactly k odd numbers, there may be multiple possible left positions that yield a valid subarray ending at right.
+These are the positions where, if you started a subarray, it would include exactly k odds up to right.
+prefix counts how many such left positions there are.
+
+
+How does it work in the code?
+
+Each time you increment right and the window reaches exactly k odds, you start moving left to the right (shrinking the window from the left).
+For every left you move past an even number, the count of odds in the window doesn't change, so the window is still valid (still has k odds), and you increment prefix.
+When you move past an odd, the window now has fewer than k odds, so you stop.
+At this point, prefix is the number of valid ways you could start a subarray ending at right with exactly k odds.
+
+*/
+
 var numberOfSubarrays = (nums, k) => {
     const n = nums.length
     let odd = 0, prefix = 0, count = 0, left = 0
@@ -60,7 +82,7 @@ var numberOfSubarrays = (nums, k) => {
         while (odd === k && left <= right) {
             if (nums[left] % 2) odd--
             left++
-            prefix++ // we calculate how many subarrays are valid between left and right, till odd === k, we keep adding the count of subarr
+            prefix++ // we calculate how many ways you could start a subarray ending at right with exactly k odds.
         }
 
         count += prefix
