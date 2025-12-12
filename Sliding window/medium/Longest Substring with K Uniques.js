@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/find-the-longest-substring-with-k-unique-characters-in-a-given-string/
 
+// For counting, refer 992
+
 /*
 
 Brute
@@ -53,7 +55,7 @@ class Solution {
     let count = 0,
       right,
       max = -1;
-      
+
     for (right = 0; right < n; right++) {
       freq[s[right].charCodeAt(0) - 97]++;
       if (freq[s[right].charCodeAt(0) - 97] === 1) count++;

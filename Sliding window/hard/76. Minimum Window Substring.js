@@ -1,6 +1,53 @@
 // https://leetcode.com/problems/minimum-window-substring/description/
 
 
+/*
+
+Brute
+
+O(n^2) & O(m)
+
+*/
+
+
+var minWindow = function (s, t) {
+    let count, start = -1
+    if (s === t) return s
+    const m = s.length, n = t.length
+    let minLen = Number.MAX_SAFE_INTEGER
+
+    for (let i = 0; i < m; i++) {
+        const map = new Map()
+        for (let j = 0; j < n; j++) {
+            map.set(t[j], (map.get(t[j]) || 0) + 1)
+        }
+        count = 0
+
+        for (let k = i; k < m; k++) {
+            if (map.get(s[k]) > 0) count++
+            map.set(s[k], (map.get(s[k]) || 0) - 1)
+            if (count === n) {
+                if (k - i + 1 < minLen) {
+                    minLen = k - i + 1
+                    start = i
+                    break
+                }
+            }
+        }
+    }
+
+    return start == -1 ? "": s.slice(start, start + minLen)
+
+};
+
+
+/*
+
+Optimal
+
+O(n + m)
+
+*/
 
 var minWindow = function (s, t) {
     const n = s.length, m = t.length
