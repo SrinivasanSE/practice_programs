@@ -100,7 +100,6 @@ function count(s, k) {
 // Function to find the number of substrings
 // with exactly k Distinct characters.
 function countSubstr(s, k) {
-    let n = s.length;
     let ans = 0;
 
     // Subtract substrings with at most 

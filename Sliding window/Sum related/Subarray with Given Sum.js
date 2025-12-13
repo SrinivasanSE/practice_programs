@@ -1,8 +1,16 @@
 // https://www.geeksforgeeks.org/find-subarray-with-given-sum/
 
-// This sol won't work for arr with negative numbers
+
+/*
+
+Optimal - This sol won't work for arr with negative numbers
+
+O(n) & O(1)
+
+*/
+
+
 class Solution {
-    // Function to find a continuous sub-array which adds up to a given number.
     subarraySum(arr, sum) {
         
         let res = []
@@ -13,7 +21,6 @@ class Solution {
             
             currSum += arr[end]
 
-           if (currSum >= sum) {
             
             while (currSum > sum && start < end) {
                 currSum-=arr[start]
@@ -23,16 +30,21 @@ class Solution {
             if (currSum === sum) {
                 return [start + 1, end + 1]
             }
-           }
         }
         
         return res
     }
 }
 
-// works for negative nums
+/*
+
+Optimal - works for negative nums
+
+O(n) & O(n)
+
+*/
+
 class Solution {
-    // Function to find a continuous sub-array which adds up to a given number.
     subarraySum(arr, tar) {
         
         const hashmap = new Map()
