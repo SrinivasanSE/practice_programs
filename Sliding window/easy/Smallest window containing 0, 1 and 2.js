@@ -1,7 +1,6 @@
 // https://www.geeksforgeeks.org/smallest-window-containing-0-1-and-2/
 
 class Solution {
-  // Function to check whether the list is palindrome.
   smallestSubstring(S) {
     // your code here
 

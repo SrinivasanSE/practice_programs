@@ -1,6 +1,6 @@
 // https://www.geeksforgeeks.org/dsa/find-zeroes-to-be-flipped-so-that-number-of-consecutive-1s-is-maximized/
 
-
+// Here k is not given and we take it as 1 and in 1004 problem, k is given
 /*
 
 Brute

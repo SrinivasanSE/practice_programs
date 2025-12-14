@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/minimum-window-substring/description/
 
+// Similar to Sliding window/medium/others/Smallest distinct window.js
+
 
 /*
 
