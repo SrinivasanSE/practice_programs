@@ -5,7 +5,7 @@
 
 /*
 
-Brute
+Brute - Heap
 
 O(N + MlogM) & O(M)
 */

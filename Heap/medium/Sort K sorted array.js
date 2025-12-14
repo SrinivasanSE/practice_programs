@@ -1,5 +1,11 @@
 // https://www.geeksforgeeks.org/nearly-sorted-algorithm/
 
+/*
+
+O(nlogk) & O(k)
+
+*/
+
 class Solution {
     nearlySorted(arr, k) {
         // code
