@@ -1,13 +1,7 @@
 // https://www.geeksforgeeks.org/maximize-elements-using-another-array/
 
 class Solution {
-    /**
-    * @param number n
-    * @param number[] arr1
-    * @param number[] arr2
 
-    * @returns number[]
-    */
     maximizeArray(n, arr1, arr2) {
         // code here
         const heap = new MaxHeap()

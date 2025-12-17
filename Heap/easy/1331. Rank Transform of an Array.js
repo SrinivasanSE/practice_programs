@@ -3,80 +3,96 @@
 
 /*
 
-Better
-O(NLogN) & O(N)
+Brute
+
+O(n^2) & O(n)
+
 */
 
 
-var arrayRankTransform = function(arr) {
-    const n = arr.length
-    const temp =  [...arr].sort((a, b) => a - b)
-
-    const map = new Map()
-    let rank = 1
-
-    for (let i = 0; i < n; i++) {
-        if (!map.has(temp[i])) {
-            map.set(temp[i], rank++)
+class Solution {
+    replaceWithRank(n, arr) {
+        // your code here
+        const res = new Array(n)
+        
+        for (let i = 0; i < n; i++) {
+            const set = new Set() // we use set to skip the duplicates so that rank doesn't increase wrongly
+            for (let j = 0; j < n; j++) {
+                if (arr[j] < arr[i]) { // count num of smaller elements for the current element
+                    set.add(arr[j])
+                }
+            }
+            
+            res[i] = set.size + 1 // rank starts from 1, so we add + 1
         }
+        
+        return res
     }
+}
 
-    for (let i = 0; i < n; i++) {
-        arr[i] = map.get(arr[i])
+/*
+
+Optimal - Sorting
+
+O(nlogn) & O(n)
+
+*/
+
+
+
+class Solution {
+    // Function to replace each element of the array with its rank.
+    replaceWithRank(n, arr) {
+        // Convert the arr to [value, index] and sort the array by value
+        const sorted = [...arr].map((num, i) => [num, i]).sort((a, b) => a[0] - b[0])
+        
+        let rank = 0 // to track the rank
+        let lastNum = null
+        
+        for (let item of sorted) {
+            if (lastNum == null || item[0] != lastNum) { // to ignore the duplicates, for duplicates, the rank is same
+                rank++
+            }
+            
+            arr[item[1]] = rank // Replace the element by it's rank at the index we get
+            lastNum = item[0]
+        }
+        
+        return arr
     }
-
-    return arr
-    
-};
+}
 
 
 /*
 
-Optimal - Map is not used
-O(NLogN) & O(N)
+Optimal - Heap
+
+O(nlogn) & O(n)
 
 */
 
 
-var arrayRankTransform = function (arr) {
-    const n = arr.length
-    if (n === 0) return []
-    const temp = arr.map((val, i) => [val, i]).sort((a, b) => a[0] - b[0])
-
-    let rank = 1, prev = temp[0][0]
-    for (let i = 0; i < n; i++) {
-        if (prev < temp[i][0]) { // if prev is lesser than the new element, we need to increase the rank, this condition will not execute if the elements are same
-            rank++
+class Solution {
+    replaceWithRank(n, arr) {
+        // your code here
+        const heap = new MinHeap()
+        for (let i = 0; i <n; i++) { // insert all the elements to the heap
+            heap.insert({value: arr[i], index: i})
         }
-        arr[temp[i][1]] = rank // original index is used to place the rank
-        prev = temp[i][0]
+        let rank = 0
+        let lastNum = null
+        
+        while (!heap.isEmpty()) {
+            const item = heap.extractMin()
+        
+            if (lastNum == null || item.value != lastNum) {
+                rank++
+            }
+            
+            arr[item.index] = rank
+            lastNum = item.value
+        }
+        
+        return arr
     }
-
-    return arr
-
-};
-
-
-// Using heap - O(NLogN) & O(N)
-
-
-function arrayRankTransform(arr) {
-    // Step 1: Insert all unique elements into the heap
-    const heap = new MinHeap(); // Assume MinHeap is implemented elsewhere
-    const unique = new Set(arr);
-    for (let num of unique) {
-        heap.insert(num);
-    }
-
-    // Step 2: Pop elements from the heap and assign ranks
-    const rankMap = new Map();
-    let rank = 1;
-    while (!heap.isEmpty()) {
-        const num = heap.extractMin();
-        rankMap.set(num, rank);
-        rank++;
-    }
-
-    // Step 3: Transform the array using the rankMap
-    return arr.map(num => rankMap.get(num));
 }
