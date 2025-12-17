@@ -28,7 +28,7 @@ class MaxHeap {
         [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
     }
 
-    heapifyUp() {
+    heapifyUp() { // sort by value if the freq is same
         let index = this.heap.length - 1;
         while (index > 0 && 
               (this.heap[index].freq > this.heap[this.parentIndex(index)].freq || 

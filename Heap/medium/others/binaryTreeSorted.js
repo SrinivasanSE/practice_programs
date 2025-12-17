@@ -6,7 +6,7 @@ class Solution {
         q.push({ data: arr[0], index: 0 });
         let res = [];
 
-        while (q.length > 0) {
+        while (q.length > 0) { // queue is used for tracking the level and heap is used to add all the nodes in that level and then print in sorted order
             const len = q.length;
 
             // Create a min-heap using your custom PriorityQueue
@@ -41,32 +41,3 @@ class Solution {
     }
 }
 
-
-class Solution {
-    // Function to find a continuous sub-array which adds up to a given number.
-    binTreeSortedLevels(arr, n) {
-        // your code here
-        let q = []
-        q.push({data: arr[0], index: 0})
-        let res = []
-        while (q.length > 0) {
-            let len = q.length
-            //console.log(q)
-            let temp = []
-            for(let i = 0; i < len; i++) {
-                let {data, index} = q.shift()
-                temp.push(data)
-                
-                if (2*index + 1 < n) {
-                    q.push({data: arr[2*index + 1], index: 2*index + 1})
-                }
-                if (2*index + 2 < n) {
-                    q.push({data: arr[2*index + 2], index: 2*index + 2})
-                }
-            }
-            temp.sort((a, b) => a - b)
-            res.push(temp)
-        }
-        return res
-    }
-}

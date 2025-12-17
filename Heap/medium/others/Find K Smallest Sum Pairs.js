@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/problems/find-k-smallest-sum-pairs/1
 
+// Similar to Heap/medium/Max sum combinations.js
+
 class Solution {
     kSmallestPair(arr1, arr2, k) {
         // code here
