@@ -9,6 +9,7 @@ https://www.geeksforgeeks.org/dsa/union-and-intersection-of-two-sorted-arrays-2/
 
 2) Learn variations of Stock buy and sell
 3) Learn ksum
+4) Understand why heapify process is O(n)
 
 
 # Algos

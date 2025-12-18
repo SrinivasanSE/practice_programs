@@ -34,3 +34,11 @@ class Solution {
         return nums
     }
 }
+
+/*
+
+Start from the last internal node because leaf nodes are already heaps.
+Go upwards to the root, so that when you heapify a node, its children are already heaps.
+This is the standard and most efficient way to build a heap from an array.
+
+*/

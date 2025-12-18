@@ -57,8 +57,8 @@ class Solution {
     }
     let currSum;
     for (let i = 0; i < n; i++) {
-      for (let j = i + 1; j < n; j++) {
-        currSum = ps[j] - ps[i];
+      for (let j = i; j < n; j++) {
+        currSum = ps[j + 1] - ps[i];
         if (heap.size() === k) {
           if (heap.getMin() < currSum) {
             heap.extractMin();

@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/k-maximum-sum-combinations-two-arrays/
 
+// Similar to Heap/medium/others/Find K Smallest Sum Pairs.js
+
 /*
 
 Brute
@@ -67,7 +69,7 @@ const _maxCombinations = (N, K, A, B) => {
 /*
 
 Efficient when N is large and K is small
-O(NlogN) + O(KlogK)
+O(NlogN) + O(KlogK) & O(n)
 
 */
 
@@ -99,6 +101,40 @@ const maxCombinations = (N, K, A, B) => {
 
   return res;
 };
+
+
+class Solution {
+    topKSumPairs(arr1, arr2, k) {
+        // code here
+        let res = []
+        arr1.sort((a, b) => b - a)
+        arr2.sort((a, b) => b - a)
+        const n = arr1.length
+        const m = arr2.length
+        
+        if (m === 0 || n === 0 || k === 0) return res
+        
+        
+        const heap = new MaxHeap()
+        
+        for (let i = 0; i < Math.min(k, n); i++) { // run till the min of (k, n) push all the elements from one array with first element from the another array
+            heap.insert({i, j: 0, sum: arr1[i] + arr2[0]})
+        }
+        
+        
+        while (!heap.isEmpty() && k > 0) {
+            const {i, j, sum} = heap.extractMax()
+            
+            res.push(sum)
+            
+            if (j + 1 < m) { // keep pushing the next element from the arr2
+                heap.insert({i, j: j + 1, sum: arr1[i] + arr2[j + 1]})
+            }
+            k--
+        }
+        return res
+    }
+}
 
 
 /*
