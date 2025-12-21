@@ -11,16 +11,16 @@ O(N + logN) & O(N)
 
 */
 
-const findIndex = (intervals, n, target) => {
+const findIndex = (intervals, n, target) => { // lower bound
     let l = 0, r = n - 1, mid
 
     while (l <= r) {
         mid = l + Math.floor((r - l)/2)
 
-        if (intervals[mid][0] < target) { // compare the start with new interval start
-            l = mid + 1
-        } else {
+        if (target <= intervals[mid][0]) { // compare the start with new interval start
             r = mid - 1
+        } else {
+            l = mid + 1
         }
     }
 
@@ -75,7 +75,7 @@ var insert = function (intervals, newInterval) {
         i++
     }
 
-    while (i < n && intervals[i][0] <= newInterval[1]) { // these intervals must be overlapping, compare start with new interval's end and keep upadting the new interval
+    while (i < n && intervals[i][0] <= newInterval[1]) { // these intervals must be overlapping, compare start with new interval's end and keep updating the new interval
         newInterval[0] = Math.min(intervals[i][0], newInterval[0]) // take the min of start
         newInterval[1] = Math.max(intervals[i][1], newInterval[1]) // take the max of end
         i++
@@ -89,3 +89,6 @@ var insert = function (intervals, newInterval) {
        
     return res
 };
+
+
+// [1, 4] [6, 7]
