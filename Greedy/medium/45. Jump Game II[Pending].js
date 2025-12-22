@@ -93,3 +93,17 @@ class Solution {
         return -1
     }
 }
+
+/*
+
+nums = [2, 3, 1, 1, 4]
+
+If I stand at ANY index in [0, 1, 2],
+which one lets me reach the farthest next?”
+
+That’s what farthest tracks.
+
+At index 2, we are not jumping from index 2 —
+we are deciding the next jump using the best option found in the entire current range.
+
+*/
