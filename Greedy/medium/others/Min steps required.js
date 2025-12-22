@@ -3,17 +3,18 @@
 // O(n) & O(1)
 
 function minSteps(str) {
-    let cnt = 1; // number of groups (segments) of consecutive same characters.
+  // str contains only a and b
+  let cnt = 1; // number of groups (segments) of consecutive same characters.
 
-    for (let i = 1; i < str.length; i++) {
-        if (str[i] !== str[i - 1]) { // a new group starts
-            cnt++;
-        }
+  for (let i = 1; i < str.length; i++) {
+    if (str[i] !== str[i - 1]) {
+      // a new group starts
+      cnt++;
     }
+  }
 
-    return Math.floor(cnt / 2) + 1; // Each operation removes one group and merges others, so effectively 2 groups disappear per step
+  return Math.floor(cnt / 2) + 1; // Removing one group can cause two neighboring groups (same character) to merge. So effectively, 2 groups disappear per operation
 }
-
 
 /*
 
@@ -27,4 +28,3 @@ Step 3: Remove "b" → empty
 ✅ Formula → Math.floor(4 / 2) + 1 = 3
 
 */
-

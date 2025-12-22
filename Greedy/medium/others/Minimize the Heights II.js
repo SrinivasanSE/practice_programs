@@ -42,7 +42,7 @@ Decreasing tall towers lowers the top
 Both actions shrink the overall range
 
 
-The new maximum is either the largest increased value (arr[i] + K) or the smallest decreased value (arr[-1] - K).
+The new maximum is either the largest increased value (arr[i] + K) or the smallest decreased value (arr[n - 1] - K).
 The new minimum is either the smallest increased value (arr[0] + K) or the first decreased value (arr[i+1] - K).
 
 */

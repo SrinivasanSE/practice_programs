@@ -13,6 +13,7 @@ M - Unit of food required each day to survive.
 
 class Solution {
     minimumDays(S, N, M) {
+        let totalFoodNeeded = S*M
         if (N < M) { // if unit of food required is greater than the max we can buy for a day, it's not possible to survive
             return -1
         }
