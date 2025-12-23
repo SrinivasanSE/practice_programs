@@ -11,24 +11,26 @@ O(n) & O(n)
 
 */
 
-var rightSideView = function(root) { // we need to push the right side node at each level
-    let res = []
-    if (root == null) return res
+var rightSideView = function (root) {
+  // we need to push the right side node at each level
+  let res = [];
+  if (root == null) return res;
 
-    const traversal = (node, res, level) => {
-        if (node == null) return
-        
-        if (res.length === level) { // right node will first come here and length will be equal to the level, so we push the value
-            res.push(node.val)
-        }
+  const traversal = (node, res, level) => {
+    // similar to recursive level order traversal
+    if (node == null) return;
 
-        traversal(node.right, res, level + 1) // go to right first
-        traversal(node.left, res, level + 1)
+    if (res.length === level) {
+      // right node will first come here and length will be equal to the level, so we push the value
+      res.push(node.val);
     }
-    traversal(root, res, 0)
-    return res
-};
 
+    traversal(node.right, res, level + 1); // go to right first
+    traversal(node.left, res, level + 1);
+  };
+  traversal(root, res, 0);
+  return res;
+};
 
 /*
 
@@ -38,32 +40,29 @@ O(n) & O(n)
 
 */
 
+var rightSideView = function (root) {
+  let res = [];
+  if (root == null) return res;
 
-var rightSideView = function(root) {
-    let res = []
-    if (root == null) return res
-
-    const q = [root]
-    let level = 0
-    while (q.length > 0) {
-        let len = q.length
-        for (let i = 0; i < len; i++) {
-            const node = q.shift()
-            /*
+  const q = [root];
+  let level = 0;
+  while (q.length > 0) {
+    let len = q.length;
+    for (let i = 0; i < len; i++) {
+      const node = q.shift();
+      /*
                 if (i === len - 1) res[level] = node.val or res.push(node.val) and no need to use level var
             */
-            res[level] = node.val // keep updating the value at this level, first left node's value will be added and then at the right side node's val will be updated
+      res[level] = node.val; // keep updating the value at this level, first left node's value will be added and then at the right side node's val will be updated
 
-            if (node.left) q.push(node.left)
-            if (node.right) q.push(node.right)
-        }
-        level++
+      if (node.left) q.push(node.left);
+      if (node.right) q.push(node.right);
     }
+    level++;
+  }
 
-    return res
+  return res;
 };
-
-
 
 //*************************************************************** Left side ********************************************************************************/
 
@@ -75,27 +74,26 @@ O(n) & O(n)
 
 */
 
-
 class Solution {
-    leftView(root) {
-        // code here
-        const res = []
-        if (root == null) return res
-        
-        const traversal = (node, level, res) => {
-            if (node == null) return
-            
-            if (res.length === level) {
-                res.push(node.data)
-            }
-            
-            traversal(node.left, level + 1, res) // first go to left
-            traversal(node.right, level + 1, res)
-        }
-        traversal(root, 0, res)
-        
-        return res
-    }
+  leftView(root) {
+    // code here
+    const res = [];
+    if (root == null) return res;
+
+    const traversal = (node, level, res) => { // Similar to recursive level order traversal
+      if (node == null) return;
+
+      if (res.length === level) {
+        res.push(node.data);
+      }
+
+      traversal(node.left, level + 1, res); // first go to left
+      traversal(node.right, level + 1, res);
+    };
+    traversal(root, 0, res);
+
+    return res;
+  }
 }
 
 /*
@@ -106,28 +104,27 @@ O(n) & O(n)
 
 */
 
-
 class Solution {
-    leftView(root) {
-        // code here
-        const res = []
-        if (root == null) return res
-        const q = [root]
-        let level = 0
-        while (q.length > 0) {
-            let len = q.length
-            
-            for (let i = 0; i < len; i++) {
-                const node = q.shift()
-                if (i === 0) res[level] = node.data
-                
-                if (node.left) q.push(node.left)
-                if (node.right) q.push(node.right)
-            }
-            
-            level++
-        }
-        
-        return res
+  leftView(root) {
+    // code here
+    const res = [];
+    if (root == null) return res;
+    const q = [root];
+    let level = 0;
+    while (q.length > 0) {
+      let len = q.length;
+
+      for (let i = 0; i < len; i++) {
+        const node = q.shift();
+        if (i === 0) res[level] = node.data;
+
+        if (node.left) q.push(node.left);
+        if (node.right) q.push(node.right);
+      }
+
+      level++;
     }
+
+    return res;
+  }
 }

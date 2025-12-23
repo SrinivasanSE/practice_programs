@@ -1,7 +1,6 @@
 // https://www.geeksforgeeks.org/postorder-traversal-of-binary-tree/
 // https://leetcode.com/problems/binary-tree-postorder-traversal/description/
 
-
 /*
 
 Brute - Recursion
@@ -10,22 +9,20 @@ O(n) & O(n)
 
 */
 
-
 var inorderTraversal = function (root) {
-    const nodes = []
+  const nodes = [];
 
-    const traversal = (node) => {
-        if (node == null) return
+  const traversal = (node) => {
+    if (node == null) return;
 
-        traversal(node.left)
-        nodes.push(node.val)
-        traversal(node.right)
-    }
+    traversal(node.left);
+    nodes.push(node.val);
+    traversal(node.right);
+  };
 
-    traversal(root)
-    return nodes
+  traversal(root);
+  return nodes;
 };
-
 
 /*
 
@@ -35,32 +32,32 @@ O(n) & O(2n)
 
 */
 
+var postorderTraversal = function (root) {
+  const nodes = [];
 
-var postorderTraversal = function(root) {
-    const nodes = []
+  const stk1 = [],
+    stk2 = [];
 
-    const stk1 = [], stk2 = []
+  if (root == null) return nodes;
 
-    if (root == null) return nodes
+  stk1.push(root);
+  let node;
+  while (stk1.length > 0) {
+    // similar to pre order, for pre order, we do root -> left > right, this code will do root -> right -> left and reverse it, we get left -> right -> root
+    node = stk1.pop();
 
-    stk1.push(root)
-    let node
-    while (stk1.length > 0) { // similar to pre order, for pre order, we do root -> left > right, this code will do root -> right -> left and reverse it, we get left -> right -> root
-        node = stk1.pop()
+    if (node.left != null) stk1.push(node.left);
+    if (node.right != null) stk1.push(node.right);
 
-        if (node.left != null) stk1.push(node.left)
-        if (node.right != null) stk1.push(node.right)
+    stk2.push(node.val); // we use stk2 to reverse the values
+  }
 
-        stk2.push(node.val) // we use stk2 to reverse the values
-    }
+  while (stk2.length > 0) {
+    nodes.push(stk2.pop());
+  }
 
-    while (stk2.length > 0) {
-        nodes.push(stk2.pop())
-    }
-    
-    return nodes
+  return nodes;
 };
-
 
 /*
 
@@ -79,33 +76,36 @@ lastVisited helps us track if we've already processed the right child, so we onl
 */
 
 var postorderTraversal = function (root) {
-    const nodes = []
+  const nodes = [];
 
-    const stk = []
+  const stk = [];
 
-    if (root == null) return nodes
+  if (root == null) return nodes;
 
-    let current = root, lastVisited, peek
+  let current = root,
+    lastVisited,
+    peek;
 
-    while (current || stk.length > 0) {
-        if (current) { // go left as much as possible
-            stk.push(current)
-            current = current.left
-        } else {
-            peek = stk[stk.length - 1] // if there is no left, go to right
-            if (peek.right && peek.right != lastVisited) { // if the right is there and we did not visit it already, go to right
-                current = peek.right
-            } else { // if there is no right, process the node
-                nodes.push(peek.val)
-                lastVisited = stk.pop()
-            }
-        }
+  while (current || stk.length > 0) {
+    if (current) {
+      // go left as much as possible
+      stk.push(current);
+      current = current.left;
+    } else {
+      peek = stk[stk.length - 1]; // if there is no left, go to right
+      if (peek.right && peek.right != lastVisited) {
+        // if the right is there and we did not visit it already, go to right
+        current = peek.right;
+      } else {
+        // if there is no right, process the node
+        nodes.push(peek.val);
+        lastVisited = stk.pop();
+      }
     }
+  }
 
-    return nodes
+  return nodes;
 };
-
-
 
 /*
 
@@ -115,31 +115,32 @@ O(n) & O(n)
 
 */
 
+var postorderTraversal = function (root) {
+  // we use modified pre order, root - right - left
+  let res = [];
+  let curr = root,
+    prev;
 
-var postorderTraversal = function(root) { // we use modified pre order, root - right - left
-    let res = []
-    let curr = root, prev
+  while (curr) {
+    if (curr.right == null) {
+      res.push(curr.val);
+      curr = curr.left;
+    } else {
+      prev = curr.right;
+      while (prev.left && prev.left != curr) {
+        prev = prev.left;
+      }
 
-    while (curr) {
-        if (curr.right == null) {
-            res.push(curr.val)
-            curr = curr.left
-        } else {
-            prev = curr.right
-            while (prev.left && prev.left != curr) {
-                prev = prev.left
-            }
-
-            if (prev.left == null) {
-                prev.left = curr
-                res.push(curr.val) // visit in Root->Right->Left order
-                curr = curr.right
-            } else {
-                prev.left = null
-                curr = curr.left
-            }
-        }
+      if (prev.left == null) {
+        prev.left = curr;
+        res.push(curr.val); // visit in Root->Right->Left order
+        curr = curr.right;
+      } else {
+        prev.left = null;
+        curr = curr.left;
+      }
     }
+  }
 
-    return res.reverse() // return the reversed list
+  return res.reverse(); // return the reversed list
 };

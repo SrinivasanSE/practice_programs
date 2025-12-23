@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/
+// https://leetcode.com/problems/cousins-in-binary-tree/description/
 
 class Solution {
     
