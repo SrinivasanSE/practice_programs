@@ -10,7 +10,7 @@ O(n) & O(h)
 
 
 class Solution {
-    // Function to find the path from the
+    // FunctioProot n to find the path from the
     // root to a given node with value 'x'
     getPath(root, arr, x) {
         // Base case: If the current

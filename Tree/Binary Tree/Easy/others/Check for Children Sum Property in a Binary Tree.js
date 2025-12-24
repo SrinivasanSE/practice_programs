@@ -15,7 +15,7 @@ O(n) & O(H)
 
 class Solution {
     isSumProperty(root) {
-        //  leaft node satisfies child sum property
+        //  leaf node satisfies child sum property
         if (root == null || (root.left == null && root.right == null)) return true
 
         let sum = 0
