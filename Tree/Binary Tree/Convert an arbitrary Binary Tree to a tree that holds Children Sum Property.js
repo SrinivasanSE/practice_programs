@@ -37,7 +37,8 @@ class Solution {
         } else {
             // If the sum is smaller, update the
             // child with the current node's value.
-            if (root.left) {
+            if (root.left) { // updating left or right with the parent val is fine, no need to update both. 
+            // If we update one, we make sure adding left + right will be >= parent node's val. So there is no possibility of decrease ops
                 root.left.val = root.val;
             } else if (root.right) {
                 root.right.val = root.val;
@@ -61,8 +62,8 @@ class Solution {
         }
 
         // If either left or right child
-        // exists, update the current node's
-        // value with the total sum.
+        // exists, then only update the current node's
+        // value with the total sum. We should not change the leaf node
         if (root.left || root.right) {
             root.val = tot;
         }
