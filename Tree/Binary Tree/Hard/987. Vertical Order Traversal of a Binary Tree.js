@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
 // https://www.geeksforgeeks.org/dsa/vertical-order-traversal-of-binary-tree-using-map/
 
-// Check GFG variation as well
+// Check GFG variation at the last
 
 /*
 
@@ -24,6 +24,16 @@ var verticalTraversal = function (root) {
 
   dfs(root, 0, 0); // for each node, create the mappings
 
+  /*
+  Sorting priority:
+
+    Column first → left to right
+
+    Row second → top to bottom
+
+    Value last → tie breaker
+
+  */
   nodes.sort((a, b) => {
     if (a[2] != b[2]) return a[2] - b[2]; // sort by col (vertical index)
     if (a[1] != b[1]) return a[1] - b[1]; // sort by row (level)
@@ -129,3 +139,45 @@ var verticalTraversal = function (root) {
 
   return res;
 };
+
+
+/*
+
+In GFG variation, there is no need to sort by values and also if we use level order traversal, it will be sorted by level as well. So we can directly add to the result
+
+*/
+
+
+function verticalOrder(root) {
+    if (!root) return [];
+
+    // Map to store nodes and their vertical levels
+    const lst = new Map();
+
+    // Use our custom queue
+    const q = new Queue();
+    q.enqueue([root, 0]);
+
+    let mn = 0, mx = 0;
+
+    while (!q.isEmpty()) {
+        const [node, val] = q.dequeue();
+
+        mn = Math.min(mn, val);
+        mx = Math.max(mx, val);
+
+        if (!lst.has(val)) lst.set(val, []);
+        lst.get(val).push(node.data);
+
+        if (node.left) q.enqueue([node.left, val - 1]);
+        if (node.right) q.enqueue([node.right, val + 1]);
+    }
+
+    // Build the result in vertical order
+    const res = [];
+    for (let i = mn; i <= mx; i++) {
+        res.push(lst.get(i));
+    }
+
+    return res;
+}

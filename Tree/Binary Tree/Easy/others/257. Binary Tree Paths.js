@@ -1,6 +1,9 @@
 // https://leetcode.com/problems/binary-tree-paths/description/
+// https://www.geeksforgeeks.org/given-a-binary-tree-print-all-root-to-leaf-paths/
 
-// return all root-to-leaf paths
+// Refer Print path from root to a given node in a binary tree.js for printing the path for a specific node
+
+// For this program, return all root-to-leaf paths
 
 /*
 
@@ -59,7 +62,7 @@ var binaryTreePaths = function (root) { // using path as string
 
 /*
 
-Iterative
+Iterative - Pre order traversal
 
 O(N*H) & O(N*H)
 
