@@ -64,10 +64,9 @@ class Solution {
   // A helper function to check if a node is a leaf
   isLeaf(node) {
     // A null node or a node with no children is considered a leaf
-    if (node === null || (node.left === null && node.right === null)) {
-      return true;
-    }
-    return false;
+    return (node.left === null && node.right === null) 
+     
+    
   }
 
   // Main function to check Sum Tree
