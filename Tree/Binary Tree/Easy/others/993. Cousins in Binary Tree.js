@@ -30,7 +30,7 @@ If they have same parent, then return false. else, return true.
 
 class Solution {
   siblings(root, a, b) {
-    if (root == null) {
+    if (root == null) { // return false if the root is null
       return false;
     }
 

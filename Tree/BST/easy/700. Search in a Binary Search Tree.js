@@ -9,22 +9,21 @@ O(n) & O(h)
 
 */
 
-
 class Solution {
-    // Function to search a node in BST.
-    search(root, x) {
-        // your code here
-        
-        if (root === null || root.data === x) {
-            return root
-        }
-        
-        if (root.data < x) {
-            return this.search(root.right, x)
-        }
-        
-        return this.search(root.left, x)
+  // Function to search a node in BST.
+  search(root, x) {
+    // your code here
+
+    if (root === null || root.data === x) {
+      return root;
     }
+
+    if (root.data < x) {
+      return this.search(root.right, x);
+    }
+
+    return this.search(root.left, x);
+  }
 }
 
 /*
@@ -36,24 +35,24 @@ O(n) & O(1)
 */
 
 class Solution {
-    // Function to search a node in BST.
-    search(root, x) {
-        // your code here
-        
-        let curr = root
-        
-        while(curr) {
-            if (curr.data === x) {
-                return true
-            }
-            
-            if (curr.data < x) {
-                curr = curr.right
-            } else {
-                curr = curr.left
-            }
-        }
-        
-        return false
+  // Function to search a node in BST.
+  search(root, x) {
+    // your code here
+
+    let curr = root;
+
+    while (curr) {
+      if (curr.data === x) {
+        return true; // or curr node if asked to return the node
+      }
+
+      if (curr.data < x) {
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
     }
+
+    return false;
+  }
 }
