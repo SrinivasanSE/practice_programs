@@ -35,7 +35,7 @@ class Solution {
     }
 
     if (
-      // They should not have same parent, // checking left is eq to a
+      // They should have same parent if they are siblings, // checking left is eq to a
       root.left &&
       root.right &&
       root.left.data === a &&
