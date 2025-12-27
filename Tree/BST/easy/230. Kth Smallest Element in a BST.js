@@ -53,6 +53,38 @@ var kthSmallest = function (root, k) {
 
 /*
 
+Better - Iterative inorder traversal
+
+O(n) & O(n)
+
+*/
+
+var kthSmallest = function (root, k) {
+  if (root == null) return null;
+  let count = 0;
+  let curr = root;
+  let stk = [];
+
+  while (true) {
+    if (curr) {
+      stk.push(curr);
+      curr = curr.left;
+    } else {
+      if (stk.length == 0) {
+        return;
+      }
+      curr = stk.pop();
+      count++;
+      if (count === k) {
+        return curr.val;
+      }
+      curr = curr.right;
+    }
+  }
+};
+
+/*
+
 Optimal - Morris inorder traversal
 
 O(n) & O(1)
