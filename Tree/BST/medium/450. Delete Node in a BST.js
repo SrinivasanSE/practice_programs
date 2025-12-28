@@ -132,18 +132,17 @@ const getLastRightNode = (node) => {
 // Helper function to delete a node from a BST
 // It returns the NEW ROOT of the subtree after deletion
 const _helper = (node) => {
+  // Case 1: Node has NO left child
+  // Simply replace the node with its right subtree
+  // (all values in right subtree are already greater than node.val)
+  if (node.left == null) return node.right;
 
-    // Case 1: Node has NO left child
-    // Simply replace the node with its right subtree
-    // (all values in right subtree are already greater than node.val)
-    if (node.left == null) return node.right;
+  // Case 2: Node has NO right child
+  // Simply replace the node with its left subtree
+  // (all values in left subtree are already smaller than node.val)
+  if (node.right == null) return node.left;
 
-    // Case 2: Node has NO right child
-    // Simply replace the node with its left subtree
-    // (all values in left subtree are already smaller than node.val)
-    if (node.right == null) return node.left;
-
-    /*
+  /*
       Case 3: Node has TWO children
 
       Strategy (mirror version of predecessor approach):
@@ -183,25 +182,23 @@ const _helper = (node) => {
         preserves BST ordering
     */
 
-    const leftNode = node.left;                 // Save the left subtree
-    const lastNode = lastLeftNode(node.right); // Find smallest node in right subtree
-    lastNode.left = leftNode;                   // Attach left subtree here
+  const leftNode = node.left; // Save the left subtree
+  const lastNode = lastLeftNode(node.right); // Find smallest node in right subtree
+  lastNode.left = leftNode; // Attach left subtree here
 
-    // Return the right subtree as the new root of this subtree
-    return node.right;
+  // Return the right subtree as the new root of this subtree
+  return node.right;
 };
 
 // Finds the LEFTMOST node in a subtree (minimum value)
 // This is used to locate where the left subtree should be attached
 const lastLeftNode = (node) => {
+  // If there is no left child, this node is the leftmost (smallest)
+  if (node.left == null) return node;
 
-    // If there is no left child, this node is the leftmost (smallest)
-    if (node.left == null) return node;
-
-    // Keep moving left until we find the leftmost node
-    return lastLeftNode(node.left);
+  // Keep moving left until we find the leftmost node
+  return lastLeftNode(node.left);
 };
-
 
 /*
 
@@ -211,32 +208,106 @@ O(n) & O(n)
 
 */
 
+// Deletes a node with value = key from a Binary Search Tree (BST)
+// Uses the INORDER SUCCESSOR approach (smallest node in right subtree)
 var deleteNode = function (root, key) {
+  // Base case: if the subtree is empty, nothing to delete
   if (root == null) return root;
 
+  // If key is greater than current node's value,
+  // the node to delete must be in the RIGHT subtree
   if (root.val < key) {
     root.right = deleteNode(root.right, key);
-  } else if (root.val > key) {
-    root.left = deleteNode(root.left, key);
-  } else {
-    // when the node is equal to key
-    if (root.left == null && root.right == null) return null;
-
-    if (root.left == null) return root.right;
-    if (root.right == null) return root.left;
-
-    const lastNode = getLastLeftNode(root.right); // get the last left node from the right
-    root.val = lastNode.val; // replace the val
-    root.right = deleteNode(root.right, root.val); // delete the lastNode we found from the right tree
   }
 
+  // If key is smaller than current node's value,
+  // the node to delete must be in the LEFT subtree
+  else if (root.val > key) {
+    root.left = deleteNode(root.left, key);
+  }
+
+  // If root.val === key, we have FOUND the node to delete
+  else {
+    // CASE 1: Node is a LEAF (no children)
+    // Simply remove it by returning null
+    if (root.left == null && root.right == null) return null;
+
+    // CASE 2: Node has ONLY right child
+    // Replace node with its right child
+    if (root.left == null) return root.right;
+
+    // CASE 2: Node has ONLY left child
+    // Replace node with its left child
+    if (root.right == null) return root.left;
+
+    /*
+      CASE 3: Node has TWO children
+
+      Strategy (Inorder Successor):
+      - Find the SMALLEST node in the right subtree
+        (leftmost node of right subtree)
+      - Copy its value into the current node
+      - Delete that successor node from the right subtree
+
+      Example:
+
+      BEFORE deletion (delete key = 10):
+
+              10
+             /  \
+            5   15
+               / \
+              12 20
+
+      Step 1: Find inorder successor
+              → leftmost node of right subtree = 12
+
+      Step 2: Replace root value with successor value
+
+              12   ← value copied here
+             /  \
+            5   15
+               / \
+              12 20   ← duplicate still exists
+
+      Step 3: Delete the duplicate successor (12) from right subtree
+
+      AFTER deletion:
+
+              12
+             /  \
+            5   15
+                 \
+                  20
+
+      Why this works:
+      - Inorder successor is the smallest value greater than root
+      - Replacing value preserves BST ordering
+      - Deleting the successor avoids duplicates
+    */
+
+    // Find the inorder successor (smallest value in right subtree)
+    const lastNode = getLastLeftNode(root.right);
+
+    // Copy successor's value into current node
+    root.val = lastNode.val;
+
+    // Delete the successor node from the right subtree
+    root.right = deleteNode(root.right, root.val);
+  }
+
+  // Return the updated root of this subtree
   return root;
 };
 
+// Helper function to find the LEFTMOST node in a subtree
+// This corresponds to the MINIMUM value in that subtree
 const getLastLeftNode = (node) => {
+  // If there is no left child, this is the leftmost node
   if (node.left == null) {
     return node;
   }
 
+  // Keep moving left until the leftmost node is found
   return getLastLeftNode(node.left);
 };

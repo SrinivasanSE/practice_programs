@@ -77,7 +77,8 @@ O(n) & O(n)
 
 // We don't need to care about lower bound. When we construct the tree, we try to create left node first. 
 // If the condition fails (i.e. current number is greater than the parent node value), 
-// then we try to create the right node which automatically satisfies the condition, hence no lower bound is needed.
+// then we try to create the right node which automatically satisfies the condition, 
+// hence we will not ever place a element lesser than the root to the right, if it was lesser than the root, it would have been placed in the left
 
 var bstFromPreorder = function (preorder) {
     let i = 0
@@ -97,3 +98,35 @@ var bstFromPreorder = function (preorder) {
     return construct(Number.MAX_SAFE_INTEGER)
 
 };
+
+/*
+
+When building from preorder left to right:
+
+Once you start the right subtree,
+you will never see a value smaller than the root again
+
+So:
+
+The lower bound is implicitly handled
+
+You only need to prevent values greater than allowed.
+
+Look at this preorder:
+
+[8, 5, 1, 7, 10, 12]
+
+
+When you are building:
+
+Left subtree of 8 → all values < 8
+
+Once you hit 10, you cannot go back to smaller values
+
+So:
+
+Lower bound never needs checking
+
+Preorder order itself enforces it
+
+*/
