@@ -47,7 +47,7 @@ const fib = (n) => { // You start at the top (the original problem) and break it
 
 Better - Tabulation
 
-O(n) & O(1)
+O(n) & O(n)
 
 */
 
