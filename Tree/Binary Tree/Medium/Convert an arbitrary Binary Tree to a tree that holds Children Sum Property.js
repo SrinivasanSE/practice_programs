@@ -13,7 +13,7 @@ O(n) & O(H)
 class Solution {
     // Function to change the values of the nodes
     // based on the sum of its children's values.
-    changeTree(root) {
+    changeTree(root) { // post order traversal
         // Base case: If the current node
         // is null, return and do nothing.
         if (root === null) {

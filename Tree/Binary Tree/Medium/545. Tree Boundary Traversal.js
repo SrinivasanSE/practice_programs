@@ -18,7 +18,7 @@ const leftBoundary = (node, res) => {
     while (!isLeaf(curr)) {
 
         res.push(curr.data)
-        if (curr.left)
+        if (curr.left) // go to left first
             curr = curr.left
         else
             curr = curr.right
@@ -33,7 +33,7 @@ const rightBoundary = (node, res) => {
     let temp = []
     while (!isLeaf(curr)) {
         temp.push(curr.data)
-        if (curr.right)
+        if (curr.right) // go to right first
             curr = curr.right
         else
             curr = curr.left
@@ -67,7 +67,8 @@ class Solution {
         if (!isLeaf(root)) res.push(root.data)
         leftBoundary(root.left, res) // traverse the left nodes until the leaves node
         leaves(root, res) // collect the leaf nodes using inorder traversal
-        rightBoundary(root.right, res) // traverse the right side nodes until the leaves node, we need to store it in a temp list and move it back to the res
+        rightBoundary(root.right, res) // traverse the right side nodes until the leaves node, we need to store it in a temp list and move it back to the res 
+        // since the right boundary should be be traversed from bottom to top
 
         return res
     }

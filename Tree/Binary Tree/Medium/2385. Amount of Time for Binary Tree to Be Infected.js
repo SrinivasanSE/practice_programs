@@ -52,7 +52,7 @@ var amountOfTime = function (root, start) {
   if (root === null) return 0;
   const parents = new Map();
   let targetNode;
-  if (root.val === start) {
+  if (root.val === start) { // when the root is same as the given val, we don't need the parent mapping
     targetNode = root;
   } else {
     targetNode = findParents(root, start, parents, null);
@@ -72,7 +72,7 @@ var amountOfTime = function (root, start) {
   // Result stores the maximum time needed to infect all nodes
   let result = 0;
 
-  // DFS function traverses tree and returns either:
+  // Post order DFS function traverses tree and returns either:
   // - positive number: height of subtree if target not found in this subtree
   // - negative number: distance from current node to target if target found
   const DFS = function (node, start) {

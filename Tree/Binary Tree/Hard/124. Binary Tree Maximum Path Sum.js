@@ -10,7 +10,7 @@ O(n) & O(n)
 
 var maxPathSum = function (root) {
   let maxSum = -Infinity;
-  const findPathSum = (node) => {
+  const findPathSum = (node) => { // post order
     if (node == null) return 0;
 
     const left = Math.max(0, findPathSum(node.left)); // if the sum is negative, we should ignore that and take it as 0, since negative value will not increase the sum
@@ -24,4 +24,49 @@ var maxPathSum = function (root) {
   };
   findPathSum(root);
   return maxSum;
+};
+
+
+/*
+
+Iterative
+
+O(n) & O(n)
+
+*/
+
+var maxPathSum = function(root) {
+    let maxSum = -Infinity;
+
+    // Map to store max gain from each node
+    const gain = new Map();
+
+    // Stack for postorder traversal: [node, visited]
+    const stack = [[root, false]];
+
+    while (stack.length > 0) {
+        const [node, visited] = stack.pop();
+
+        if (node === null) continue;
+
+        if (!visited) {
+            // Postorder: left → right → node
+            stack.push([node, true]);
+            stack.push([node.right, false]);
+            stack.push([node.left, false]);
+        } else {
+            // Get gains from children (ignore negatives)
+            const leftGain = Math.max(0, gain.get(node.left) || 0);
+            const rightGain = Math.max(0, gain.get(node.right) || 0);
+
+            // Path passing through this node
+            const currentPathSum = node.val + leftGain + rightGain;
+            maxSum = Math.max(maxSum, currentPathSum);
+
+            // Gain to parent
+            gain.set(node, node.val + Math.max(leftGain, rightGain));
+        }
+    }
+
+    return maxSum;
 };

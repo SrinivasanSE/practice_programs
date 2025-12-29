@@ -44,6 +44,8 @@ var deserialize = function (data) {
   while (q.length > 0) {
     const node = q.shift();
 
+    // we are not checking for # and assigning null explicitly since by default it's already null while creating the node itself.
+
     if (data[i] != "#") {
       node.left = new TreeNode(+data[i]);
       q.push(node.left);

@@ -33,7 +33,9 @@ function topView(root) {
 
   // Start DFS traversal
   dfs(root, 0, 0, topNodes);
+
     // We can track min and max and then just run for loop from min to max, no need of sorting
+    
   // Collect nodes from the map sorted by horizontal distance
   const sortedKeys = Object.keys(topNodes)
     .map(Number)

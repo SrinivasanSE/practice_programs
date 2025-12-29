@@ -8,27 +8,86 @@ O(n) & O(n)
 
 */
 
+
+/*
+Example Tree (BEFORE flatten):
+
+        1
+       / \
+      2   5
+     / \   \
+    3   4   6
+
+Expected Tree (AFTER flatten):
+(All left pointers are null, right pointers form a linked list)
+
+1 → 2 → 3 → 4 → 5 → 6
+*/
+
 var flatten = function (root) {
-  // will move to right and make the node's right connect to the prev and left as null
+  // `prev` will point to the previously processed node
+  // in the flattened linked list.
+  // Initially null because no nodes are processed yet.
   let prev = null;
+
   const makeFlat = (root) => {
-    // right -> left -> root (reverse post order traversal)
+    // Base case:
+    // If the node is null, nothing to process
     if (root == null) {
       return;
     }
 
-    makeFlat(root.right); // move to right first
+    /*
+      We use REVERSE PREORDER traversal:
+      right → left → root
+
+      Why?
+      Because we want to build the linked list from the END backwards.
+
+      Processing order for the example tree:
+      6 → 5 → 4 → 3 → 2 → 1
+    */
+
+    // Step 1: Flatten the right subtree first
+    makeFlat(root.right);
+
+    // Step 2: Flatten the left subtree
     makeFlat(root.left);
 
-    root.right = prev;
-    root.left = null;
-    prev = root; // assign the prev
+    /*
+      Step 3: Rewire pointers
+
+      At this point, `prev` already points to the
+      flattened list of nodes that come AFTER `root`.
+
+      Example:
+      When root = 4
+      prev = 5 → 6
+
+      We do:
+      4.right = prev   → 4 → 5 → 6
+      4.left  = null
+    */
+
+    root.right = prev; // attach current node to the flattened list
+    root.left = null;  // left must be null for linked list
+
+    /*
+      Step 4: Move `prev` pointer
+
+      Now current node becomes the previous node
+      for its parent in recursion.
+    */
+    prev = root;
   };
 
+  // Start flattening from the root
   makeFlat(root);
 
+  // Return the root of the flattened tree
   return root;
 };
+
 
 /*
 
@@ -39,15 +98,30 @@ O(n) & O(n)
 */
 
 var flatten = function (root) {
+  // If the tree is empty, nothing to flatten
   if (root == null) return null;
-  let stk = [root],
-    curr;
 
+  // Stack to simulate preorder traversal (root → left → right)
+  let stk = [root],
+      curr;
+
+  // Continue until all nodes are processed
   while (stk.length > 0) {
+
+    // Pop the top node from the stack
     curr = stk.pop();
 
+    /*
+      IMPORTANT:
+      Push RIGHT child first, then LEFT child.
+
+      Why?
+      Stack is LIFO, so pushing right first ensures
+      that the left child is processed before the right child,
+      maintaining preorder traversal order.
+    */
+
     if (curr.right) {
-      // push right node first and then left, so that left node is on that top
       stk.push(curr.right);
     }
 
@@ -55,16 +129,24 @@ var flatten = function (root) {
       stk.push(curr.left);
     }
 
+    /*
+      After pushing children:
+      - The top of the stack is the next node in preorder traversal
+      - We link current node's right pointer to that node
+    */
     if (stk.length > 0) {
-      // link the right with the left node
       curr.right = stk[stk.length - 1];
     }
 
-    curr.left = null; // set the node's left as null
+    // Since we are flattening into a linked list,
+    // left pointer must always be null
+    curr.left = null;
   }
 
+  // Root now represents the head of the flattened linked list
   return root;
 };
+
 
 /*
 

@@ -97,7 +97,7 @@ var postorderTraversal = function (root) {
         // if the right is there and we did not visit it already, go to right
         current = peek.right;
       } else {
-        // if there is no right, process the node
+        // if there is no right or if it was already visited, process the node
         nodes.push(peek.val);
         lastVisited = stk.pop();
       }

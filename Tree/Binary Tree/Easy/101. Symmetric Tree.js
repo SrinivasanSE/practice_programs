@@ -21,7 +21,7 @@ var isSymmetric = function(root) {
         return left.val === right.val && isMirror(left.left, right.right) && isMirror(left.right, right.left) // check left and right node
     }
 
-    return isMirror(root.left, root.right)
+    return isMirror(root.left, root.right) // we are passing left and right
 };
 
 
