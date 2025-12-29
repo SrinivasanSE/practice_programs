@@ -15,7 +15,7 @@ class Solution {
     let count = 0;
     let res = 0;
     const inorder = (node) => {
-      // right -> root -> left (reverse inorder)
+      // right -> root -> left (reverse inorder for getting elements in desc order)
       if (node == null || count >= k) {
         return;
       }

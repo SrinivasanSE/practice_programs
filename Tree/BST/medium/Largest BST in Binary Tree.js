@@ -80,7 +80,8 @@ class Solution {
         ); // keep passing the min and max and size to the top, so the top nodes can check if the below children and including it are valid bst or not
       }
 
-      // if it's not a valid bst, we set [-inf, inf] and set the max of both size since this is not a valid bst, but the children could be a bst
+      // if it's not a valid bst, we set [-inf, inf] so that this tree won't be considered as valid bst anymore and set the max of both size 
+      // so that we can propagate the size to the top, but the children could be a bst
       return new NodeValue(
         Number.MIN_SAFE_INTEGER,
         Number.MAX_SAFE_INTEGER,
