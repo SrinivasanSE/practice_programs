@@ -29,7 +29,7 @@ var maxPathSum = function (root) {
 
 /*
 
-Iterative
+Iterative - Post order traversal
 
 O(n) & O(n)
 

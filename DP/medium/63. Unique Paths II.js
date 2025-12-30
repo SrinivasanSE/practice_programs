@@ -1,8 +1,6 @@
 // https://leetcode.com/problems/unique-paths-ii/description/
 
-
 // Same as 62, just need to handle for obstacles
-
 
 /*
 
@@ -12,32 +10,28 @@ O(2^(m*n)) & O(m - 1 + n - 1)
 
 */
 
-
 var uniquePathsWithObstacles = function (obstacleGrid) {
+  let m = obstacleGrid.length;
+  let n = obstacleGrid[0].length;
 
-    let m = obstacleGrid.length
-    let n = obstacleGrid[0].length
-
-    const findPaths = (i, j) => {
-
-        if (i < 0 || j < 0 || obstacleGrid[i][j] === 1) { // we can't use that path if there is a obstacle
-            return 0
-        }
-
-        if (i === 0 && j === 0) {
-            return 1
-        }
-
-
-        const left = findPaths(i, j - 1)
-        const up = findPaths(i - 1, j)
-
-        return left + up
+  const findPaths = (i, j) => {
+    if (i < 0 || j < 0 || obstacleGrid[i][j] === 1) {
+      // we can't use that path if there is a obstacle
+      return 0;
     }
 
-    return findPaths(m - 1, n - 1)
-};
+    if (i === 0 && j === 0) {
+      return 1;
+    }
 
+    const left = findPaths(i, j - 1);
+    const up = findPaths(i - 1, j);
+
+    return left + up;
+  };
+
+  return findPaths(m - 1, n - 1);
+};
 
 /*
 
@@ -47,36 +41,31 @@ O(n*m) & O((N-1)+(M-1)) + O(M*N)
 
 */
 
-
 var uniquePathsWithObstacles = function (obstacleGrid) {
+  let m = obstacleGrid.length;
+  let n = obstacleGrid[0].length;
 
-    let m = obstacleGrid.length
-    let n = obstacleGrid[0].length
+  const dp = Array.from({ length: m }, () => new Array(n).fill(-1));
 
-    const dp = Array.from({length: m}, () => new Array(n).fill(-1))
-
-    const findPaths = (i, j) => {
-
-        if (i < 0 || j < 0 || obstacleGrid[i][j] === 1) {
-            return 0
-        }
-
-        if (i === 0 && j === 0) {
-            return 1
-        }
-
-        if (dp[i][j] != -1) return dp[i][j]
-
-
-        const left = findPaths(i, j - 1)
-        const up = findPaths(i - 1, j)
-
-        return dp[i][j] = left + up
+  const findPaths = (i, j) => {
+    if (i < 0 || j < 0 || obstacleGrid[i][j] === 1) {
+      return 0;
     }
 
-    return findPaths(m - 1, n - 1)
-};
+    if (i === 0 && j === 0) {
+      return 1;
+    }
 
+    if (dp[i][j] != -1) return dp[i][j];
+
+    const left = findPaths(i, j - 1);
+    const up = findPaths(i - 1, j);
+
+    return (dp[i][j] = left + up);
+  };
+
+  return findPaths(m - 1, n - 1);
+};
 
 /*
 
@@ -86,46 +75,40 @@ O(n*m) & O(n*m)
 
 */
 
+var uniquePathsWithObstacles = function (obstacleGrid) {
+  const m = obstacleGrid.length;
+  const n = obstacleGrid[0].length;
+  let left, up;
+  const dp = Array.from({ length: m }, () => new Array(n));
 
-var uniquePathsWithObstacles = function(obstacleGrid) {
+  dp[0][0] = 1;
 
-    const m = obstacleGrid.length
-    const n = obstacleGrid[0].length
-    let left, up
-    const dp = Array.from({length: m}, () => new Array(n))
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (obstacleGrid[i][j] === 1) {
+        dp[i][j] = 0;
+        continue;
+      }
 
-    dp[0][0] = 1
+      if (i === 0 && j === 0) {
+        continue;
+      }
 
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
+      up = 0;
+      if (i > 0) {
+        up = dp[i - 1][j];
+      }
+      left = 0;
+      if (j > 0) {
+        left = dp[i][j - 1];
+      }
 
-            if (obstacleGrid[i][j] === 1)             {
-                dp[i][j] = 0
-                continue
-            }
-            
-            if (i === 0 && j === 0) {
-                continue
-            }
-
-            up = 0
-            if (i > 0) {
-                up = dp[i - 1][j]
-            }
-            left = 0
-            if (j > 0) {
-                left = dp[i][j - 1]
-            }
-
-            dp[i][j] = up + left 
-            
-        }
+      dp[i][j] = up + left;
     }
+  }
 
-    return dp[m - 1][n - 1]
-    
+  return dp[m - 1][n - 1];
 };
-
 
 /*
 
@@ -135,47 +118,34 @@ O(n*m) & O(n)
 
 */
 
+var uniquePathsWithObstacles = function (grid) {
+  const m = grid.length;
+  const n = grid[0].length;
 
-var uniquePathsWithObstacles = function(obstacleGrid) {
+  const dp = new Array(n).fill(1);
 
-    const m = obstacleGrid.length
-    const n = obstacleGrid[0].length
-    let left, up, last
-    const prev = new Array(n)
+  let up = 0,
+    left = 0;
 
-    prev[0] = 1
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] == 1) {
+        dp[j] = 0;
+        continue;
+      }
+      if (i == 0 && j == 0) continue;
+      up = 0;
+      if (i - 1 >= 0) {
+        up += dp[j];
+      }
+      left = 0;
+      if (j - 1 >= 0) {
+        left += dp[j - 1];
+      }
 
-    for (let i = 0; i < m; i++) {
-        last = 1
-        for (let j = 0; j < n; j++) {
-
-            if (obstacleGrid[i][j] === 1)             {
-                prev[j] = 0
-                last = 0
-                continue
-            }
-            
-            if (i === 0 && j === 0) {
-                
-                continue
-            }
-
-            
-            up = 0
-            if (i > 0) {
-                up = prev[j]
-            }
-            left = 0
-            if (j > 0) {
-                left = last
-            }
-
-            last = up + left 
-            prev[j] = last
-            
-        }
+      dp[j] = up + left;
     }
+  }
 
-    return prev[n - 1]
-    
+  return dp[n - 1];
 };

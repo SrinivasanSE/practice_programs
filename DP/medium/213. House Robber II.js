@@ -100,10 +100,10 @@ var rob = function(nums) {
         const dp = new Array(len).fill(-1)
         dp[0] = nums[start]
 
-        if (len > 1) dp[1] = dp[1] = Math.max(nums[start], nums[start + 1])
+        if (len > 1) dp[1] = Math.max(nums[start], nums[start + 1]) // use start index here
 
         for (let i = 2; i < len; i++) {
-            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[start + i])
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[start + i]) // use start index here
         }
 
         return dp[len - 1]
@@ -134,7 +134,7 @@ var rob = function(nums) {
     if (n === 1) return nums[0]
     const find = (start, end) => {
         let curr, prev1 = 0, prev2 = 0
-        for (let i = start; i <= end; i++) {
+        for (let i = start; i <= end; i++) { // iterate from start to end (inclusive)
             curr = Math.max(prev1, prev2 + nums[i])
             prev2 = prev1
             prev1 = curr
