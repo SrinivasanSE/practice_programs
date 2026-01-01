@@ -1,5 +1,7 @@
 // https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1
 
+//TODO - understand why this works
+
 
 /*
 

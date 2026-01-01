@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/target-sum/description/
 
+// TODO: can be also implemented using assigning + and - at each step
+
 /*
 
 Let’s denote:
@@ -28,5 +30,3 @@ So, we just need to count the number of subsets with sum = (totalSum + k)/2.
 
 // Can be solved using DP/medium/Count Partitions with Given Difference.js
 
-
-// TODO: can be also implemented using assigning + and - at each step
