@@ -36,7 +36,7 @@ var shortestCommonSupersequence = function (str1, str2) {
             i--
             j--
         } else if (dp[i - 1][j] > dp[i][j - 1]) { // if the upper row has the max value, before moving, add the char at that position
-            res = str1[i - 1] + res
+            res = str1[i - 1] + res // should use i - 1 since 1 based indexing
             i--
         } else {
             res = str2[j - 1] + res // similarly here

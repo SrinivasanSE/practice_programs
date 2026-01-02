@@ -6,26 +6,26 @@ using the same logic as LCS
 
 */
 
-
-var minDistance = function (word1, word2) { // same for Minimum number of deletions and insertions problem
-    const n1 = word1.length, n2 = word2.length
-    let dp = new Array(n2 + 1).fill(0)
-    let prev, temp
-    for (let i = 1; i <= n1; i++) {
-        prev = 0
-        for (let j = 1; j <= n2; j++) {
-            temp = dp[j]
-            if (word1[i - 1] === word2[j - 1]) {
-                dp[j] = 1 + prev
-            } else {
-                dp[j] = Math.max(dp[j], dp[j - 1])
-            }
-            prev = temp
-        }
+var minDistance = function (word1, word2) {
+  // same for Minimum number of deletions and insertions problem
+  const n1 = word1.length,
+    n2 = word2.length;
+  let dp = new Array(n2 + 1).fill(0);
+  let prev, temp;
+  for (let i = 1; i <= n1; i++) {
+    prev = 0;
+    for (let j = 1; j <= n2; j++) {
+      temp = dp[j];
+      if (word1[i - 1] === word2[j - 1]) {
+        dp[j] = 1 + prev;
+      } else {
+        dp[j] = Math.max(dp[j], dp[j - 1]);
+      }
+      prev = temp;
     }
-    return n1 + n2 - dp[n2] * 2 // this is the main logic
+  }
+  return n1 + n2 - dp[n2] * 2; // this is the main logic
 };
-
 
 /*
 
@@ -43,6 +43,8 @@ The LCS represents all the characters that are already in the correct order in b
 We do not need to touch those characters.
 
 Everything outside the LCS must be either deleted or inserted.
+
+The max operations will be deleting all the chars in the s1 and inserting all the chars from s2
 
 Let:
 
