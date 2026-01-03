@@ -8,7 +8,7 @@ var findNumberOfLIS = function (nums) {
     if (n === 0) return 0; // edge case: empty array
 
     // dp[i] = length of the Longest Increasing Subsequence (LIS) ending at index i
-    // count[i] = number of LIS of length dp[i] that end at index i
+    // count[i] = number of ways to reach dp[i] ending at i
     const dp = new Array(n).fill(1);
     const count = new Array(n).fill(1);
 
