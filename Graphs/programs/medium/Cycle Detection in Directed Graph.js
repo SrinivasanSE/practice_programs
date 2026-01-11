@@ -84,73 +84,71 @@ O(V + E) & O(V)
 
 class Solution {
   isCyclic(V, edges) {
-    // -------------------------------
-    // STEP 1: Build adjacency list
-    // -------------------------------
-
-    // adj[u] contains all nodes v such that u -> v
+    // ----------------------------------------
+    // Build adjacency list for directed graph
+    // adj[u] contains all nodes v such that u → v
+    // ----------------------------------------
     const adj = Array.from({ length: V }, () => []);
 
-    for (let [u, v] of edges) {
-      adj[u].push(v); // directed edge u → v
-    }
+    // ----------------------------------------
+    // vis states:
+    // 0 → unvisited
+    // 1 → currently visiting (in DFS recursion stack)
+    // 2 → fully processed (DFS completed, safe node)
+    // ----------------------------------------
+    const vis = new Array(V).fill(0);
 
-    // -------------------------------
-    // STEP 2: Single array for visit state
-    // -------------------------------
-
-    // state[i] meanings:
-    // 0 → not visited
-    // 1 → visited and in current DFS path
-    // 2 → visited and fully processed
-    const state = new Array(V).fill(0);
-
-    // -------------------------------
-    // STEP 3: DFS for cycle detection
-    // -------------------------------
+    // DFS function returns:
+    // true  → cycle detected
+    // false → no cycle in this path
     const dfs = (node) => {
-      // Mark node as "in current DFS path"
-      state[node] = 1;
+      // ----------------------------------------
+      // If node is already in the current DFS path
+      // → back edge found → cycle exists
+      // ----------------------------------------
+      if (vis[node] == 1) return true;
+
+      // ----------------------------------------
+      // If node is already fully processed
+      // → this node is already verified as safe
+      // → no need to explore again
+      // ----------------------------------------
+      if (vis[node] == 2) return false;
+
+      // Mark node as currently visiting
+      vis[node] = 1;
 
       // Explore all outgoing edges
       for (let nei of adj[node]) {
-        // Case 1: Neighbor not visited yet
-        if (state[nei] === 0) {
-          if (dfs(nei)) return true;
-        }
-
-        // Case 2: Neighbor is already in current path
-        // Found a back edge → cycle detected
-        else if (state[nei] === 1) {
-          return true;
-        }
+        if (dfs(nei)) return true;
       }
 
-      // Backtracking:
-      // Mark node as fully processed (remove from path)
-      state[node] = 2;
+      // ----------------------------------------
+      // All neighbors explored without cycle
+      // Mark node as fully processed
+      // ----------------------------------------
+      vis[node] = 2;
 
-      // No cycle found from this node
       return false;
     };
 
-    // -------------------------------
-    // STEP 4: Run DFS for all components
-    // -------------------------------
-    for (let i = 0; i < V; i++) {
-      if (state[i] === 0) {
-        if (dfs(i)) return true;
-      }
+    // Build graph from edge list
+    for (let [u, v] of edges) {
+      adj[u].push(v);
     }
 
-    // No cycle found in the graph
+    // Run DFS for all nodes (graph may be disconnected)
+    for (let i = 0; i < V; i++) {
+      if (dfs(i)) return true;
+    }
+
     return false;
   }
 }
 
 /*
 
-BFS - Topo sort
+BFS - Topo sort algo
 
 O(V + E) & O(V)
 
