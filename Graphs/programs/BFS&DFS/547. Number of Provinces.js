@@ -21,8 +21,8 @@ var findCircleNum = function (isConnected) {
   const visited = new Array(v).fill(false);
   const adj = Array.from({ length: v }, () => []);
 
-  for (let i = 0; i < isConnected.length; i++) {
-    for (let j = 0; j < isConnected.length; j++) {
+  for (let i = 0; i < v; i++) {
+    for (let j = 0; j < v; j++) {
       if (isConnected[i][j] == 1 && i != j) {
         adj[i].push(j);
         adj[j].push(i);
@@ -96,8 +96,8 @@ var findCircleNum = function (isConnected) {
   const visited = new Array(v).fill(false);
   const adj = Array.from({ length: v }, () => []);
 
-  for (let i = 0; i < isConnected.length; i++) {
-    for (let j = 0; j < isConnected.length; j++) {
+  for (let i = 0; i < v; i++) {
+    for (let j = 0; j < v; j++) {
       if (isConnected[i][j] == 1 && i != j) {
         adj[i].push(j);
         adj[j].push(i);

@@ -1,5 +1,12 @@
 // https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
 
+
+/*
+
+O(V + E) & O(V)
+
+*/
+
 class Solution {
   dfs(adj) {
     // code here
