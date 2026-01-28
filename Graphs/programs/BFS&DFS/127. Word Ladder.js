@@ -52,7 +52,7 @@ var ladderLength = function (beginWord, endWord, wordList) {
       for (let j = 0; j < 26; j++) {
         // Generate a new word by replacing one character
         word =
-          curr.slice(0, i) + String.fromCharCode(97 + j) + curr.slice(i + 1, n);
+          curr.slice(0, i) + String.fromCharCode(97 + j) + curr.slice(i + 1);
 
         // If the generated word exists in the dictionary
         if (set.has(word)) {

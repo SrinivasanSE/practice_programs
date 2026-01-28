@@ -15,6 +15,8 @@ A graph is bipartite if:
 We can divide all nodes into two groups (colors) such that
 no two adjacent nodes have the same color.
 
+If the graph has odd length cycle, then it can't be bipartite
+
 */
 
 const isCheck = (node, color, graph) => {
