@@ -80,7 +80,7 @@ const detectCycle = (node, parent, vis, adj) => {
     // continue DFS deeper
     if (!vis[n]) {
       // Pass current node as parent
-      if (detectCycle(n, node, vis, adj) == true) {
+      if (detectCycle(n, node, vis, adj)) {
         return true; // cycle found in DFS subtree
       }
     }
@@ -116,7 +116,7 @@ class Solution {
     for (let i = 0; i < V; i++) {
       if (!vis[i]) {
         // Start DFS from unvisited node
-        if (detectCycle(i, -1, vis, adj) == true) {
+        if (detectCycle(i, -1, vis, adj)) {
           return true; // cycle found
         }
       }
