@@ -165,78 +165,102 @@ O(E log E) & O(V)
 
 class Solution {
   spanningTree(V, edges) {
+
     /*
-        STEP 1: Sort edges by weight (ascending)
+      STEP 1: Sort all edges by weight (ascending)
 
-        Example:
-        edges = [
-          [0,1,10],
-          [0,2,6],
-          [0,3,5],
-          [1,3,15],
-          [2,3,4]
-        ]
+      Kruskal's idea:
+      → Always pick the smallest edge
+      → But NEVER form a cycle
 
-        After sorting:
-        [
-          [2,3,4],
-          [0,3,5],
-          [0,2,6],
-          [0,1,10],
-          [1,3,15]
-        ]
-        */
+      Example before sorting:
+      [u, v, w]
+      [
+        [0,1,10],
+        [0,2,6],
+        [0,3,5],
+        [1,3,15],
+        [2,3,4]
+      ]
+
+      After sorting:
+      [
+        [2,3,4],
+        [0,3,5],
+        [0,2,6],
+        [0,1,10],
+        [1,3,15]
+      ]
+    */
     edges.sort((a, b) => a[2] - b[2]);
 
-    let sum = 0;
+    // Total weight of MST
+    let mstWeight = 0;
+
+    // To store MST edges (for printing / returning)
+    const mstEdges = [];
 
     /*
-        STEP 2: Initialize Disjoint Set
-        Initially, every node is its own parent
+      STEP 2: Initialize Disjoint Set (Union-Find)
 
-        Sets:
-        {0}, {1}, {2}, {3}, ..., {V-1}
-        */
+      Initially:
+      Each vertex is its own parent
+      {0}, {1}, {2}, ..., {V-1}
+    */
     const ds = new DisJointSet(V);
 
     /*
-        STEP 3: Process edges in increasing order
-        */
+      STEP 3: Process edges in increasing order
+    */
     for (let [u, v, w] of edges) {
+
       /*
-            Check if u and v belong to different components
+        Check if u and v belong to DIFFERENT components
 
-            Example:
-            findPar(2) = 2
-            findPar(3) = 3
-            → Different → NO cycle
-            */
-      if (ds.findPar(u) != ds.findPar(v)) {
-        /*
-                Edge can be safely added to MST
-                */
-        sum += w;
+        If they do:
+        - Adding this edge will NOT form a cycle
+        - Safe to include in MST
+      */
+      if (ds.findPar(u) !== ds.findPar(v)) {
+
+        // Add edge weight to MST total
+        mstWeight += w;
+
+        // Store this edge as part of MST
+        mstEdges.push([u, v, w]);
 
         /*
-                Merge the two components
-                Example:
-                unionBySize(2,3)
-                Now set becomes {2,3}
-                */
+          Merge the two components
+          Example:
+          unionBySize(2,3)
+          {2} and {3} → {2,3}
+        */
         ds.unionBySize(u, v);
+
+        /*
+          Optimization:
+          MST has exactly (V - 1) edges
+          So we can stop early
+        */
+        if (mstEdges.length === V - 1) break;
       }
 
       /*
-            Else:
-            u and v are already connected
-            Adding this edge would form a CYCLE → SKIP
-            */
+        Else:
+        u and v already belong to same component
+        → Adding edge would form a cycle
+        → SKIP
+      */
     }
 
     /*
-        At the end, sum contains the total weight
-        of the Minimum Spanning Tree
-        */
-    return sum;
+      Final result:
+      - mstWeight → total weight of MST
+      - mstEdges  → actual MST edges
+    */
+    return {
+      weight: mstWeight,
+      mst: mstEdges
+    };
   }
 }

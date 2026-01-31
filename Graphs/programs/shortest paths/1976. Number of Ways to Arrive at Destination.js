@@ -60,8 +60,7 @@ var countPaths = function (n, roads) {
         ways[nei] = ways[node]; // Inherit number of paths
         pq.enqueue([newDistance, nei]);
       } else if (newDistance === dist[nei]) {
-
-      /*
+        /*
             Case 2: Found ANOTHER path with SAME SHORTEST distance
             ------------------------------------------------------
             Example:

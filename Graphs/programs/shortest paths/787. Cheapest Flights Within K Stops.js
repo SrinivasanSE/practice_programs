@@ -122,6 +122,7 @@ var findCheapestPrice = function (n, flights, src, dst, k) {
   const pq = new PriorityQueue((a, b) => a[0] - b[0]);
 
   // dist[node][stops] = minimum cost to reach 'node' using 'stops' edges
+  // “We track flights, not stops. Since k stops allow k+1 flights, we must allow stops up to k+1 and store them in a k+2 sized DP.”
   const dist = Array.from({ length: n }, () => new Array(k + 2).fill(1e9));
 
   // Start from source

@@ -86,7 +86,7 @@ class Solution {
 
 /*
 
-BFS
+BFS - NO relaxation needed, we can use dist arr as vis arr
 
 O(10^5) & O(10^5)
 

@@ -47,17 +47,15 @@ class Solution {
     // Standard BFS traversal
     // ----------------------------------------------------
     while (q.length > 0) {
-
       // Remove front element of queue
       const curr = q.shift();
 
       // Explore all neighbors of current node
       for (let nei of adj[curr]) {
-
         // If neighbor is NOT visited yet
         if (dist[nei] === -1) {
-
-          // Distance of neighbor = distance of current + 1
+          // Distance of neighbor = di
+          // stance of current + 1
           dist[nei] = dist[curr] + 1;
 
           // Push neighbor into queue for further exploration
@@ -74,4 +72,3 @@ class Solution {
     return dist;
   }
 }
-

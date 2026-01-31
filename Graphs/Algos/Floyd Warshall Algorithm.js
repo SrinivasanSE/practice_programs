@@ -1,6 +1,5 @@
 // https://www.geeksforgeeks.org/dsa/floyd-warshall-algorithm-dp-16/
 
-
 /*
 
 Floyd–Warshall is an All-Pairs Shortest Path algorithm.
@@ -36,91 +35,87 @@ dist[i][j] = min(
 
     */
 
-
 // O(V^3) & O(V^2)
 
-
 function floydWarshall(n, edges) {
-    const INF = 1e9;
+  const INF = 1e9;
 
-    // Step 1: Initialize distance matrix
-    const dist = Array.from({ length: n }, () =>
-        Array(n).fill(INF)
-    );
+  // Step 1: Initialize distance matrix
+  const dist = Array.from({ length: n }, () => Array(n).fill(INF));
 
-    // Distance to self = 0
-    for (let i = 0; i < n; i++) dist[i][i] = 0;
+  // Distance to self = 0
+  for (let i = 0; i < n; i++) dist[i][i] = 0;
 
-    // Fill initial edges
-    for (let [u, v, w] of edges) { // there could be multiple edges from u to v
-        dist[u][v] = Math.min(dist[u][v], w);
-    }
+  // Fill initial edges
+  for (let [u, v, w] of edges) {
+    // there could be multiple edges from u to v
+    dist[u][v] = Math.min(dist[u][v], w);
+  }
 
-    // Step 2: Main DP
-    for (let via = 0; via < n; via++) {
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
-                if (dist[i][via] + dist[via][j] < dist[i][j]) {
-                    dist[i][j] = dist[i][via] + dist[via][j];
-                }
-            }
-        }
-    }
-
-    // Negative cycle detection
+  // Step 2: Main DP
+  for (let via = 0; via < n; via++) {
     for (let i = 0; i < n; i++) {
-        if (dist[i][i] < 0) {
-            console.log("Negative cycle exists");
+      for (let j = 0; j < n; j++) {
+        if (dist[i][via] + dist[via][j] < dist[i][j]) {
+          dist[i][j] = dist[i][via] + dist[via][j];
         }
+      }
     }
+  }
 
-    return dist;
+  // Negative cycle detection
+  for (let i = 0; i < n; i++) {
+    if (dist[i][i] < 0) {
+      console.log("Negative cycle exists");
+    }
+  }
+
+  return dist;
 }
 
-
 function floydWarshallWithPath(n, edges) {
-    const INF = 1e15;
-    // A very large number representing "no path"
-    // We use this instead of Infinity to avoid overflow in additions
+  const INF = 1e15;
+  // A very large number representing "no path"
+  // We use this instead of Infinity to avoid overflow in additions
 
-    // dist[i][j] = shortest distance from node i to node j
-    // Initially, we assume no node can reach any other node
-    const dist = Array.from({ length: n }, () => Array(n).fill(INF));
+  // dist[i][j] = shortest distance from node i to node j
+  // Initially, we assume no node can reach any other node
+  const dist = Array.from({ length: n }, () => Array(n).fill(INF));
 
-    // next[i][j] = the FIRST node you should go to
-    // when traveling from i to j along the shortest path
-    //
-    // Example:
-    // If shortest path from 0 → 3 is: 0 → 1 → 2 → 3
-    // then next[0][3] = 1
-    const next = Array.from({ length: n }, () => Array(n).fill(null));
+  // next[i][j] = the FIRST node you should go to
+  // when traveling from i to j along the shortest path
+  //
+  // Example:
+  // If shortest path from 0 → 3 is: 0 → 1 → 2 → 3
+  // then next[0][3] = 1
+  const next = Array.from({ length: n }, () => Array(n).fill(null));
 
-    // ---------------- INITIALIZATION ----------------
+  // ---------------- INITIALIZATION ----------------
 
-    for (let i = 0; i < n; i++) {
-        // Distance from a node to itself is always 0
-        // (staying in the same place costs nothing)
-        dist[i][i] = 0;
+  for (let i = 0; i < n; i++) {
+    // Distance from a node to itself is always 0
+    // (staying in the same place costs nothing)
+    dist[i][i] = 0;
 
-        // To go from i to i, the next node is i itself
-        next[i][i] = i;
+    // To go from i to i, the next node is i itself
+    next[i][i] = i;
+  }
+
+  // ---------------- ADD DIRECT EDGES ----------------
+
+  for (let [u, v, w] of edges) {
+    // If multiple edges exist between u and v,
+    // we keep the one with the smallest weight
+    if (w < dist[u][v]) {
+      dist[u][v] = w;
+
+      // If going directly from u → v,
+      // the first step from u to v is v itself
+      next[u][v] = v;
     }
+  }
 
-    // ---------------- ADD DIRECT EDGES ----------------
-
-    for (let [u, v, w] of edges) {
-        // If multiple edges exist between u and v,
-        // we keep the one with the smallest weight
-        if (w < dist[u][v]) {
-            dist[u][v] = w;
-
-            // If going directly from u → v,
-            // the first step from u to v is v itself
-            next[u][v] = v;
-        }
-    }
-
-    /*
+  /*
     Example after this step:
     Edge: 0 → 1 (3)
 
@@ -131,27 +126,25 @@ function floydWarshallWithPath(n, edges) {
     To go from 0 to 1, go directly to 1
     */
 
-    // ---------------- FLOYD–WARSHALL ----------------
-    // Try using every node as an intermediate ("via")
+  // ---------------- FLOYD–WARSHALL ----------------
+  // Try using every node as an intermediate ("via")
 
-    for (let via = 0; via < n; via++) {
-        // Try all possible source nodes
-        for (let i = 0; i < n; i++) {
-            // Try all possible destination nodes
-            for (let j = 0; j < n; j++) {
-
-                /*
+  for (let via = 0; via < n; via++) {
+    // Try all possible source nodes
+    for (let i = 0; i < n; i++) {
+      // Try all possible destination nodes
+      for (let j = 0; j < n; j++) {
+        /*
                 If going from i → via → j is shorter than
                 the currently known path i → j,
                 then update it.
                 */
 
-                if (dist[i][via] + dist[via][j] < dist[i][j]) {
+        if (dist[i][via] + dist[via][j] < dist[i][j]) {
+          // Update shortest distance
+          dist[i][j] = dist[i][via] + dist[via][j];
 
-                    // Update shortest distance
-                    dist[i][j] = dist[i][via] + dist[via][j];
-
-                    /*
+          /*
                     VERY IMPORTANT LINE 👇
 
                     We do NOT write:
@@ -168,9 +161,9 @@ function floydWarshallWithPath(n, edges) {
                     is the same as the first step from i → via
                     */
 
-                    next[i][j] = next[i][via];
+          next[i][j] = next[i][via];
 
-                    /*
+          /*
                     Example:
                     Suppose:
                         i = 0, via = 1, j = 3
@@ -184,30 +177,27 @@ function floydWarshallWithPath(n, edges) {
                     Meaning:
                         To go from 0 to 3, first go to 1
                     */
-                }
-            }
         }
+      }
     }
+  }
 
-
-    // Return both matrices:
-    // dist → shortest distances
-    // next → information needed to print paths
-    return { dist, next };
+  // Return both matrices:
+  // dist → shortest distances
+  // next → information needed to print paths
+  return { dist, next };
 }
 
-
 function getPath(u, v, next) {
+  // This array will store the final path
+  // We always start the path from the source node `u`
+  //
+  // Example:
+  // If we want path from 0 → 3
+  // path = [0]
+  const path = [u];
 
-    // This array will store the final path
-    // We always start the path from the source node `u`
-    //
-    // Example:
-    // If we want path from 0 → 3
-    // path = [0]
-    const path = [u];
-
-    /*
+  /*
     We keep moving forward until we reach the destination `v`.
 
     IMPORTANT:
@@ -221,9 +211,8 @@ function getPath(u, v, next) {
     - We always follow a valid edge
     */
 
-    while (u !== v) {
-
-        /*
+  while (u !== v) {
+    /*
         Move to the next node on the shortest path from u → v
 
         Example:
@@ -241,9 +230,9 @@ function getPath(u, v, next) {
             u = 2 → next[2][3] = 3
         */
 
-        u = next[u][v];
+    u = next[u][v];
 
-        /*
+    /*
         Add this node to the path
 
         After each iteration, the path grows:
@@ -258,10 +247,10 @@ function getPath(u, v, next) {
             path = [0, 1, 2, 3]
         */
 
-        path.push(u);
-    }
+    path.push(u);
+  }
 
-    // When u === v, we have reached the destination
-    // `path` now contains the full shortest path
-    return path;
+  // When u === v, we have reached the destination
+  // `path` now contains the full shortest path
+  return path;
 }

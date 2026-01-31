@@ -24,14 +24,10 @@ O(n^2) & O(n)
 
 */
 
-/**
- * @param {number[][]} stones
- * @return {number}
- */
 var removeStones = function (stones) {
-    const n = stones.length;
+  const n = stones.length;
 
-    /*
+  /*
     ======================================================
     INTUITION (HIGH LEVEL)
     ======================================================
@@ -57,10 +53,10 @@ var removeStones = function (stones) {
     ======================================================
     */
 
-    // visited[i] = 1 → stone i already visited in DFS
-    const vis = new Array(n).fill(0);
+  // visited[i] = 1 → stone i already visited in DFS
+  const vis = new Array(n).fill(0);
 
-    /*
+  /*
     ======================================================
     STEP 1: BUILD GRAPH (ADJACENCY LIST)
     ======================================================
@@ -86,24 +82,20 @@ var removeStones = function (stones) {
         3: []  (isolated stone)
     */
 
-    const adj = Array.from({ length: n }, () => []);
+  const adj = Array.from({ length: n }, () => []);
 
-    // Compare every pair of stones
-    for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
-
-            // If same row OR same column → connect them
-            if (
-                stones[i][0] === stones[j][0] ||
-                stones[i][1] === stones[j][1]
-            ) {
-                adj[i].push(j);
-                adj[j].push(i);
-            }
-        }
+  // Compare every pair of stones
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      // If same row OR same column → connect them
+      if (stones[i][0] === stones[j][0] || stones[i][1] === stones[j][1]) {
+        adj[i].push(j);
+        adj[j].push(i);
+      }
     }
+  }
 
-    /*
+  /*
     ======================================================
     STEP 2: DFS TO MARK A CONNECTED COMPONENT
     ======================================================
@@ -117,17 +109,17 @@ var removeStones = function (stones) {
         visits 0 → 1 → 2
     */
 
-    const dfs = (node) => {
-        vis[node] = 1;
+  const dfs = (node) => {
+    vis[node] = 1;
 
-        for (let nei of adj[node]) {
-            if (!vis[nei]) {
-                dfs(nei);
-            }
-        }
-    };
+    for (let nei of adj[node]) {
+      if (!vis[nei]) {
+        dfs(nei);
+      }
+    }
+  };
 
-    /*
+  /*
     ======================================================
     STEP 3: COUNT CONNECTED COMPONENTS
     ======================================================
@@ -147,16 +139,16 @@ var removeStones = function (stones) {
       components = 2
     */
 
-    let components = 0;
+  let components = 0;
 
-    for (let i = 0; i < n; i++) {
-        if (!vis[i]) {
-            components++;   // found a new component
-            dfs(i);         // mark all stones in this component
-        }
+  for (let i = 0; i < n; i++) {
+    if (!vis[i]) {
+      components++; // found a new component
+      dfs(i); // mark all stones in this component
     }
+  }
 
-    /*
+  /*
     ======================================================
     STEP 4: FINAL ANSW
     ======================================================
@@ -174,9 +166,8 @@ var removeStones = function (stones) {
       answer = 4 - 2 = 2
     */
 
-    return n - components;
+  return n - components;
 };
-
 
 /*
 
@@ -348,8 +339,6 @@ var removeStones = function (stones) {
 
   return n - components;
 };
-
-
 
 /*
 
