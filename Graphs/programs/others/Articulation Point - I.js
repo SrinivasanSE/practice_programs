@@ -14,6 +14,7 @@ class Solution {
     const vis = new Array(V).fill(0); // visited array
     const time = new Array(V); // discovery time
     const low = new Array(V); // lowest reachable time
+    // mark[] is needed to record articulation points that may be discovered multiple times during DFS, without duplicating them and without prematurely returning results.
     const mark = new Array(V).fill(0); // mark articulation points
 
     let timer = 0;

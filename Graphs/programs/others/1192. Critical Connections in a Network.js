@@ -150,7 +150,7 @@ var criticalConnections = function (n, connections) {
    * So we run DFS from every unvisited node.
    */
   for (let i = 0; i < n; i++) {
-    if (vis[i] === 0) {
+    if (!vis[i]) {
       dfs(i, -1);
     }
   }

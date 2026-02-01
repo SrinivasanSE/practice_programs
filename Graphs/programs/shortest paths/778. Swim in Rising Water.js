@@ -28,68 +28,55 @@ SC - O(n^2)
 
 */
 
+var swimInWater = function (grid) {
+  const n = grid.length;
 
-var swimInWater = function(grid) {
+  // Min-heap priority queue
+  // Each element: [maxHeightSoFar, row, col]
+  const pq = new PriorityQueue((a, b) => a[0] - b[0]);
 
-    const n = grid.length;
+  // Visited matrix to avoid revisiting cells
+  const vis = Array.from({ length: n }, () => new Array(n).fill(0));
 
-    // Min-heap priority queue
-    // Each element: [maxHeightSoFar, row, col]
-    const pq = new PriorityQueue((a, b) => a[0] - b[0]);
+  // Start from top-left
+  vis[0][0] = 1;
+  pq.enqueue([grid[0][0], 0, 0]);
 
-    // Visited matrix to avoid revisiting cells
-    const vis = Array.from({ length: n }, () => new Array(n).fill(0));
+  // 4-directional movement
+  const dir = [
+    [-1, 0], // up
+    [0, 1], // right
+    [1, 0], // down
+    [0, -1], // left
+  ];
 
-    // Start from top-left
-    vis[0][0] = 1;
-    pq.enqueue([grid[0][0], 0, 0]);
+  while (!pq.isEmpty()) {
+    // Extract cell with minimum maxHeight so far
+    const [maxHeight, row, col] = pq.dequeue();
 
-    // 4-directional movement
-    const dir = [
-        [-1, 0], // up
-        [0, 1],  // right
-        [1, 0],  // down
-        [0, -1]  // left
-    ];
-
-    while (!pq.isEmpty()) {
-
-        // Extract cell with minimum maxHeight so far
-        const [maxHeight, row, col] = pq.dequeue();
-
-        // If destination reached, this is the minimum possible time
-        if (row === n - 1 && col === n - 1) {
-            return maxHeight;
-        }
-
-        // Explore neighbors
-        for (let [dr, dc] of dir) {
-            const nRow = row + dr;
-            const nCol = col + dc;
-
-            // Valid and unvisited neighbor
-            if (
-                nRow >= 0 && nRow < n &&
-                nCol >= 0 && nCol < n &&
-                !vis[nRow][nCol]
-            ) {
-
-                // Time needed to reach this neighbor
-                const newMaxHeight = Math.max(
-                    maxHeight,
-                    grid[nRow][nCol]
-                );
-
-                pq.enqueue([newMaxHeight, nRow, nCol]);
-                vis[nRow][nCol] = 1;
-            }
-        }
+    // If destination reached, this is the minimum possible time
+    if (row === n - 1 && col === n - 1) {
+      return maxHeight;
     }
 
-    return -1; // should never happen
+    // Explore neighbors
+    for (let [dr, dc] of dir) {
+      const nRow = row + dr;
+      const nCol = col + dc;
+
+      // Valid and unvisited neighbor
+      if (nRow >= 0 && nRow < n && nCol >= 0 && nCol < n && !vis[nRow][nCol]) {
+        // Time needed to reach this neighbor
+        const newMaxHeight = Math.max(maxHeight, grid[nRow][nCol]);
+
+        pq.enqueue([newMaxHeight, nRow, nCol]);
+        vis[nRow][nCol] = 1;
+      }
+    }
+  }
+
+  return -1; // should never happen
 };
-
-
 
 /*
 
@@ -98,7 +85,6 @@ DFS + BS
 O(n^2logn) & O(n^2)
 
 */
-
 
 /*
 
@@ -137,70 +123,76 @@ That’s exactly what binary search finds.
 
 */
 
+var swimInWater = function (grid) {
+  const n = grid.length;
 
-var swimInWater = function(grid) {
-    const n = grid.length;
+  // 4-directional movement
+  const dirs = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ];
 
-    // 4-directional movement
-    const dirs = [[1,0], [-1,0], [0,1], [0,-1]];
+  // Check if destination is reachable when water level = t
+  function canReach(t) {
+    // Track visited cells to avoid infinite loops
+    const visited = Array.from({ length: n }, () => Array(n).fill(false));
 
-    // Check if destination is reachable when water level = t
-    function canReach(t) {
-        // Track visited cells to avoid infinite loops
-        const visited = Array.from({ length: n }, () => Array(n).fill(false));
+    function dfs(x, y) {
+      // If we reached bottom-right, path exists
+      if (x === n - 1 && y === n - 1) return true;
 
-        function dfs(x, y) {
-            // If we reached bottom-right, path exists
-            if (x === n - 1 && y === n - 1) return true;
+      visited[x][y] = true;
 
-            visited[x][y] = true;
+      // Try moving in all 4 directions
+      for (const [dx, dy] of dirs) {
+        const nx = x + dx,
+          ny = y + dy;
 
-            // Try moving in all 4 directions
-            for (const [dx, dy] of dirs) {
-                const nx = x + dx, ny = y + dy;
-
-                // Conditions:
-                // 1. Inside grid
-                // 2. Not visited
-                // 3. Cell height <= water level (important!)
-                if (
-                    nx >= 0 && ny >= 0 && nx < n && ny < n &&
-                    !visited[nx][ny] &&
-                    grid[nx][ny] <= t
-                ) {
-                    if (dfs(nx, ny)) return true;
-                }
-            }
-            return false;
+        // Conditions:
+        // 1. Inside grid
+        // 2. Not visited
+        // 3. Cell height <= water level (important!)
+        if (
+          nx >= 0 &&
+          ny >= 0 &&
+          nx < n &&
+          ny < n &&
+          !visited[nx][ny] &&
+          grid[nx][ny] <= t
+        ) {
+          if (dfs(nx, ny)) return true;
         }
-
-        // You must be able to stand on the start cell
-        return grid[0][0] <= t && dfs(0, 0);
+      }
+      return false;
     }
 
-    // Minimum possible time must allow start & end cells
-    let left = Math.max(grid[0][0], grid[n-1][n-1]);
+    // You must be able to stand on the start cell
+    return dfs(0, 0);
+  }
 
-    // Maximum height in grid is n*n - 1
-    let right = n * n - 1;
+  // Minimum possible time must allow start & end cells
+  let left = Math.max(grid[0][0], grid[n - 1][n - 1]);
 
-    // Binary search for minimum valid time
-    while (left < right) {
-        const mid = Math.floor((left + right) / 2);
+  // Maximum height in grid is n*n - 1
+  let right = n * n - 1;
 
-        if (canReach(mid)) {
-            // Path exists → try smaller time
-            right = mid;
-        } else {
-            // Path doesn't exist → need more water
-            left = mid + 1;
-        }
+  // Binary search for minimum valid time
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (canReach(mid)) {
+      // Path exists → try smaller time
+      right = mid - 1;
+    } else {
+      // Path doesn't exist → need more water
+      left = mid + 1;
     }
+  }
 
-    return left;
+  return left;
 };
-
-
 
 /*
 
