@@ -43,6 +43,12 @@ var shortestPathBinaryMatrix = function (grid) {
     // Dequeue the front element
     const [r, c, d] = q.shift();
 
+    // If destination is reached, return immediately
+    // BFS guarantees this is the shortest path
+    if (r == dest[0] && c == dest[1]) {
+      return d;
+    }
+
     // Explore all 8 possible directions
     // i and j represent row and column offsets
     for (let i = -1; i <= 1; i++) {
@@ -65,11 +71,11 @@ var shortestPathBinaryMatrix = function (grid) {
           // Update shortest distance
           dist[row][col] = d + 1;
 
-          // If destination is reached, return immediately
-          // BFS guarantees this is the shortest path
-          if (row == dest[0] && col == dest[1]) {
-            return dist[row][col];
-          }
+          // // If destination is reached, return immediately
+          // // BFS guarantees this is the shortest path
+          // if (row == dest[0] && col == dest[1]) {
+          //   return dist[row][col];
+          // }
 
           // Push the next cell into the queue
           q.push([row, col, dist[row][col]]);
