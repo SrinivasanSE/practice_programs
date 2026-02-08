@@ -20,3 +20,15 @@ https://www.geeksforgeeks.org/dsa/union-and-intersection-of-two-sorted-arrays-2/
 5) Shortest Remaining Time First (Preemptive SJF) Scheduling Algorithm
 6) Page Replacement Algorithms
 7) Cycle sort related problems
+
+
+# DBMS
+
+what is deadlock
+what is threading
+ACID vs BASE
+
+
+# To learn
+
+JWT
