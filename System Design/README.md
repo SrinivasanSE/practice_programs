@@ -270,7 +270,31 @@ Presigned url in aws
 l4/L7 load balancer
 Zookeeper
 How to prevent deadlock
-2pc
+2pc & SAGA pattern
 QUIC and HTTP/3
 Circuit breakers
 under fetching vs over
+How to scale relational db
+Types of indexes
+
+B-Tree Indexes
+
+The Structure of B-trees
+
+Real-World Examples
+
+Why B-trees are the default choice
+
+LSM Trees (Log-Structured Merge Trees)
+
+Hash Indexes
+
+Geospatial Indexes
+
+Inverted Indexes
+
+Index Optimization Patterns
+
+Composite Indexes
+
+Covering Indexes

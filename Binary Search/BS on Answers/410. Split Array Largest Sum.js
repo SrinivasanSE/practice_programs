@@ -35,21 +35,6 @@ var splitArray = function(nums, k) {
 };
 
 
-const isPossibleV2 = (arr, s, k, n) => {
-    let sum = 0
-    let count = 1
-    for(let i = 0; i < n; i++) {
-        sum += arr[i]
-        if (sum > s) {
-            count+=1
-            sum = arr[i]
-        }
-        if (count > k) return false
-    }
-
-    return true
-}
-
 var splitArray = function(nums, k) {
     const n = nums.length
     if (n < k) {
