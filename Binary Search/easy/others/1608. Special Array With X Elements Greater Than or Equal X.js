@@ -1,6 +1,5 @@
 // https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/description/
 
-
 /*
 
 Brute - Binary Search
@@ -9,60 +8,68 @@ O(nlogn) & O(1)
 
 */
 
+var specialArray = function (nums) {
+  nums.sort((a, b) => a - b); // Sort ascending to use upperBound
+  const n = nums.length;
 
-// Finds the first index where nums[i] >= target
-// This is a standard upper-bound implementation.
-const upperBound = (nums, target) => {
-    let l = 0, h = nums.length - 1, mid
+  // Binary-search possible x values between 1 and n
+  let l = 1,
+    r = n,
+    mid,
+    count;
 
-    while (l <= h) {
-        mid = l + Math.floor((h - l) / 2)
+  while (l <= r) {
+    mid = l + Math.floor((r - l) / 2); // Candidate x
 
-        // If nums[mid] is >= target, move left to find first such index
-        if (nums[mid] >= target) {
-            h = mid - 1
-        } else {
-            // Otherwise move right
-            l = mid + 1
-        }
+    // Count how many numbers are >= mid
+    // Since array is sorted, this is: n - index_of_first(nums[i] >= mid)
+    count = n - upperBound(nums, mid);
+
+    // If exactly mid numbers are >= mid → special value found
+    if (mid === count) return mid;
+
+    // If too many numbers are >= mid, we need a larger mid
+    if (mid < count) {
+      l = mid + 1;
+    } else {
+      // If too few numbers are >= mid, reduce mid
+      r = mid - 1;
     }
+  }
 
-    // l ends at the first index where nums[i] >= target
-    return l
-}
+  return -1; // No special x found
+};
 
+/*
+
+Better
+
+O(nlogn) & O(1)
+
+*/
 
 var specialArray = function (nums) {
-    nums.sort((a, b) => a - b)   // Sort ascending to use upperBound
-    const n = nums.length
+  nums.sort((a, b) => a - b); // Sort ascending
+  const n = nums.length;
 
-    // Binary-search possible x values between 1 and n
-    let l = 1, r = n, mid, count
+  // Try every possible x between 1 and n (max possible)
+  for (let x = 1; x <= n; x++) {
+    // The x largest numbers start at index n-x
+    // nums[n - x] is the x-th largest value
 
-    while (l <= r) {
-        mid = l + Math.floor((r - l) / 2)   // Candidate x
+    // Check: at least x numbers >= x
+    const atLeastX = nums[n - x] >= x;
 
-        // Count how many numbers are >= mid
-        // Since array is sorted, this is: n - index_of_first(nums[i] >= mid)
-        count = n - upperBound(nums, mid)
+    // Check: NOT more than x numbers >= x
+    //   → look at the (x+1)-th largest value (index n-x-1)
+    // If index doesn't exist, that's fine.
+    const onlyX = n - x - 1 < 0 || nums[n - x - 1] < x;
 
-        // If exactly mid numbers are >= mid → special value found
-        if (mid === count) return mid
+    if (atLeastX && onlyX) return x;
+  }
 
-        // If too many numbers are >= mid, we need a larger mid
-        if (mid < count) {
-            l = mid + 1
-        } else {
-            // If too few numbers are >= mid, reduce mid
-            r = mid - 1
-        }
-    }
-
-    return -1   // No special x found
+  return -1;
 };
-
-
-
 
 /*
 
@@ -72,62 +79,24 @@ O(nlogn) & O(1)
 
 */
 
-var specialArray = function(nums) {
-    nums.sort((a, b) => a - b)    // Sort ascending
-    const n = nums.length
-   
-    // Try every possible x between 1 and n (max possible)
-    for (let x = 1; x <= n; x++) {
+var specialArray = function (nums) {
+  nums.sort((a, b) => b - a); // Sort descending
+  const n = nums.length;
 
-        // The x largest numbers start at index n-x
-        // nums[n - x] is the x-th largest value
+  for (let x = 1; x <= n; x++) {
+    // nums[x - 1] is the x-th largest number
+    // Check: at least x numbers >= x
+    const atLeastX = nums[x - 1] >= x;
 
-        // Check: at least x numbers >= x
-        const atLeastX = nums[n - x] >= x
-        
-        // Check: NOT more than x numbers >= x
-        //   → look at the (x+1)-th largest value (index n-x-1)
-        // If index doesn't exist, that's fine.
-        const onlyX = (n - x - 1 < 0 || nums[n - x - 1] < x)
+    // Check: NOT more than x numbers >= x
+    // If x == n, no next element exists → OK
+    const onlyX = x === n || nums[x] < x;
 
-        if (atLeastX && onlyX) return x
-    }
+    if (atLeastX && onlyX) return x;
+  }
 
-    return -1
+  return -1;
 };
-
-
-
-
-/*
-
-Better
-
-O(nlogn) & O(1)
-
-*/
-
-var specialArray = function(nums) {
-    nums.sort((a, b) => b - a)   // Sort descending
-    const n = nums.length
-   
-    for (let x = 1; x <= n; x++) {
-
-        // nums[x - 1] is the x-th largest number
-        // Check: at least x numbers >= x
-        const atLeastX = nums[x - 1] >= x
-
-        // Check: NOT more than x numbers >= x
-        // If x == n, no next element exists → OK
-        const onlyX = (x === n || nums[x] < x)
-
-        if (atLeastX && onlyX) return x
-    }
-
-    return -1
-};
-
-
 
 /*
 
@@ -137,27 +106,29 @@ O(n) & O(n)
 
 */
 
-var specialArray = function(nums) {
-    const n = nums.length
-    
-    // freq[i] = number of elements equal to i
-    // freq[n] = number of elements >= n
-    const freq = new Array(n + 1).fill(0)
+var specialArray = function (nums) {
+  const n = nums.length;
 
-    for (let num of nums) {
-        freq[Math.min(num, n)]++   // Clamp values > n into freq[n]
-    }
-    
-    let count = 0   // running count of numbers >= x
+  // freq[i] = number of elements equal to i
+  // freq[n] = number of elements >= n
+  const freq = new Array(n + 1).fill(0);
 
-    // Sweep backwards because we need suffix sums:
-    // count(>=x) = freq[x] + freq[x+1] + ... + freq[n]
-    for (let x = n; x >= 1; x--) {
-        count += freq[x]       // Add bucket x into suffix sum
+  for (let num of nums) {
+    freq[Math.min(num, n)]++; // Clamp values > n into freq[n]
+  }
 
-        // If exactly x numbers are >= x → found special value
-        if (count === x) return x
-    }
+  let count = 0; // running count of numbers >= x
 
-    return -1
+  // Sweep backwards because we need suffix sums:
+  // count(>=x) = freq[x] + freq[x+1] + ... + freq[n]
+  // count of no greater than 2 = count of no greater than 3 + count of no greater than 4 + ...
+  // By looping from the highest possible value (n) down to 1, we can build up a running total (count) of how many numbers are greater than or equal to the current x.
+  for (let x = n; x >= 1; x--) {
+    count += freq[x]; // Add bucket x into suffix sum
+
+    // If exactly x numbers are >= x → found special value
+    if (count === x) return x;
+  }
+
+  return -1;
 };

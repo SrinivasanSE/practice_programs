@@ -1,5 +1,20 @@
 // https://leetcode.com/problems/fair-candy-swap/description/
 
+
+/*
+
+Equation explanation
+
+If Alice swaps candy x, she expects some specific quantity of candy y back.
+Let SumA and SumB be the sum of candies of Alice and Bob, if Alice gives x candies then she gets y candies back from Bob and Bob gets x candies and gives y candies back.
+From the above statement we can write this equation,
+SumA - x + y = SumB - y + x
+Finally we can arrive at this,
+y = x + (SumB - SumA)/2
+
+*/
+
+
 /*
 
 Better
@@ -68,16 +83,3 @@ var fairCandySwap = function (aliceSizes, bobSizes) {
     return [];
 };
 
-
-/*
-
-Equation explanation
-
-If Alice swaps candy x, she expects some specific quantity of candy y back.
-Let SumA and SumB be the sum of candies of Alice and Bob, if Alice gives x candies then she gets y candies back from Bob and Bob gets x candies and gives y candies back.
-From the above statement we can write this equation,
-SumA - x + y = SumB - y + x
-Finally we can arrive at this,
-y = x + (SumB - SumA)/2
-
-*/

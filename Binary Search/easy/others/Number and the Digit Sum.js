@@ -9,35 +9,32 @@ This implies that if the condition holds for k, it must also hold for any k' > k
 
 */
 
-class Solution
-{
-    
-    sumOfDigits(num) {
-        let sum = 0
-        
-        while (num > 0) {
-            const rem = num%10
-            sum+= rem
-            num= Math.floor(num/10)
-        }
-        
-        return sum
+class Solution {
+  sumOfDigits(num) {
+    let sum = 0;
+
+    while (num > 0) {
+      const rem = num % 10;
+      sum += rem;
+      num = Math.floor(num / 10);
     }
-    //Function to count the number of occurrences of k in the given number.
-    numberCount(n, k)
-    {
-       let l = 1
-       let r = n
-       while (l <= r) {
-           const mid = l + Math.floor((r - l)/2)
-           
-           if (mid - this.sumOfDigits(mid) < k) {
-               l = mid + 1 // to increase the diff, l will point to the smallest number which satisfies the given condition
-           } else { // if it's greater, all the numbers after mid will be greater anyway, so search in the left to find the first number which is greater
-               r = mid - 1 // the largest number that does not satisfy the condition.
-           }
-       }
-       return n - r // The calculation N - high gives the count of numbers from this smallest number up to ( N ) that satisfy the condition.
-      
+
+    return sum;
+  }
+  //Function to count the number of occurrences of k in the given number.
+  numberCount(n, d) {
+    let l = 1;
+    let r = n;
+    while (l <= r) {
+      const mid = l + Math.floor((r - l) / 2);
+
+      if (mid - this.sumOfDigits(mid) < d) {
+        l = mid + 1; // to increase the diff, l will point to the smallest number which satisfies the given condition
+      } else {
+        // if it's greater, all the numbers after mid will be greater anyway, so search in the left to find the first number which is greater
+        r = mid - 1; // the largest number that does not satisfy the condition.
+      }
     }
+    return n - r; // The calculation N - high gives the count of numbers from this smallest number up to ( N ) that satisfy the condition.
+  }
 }

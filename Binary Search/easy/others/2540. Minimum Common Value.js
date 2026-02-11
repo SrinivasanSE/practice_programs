@@ -54,7 +54,7 @@ O(min(n, m)) & O(1)
 */
 
 
-var getCommon = function(nums1, nums2) {
+var getCommon = function(nums1, nums2) { // sorted arr is given
     const n1 = nums1.length, n2 = nums2.length
     let l = 0, r = 0
 

@@ -1,6 +1,13 @@
 // https://leetcode.com/problems/find-target-indices-after-sorting-array/description/
 
 
+/*
+
+Do binary search and find the first and last occurence
+
+*/
+
+
 var findOccurence = (nums, target, isLeft) => {
     let l = 0, r = nums.length - 1, mid, res = -1
 

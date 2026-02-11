@@ -30,7 +30,7 @@ var smallerNumbersThanCurrent = function (nums) {
 
 Optimal - prefix sum
 
-O()
+O(n) & O(1)
 
 */
 
