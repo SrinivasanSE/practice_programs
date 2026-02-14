@@ -1,5 +1,35 @@
 // https://www.geeksforgeeks.org/find-sum-last-n-nodes-given-linked-list/
 
+class Solution {
+  reverse(head) {
+    let curr = head;
+    let nxt;
+    let prev = null;
+    while (curr) {
+      nxt = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = nxt;
+    }
+
+    return prev;
+  }
+  sumOfLastN_Nodes(head, n) {
+    // code here
+    head = this.reverse(head);
+
+    let i = 0;
+    let sum = 0;
+    while (i < n) {
+      sum += head.data;
+      i++;
+      head = head.next;
+    }
+
+    return sum;
+  }
+}
+
 /*
 Maintain two pointers – reference pointer and main pointer. Initialize both reference and main pointers to head. 
 First, move reference pointer to n nodes from head and while traversing accumulate node’s data to some variable, say sum. 
@@ -10,62 +40,29 @@ say, temp, pointed by the main pointer. Now, (sum – temp) is the required sum 
 */
 
 // Similar to Kth from end of linked list
-O(n) & O(1)
+O(n) & O(1);
 class Solution {
+  sumOfLastN_Nodes(head, n) {
+    // code here
+    let ref = head;
+    let main = head;
 
-    sumOfLastN_Nodes(head, n) {
-        // code here
-        let ref = head
-        let main = head
+    let sum = 0;
+    let temp = 0;
 
-        let sum = 0
-        let temp = 0
-
-        while (n) {
-            n--
-            sum += ref.data
-            ref = ref.next
-        }
-
-        while (ref) {
-            sum += ref.data
-            temp += main.data
-            ref = ref.next
-            main = main.next
-        }
-
-        return sum - temp // sum will contain all the nodes value and temp will contain the sum of the nodes till n, so sum - temp will give the last n nodes data
+    while (n) {
+      n--;
+      sum += ref.data;
+      ref = ref.next;
     }
-}
 
-
-class Solution {
-
-    reverse(head) {
-        let curr = head
-        let nxt
-        let prev = null
-        while (curr) {
-            nxt = curr.next
-            curr.next = prev
-            prev = curr
-            curr = nxt
-        }
-
-        return prev
+    while (ref) {
+      sum += ref.data;
+      temp += main.data;
+      ref = ref.next;
+      main = main.next;
     }
-    sumOfLastN_Nodes(head, n) {
-        // code here
-        head = this.reverse(head)
 
-        let i = 0
-        let sum = 0
-        while (i < n) {
-            sum += head.data
-            i++
-            head = head.next
-        }
-
-        return sum
-    }
+    return sum - temp; // sum will contain all the nodes value and temp will contain the sum of the nodes till n, so sum - temp will give the last n nodes data
+  }
 }
