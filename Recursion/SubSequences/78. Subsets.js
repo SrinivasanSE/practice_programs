@@ -7,23 +7,22 @@ O(2^n * n) & O(2^n * n)
 
 */
 
-var subsets = function(nums) {
-    
-    let subsets = [[]]
-    let temp
-    for(let num of nums) {
-        const n = subsets.length
-        for(let i = 0; i < n; i++) { // we keep iterative over the available subsets and add the num, [1], added 1
-                                                                                                     // [2], [1,2],  added 2 to the existing subsets
-                                                                                                     // [3], [1,3], [2, 3], [1,2,3] added 3 to the existing subsets
-            temp = [...subsets[i]]
-            temp.push(num)
-            subsets.push(temp)
-        }
+var subsets = function (nums) {
+  let subsets = [[]];
+  let temp;
+  for (let num of nums) {
+    const n = subsets.length;
+    for (let i = 0; i < n; i++) {
+      // we keep iterative over the available subsets and add the num, [1], added 1
+      // [2], [1,2],  added 2 to the existing subsets
+      // [3], [1,3], [2, 3], [1,2,3] added 3 to the existing subsets
+      temp = [...subsets[i]];
+      temp.push(num);
+      subsets.push(temp);
     }
-    return subsets
+  }
+  return subsets;
 };
-
 
 /*
 
@@ -33,24 +32,23 @@ O(2^n * n) & O(2^n * n)
 
 */
 
-
-var subsets = function(nums) {
-    let res = []
-    let subsets = []
-    const dfs = (i) => {
-        if (i >= nums.length) {
-            res.push([...subsets])
-            return
-        }
-
-        subsets.push(nums[i]) // we keep pushing and move to the next index, it goes like a tree structure where we take a decision to include or not
-        dfs(i + 1)
-        subsets.pop()
-        dfs(i + 1)
+var subsets = function (nums) {
+  let res = [];
+  let subsets = [];
+  const dfs = (i) => {
+    if (i >= nums.length) {
+      res.push([...subsets]);
+      return;
     }
 
-    dfs(0)
-    return res
+    subsets.push(nums[i]); // we keep pushing and move to the next index, it goes like a tree structure where we take a decision to include or not
+    dfs(i + 1);
+    subsets.pop();
+    dfs(i + 1);
+  };
+
+  dfs(0);
+  return res;
 };
 
 /*
@@ -65,7 +63,6 @@ var subsets = function(nums) {
 
 */
 
-
 /*
 
 Bit method
@@ -74,34 +71,34 @@ O(2^n * n) & O(2^n * n)
 
 */
 
-var subsets = function(nums) {
-    const n = nums.length; // Number of elements in the input array
+var subsets = function (nums) {
+  const n = nums.length; // Number of elements in the input array
 
-    // Total number of subsets is 2^n (each element can be present or absent)
-    const subsetsCount = 1 << n; // 1 << n is equivalent to 2^n
+  // Total number of subsets is 2^n (each element can be present or absent)
+  const subsetsCount = 1 << n; // 1 << n is equivalent to 2^n
 
-    const res = []; // Array to hold all subsets
+  const res = []; // Array to hold all subsets
 
-    let temp; // Temporary array to build each subset
+  let temp; // Temporary array to build each subset
 
-    // Iterate through all possible subset combinations
-    for (let i = 0; i < subsetsCount; i++) {
-        temp = []; // Start with an empty subset
+  // Iterate through all possible subset combinations
+  for (let i = 0; i < subsetsCount; i++) {
+    temp = []; // Start with an empty subset
 
-        // For each element in nums, decide whether to include it in the current subset
-        for (let j = 0; j < n; j++) {
-            // Check if the j-th bit in i is set (i.e., include nums[j] in this subset)
-            if (i & (1 << j)) {
-                temp.push(nums[j]);
-            }
-        }
-
-        // Add the constructed subset to the result array
-        res.push(temp);
+    // For each element in nums, decide whether to include it in the current subset
+    for (let j = 0; j < n; j++) {
+      // Check if the j-th bit in i is set (i.e., include nums[j] in this subset)
+      if (i & (1 << j)) {
+        temp.push(nums[j]);
+      }
     }
 
-    // Return the array containing all subsets
-    return res;
+    // Add the constructed subset to the result array
+    res.push(temp);
+  }
+
+  // Return the array containing all subsets
+  return res;
 };
 
 /*

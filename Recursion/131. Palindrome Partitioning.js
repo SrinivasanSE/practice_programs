@@ -1,6 +1,5 @@
 // https://leetcode.com/problems/palindrome-partitioning/description/
 
-
 /*
 
 Time Complexity (TC)
@@ -22,37 +21,36 @@ Result storage: In the worst case, O(n * 2^n) for storing all partitions.
 
 */
 
-
-var partition = function(s) {
-    const res = []
-    const n = s.length
-    const find = (index, path) => {
-        if (index === n) {
-            res.push([...path])
-            return
-        }
-
-        for (let i = index; i < n; i++) {
-            if (isPalindrome(s, index, i)) {
-                path.push(s.slice(index, i + 1))
-                find(i + 1, path)
-                path.pop()
-            }
-        }
+var partition = function (s) {
+  const res = [];
+  const n = s.length;
+  const find = (index, path) => {
+    if (index === n) {
+      res.push([...path]);
+      return;
     }
 
-    find(0, [])
-    return res
+    for (let i = index; i < n; i++) {
+      if (isPalindrome(s, index, i)) {
+        path.push(s.slice(index, i + 1));
+        find(i + 1, path);
+        path.pop();
+      }
+    }
+  };
+
+  find(0, []);
+  return res;
 };
 
 const isPalindrome = (str, i, j) => {
-    while (i < j) {
-        if (str[i] != str[j]) {
-            return false
-        }
-        i++
-        j--
+  while (i < j) {
+    if (str[i] != str[j]) {
+      return false;
     }
+    i++;
+    j--;
+  }
 
-    return true
-}
+  return true;
+};
