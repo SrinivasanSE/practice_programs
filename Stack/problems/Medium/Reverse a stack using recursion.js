@@ -7,50 +7,46 @@ Space Complexity: O(1) We need no extra stack for answer , hence O(1), but for r
 
 */
 
-
 class Solution {
-    //Function to reverse a string.
-    
-    insertAtBottom(st, element) {
-        if(st.length === 0) {
-            st.push(element)
-            return
-        } 
-        const top = st.pop() // [2, 1] n = 3 -> [2], n = 3, [], 3 -> [3] -> Push 2, [3, 2] -> Push 1 -> [3, 2, 1]
-        this.insertAtBottom(st, element) // we pop all the current elements in the stack and push the new element to the bottom and add the previous elements again after that
-        st.push(top)
-        
+  //Function to reverse a string.
+
+  insertAtBottom(st, element) {
+    if (st.length === 0) {
+      st.push(element);
+      return;
     }
-    reverse(st) {
-        //your code here
-        if(st.length === 0) {
-            return
-        }
-        
-        let top = st.pop()
-        
-        this.reverse(st)
-        
-        this.insertAtBottom(st, top)
-        
+    const top = st.pop(); // [2, 1] n = 3 -> [2], n = 3, [], 3 -> [3] -> Push 2, [3, 2] -> Push 1 -> [3, 2, 1]
+    this.insertAtBottom(st, element); // we pop all the current elements in the stack and push the new element to the bottom and add the previous elements again after that
+    st.push(top);
+  }
+  reverse(st) {
+    //your code here
+    if (st.length === 0) {
+      return;
     }
+
+    let top = st.pop();
+
+    this.reverse(st);
+
+    this.insertAtBottom(st, top);
+  }
 }
 
 // using queue, we could use an temp array, but since the stack has to modified in place, we can't use another arr.
 // O(n) & O(n)
 class Solution {
-    reverse(stack) {
-        let queue = [];
+  reverse(stack) {
+    let queue = [];
 
-        // Move elements from stack to queue
-        while (stack.length > 0) {
-            queue.push(stack.pop());
-        }
-
-        // Move elements from queue back to stack
-        while (queue.length > 0) {
-            stack.push(queue.shift());
-        }
+    // Move elements from stack to queue
+    while (stack.length > 0) {
+      queue.push(stack.pop());
     }
-}
 
+    // Move elements from queue back to stack
+    while (queue.length > 0) {
+      stack.push(queue.shift());
+    }
+  }
+}
