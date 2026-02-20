@@ -61,7 +61,13 @@ var sumSubarrayMins = function (arr) {
   return total;
 };
 
-// Optimised version
+/*
+
+Optimised version
+
+O(n) & O(n)
+
+*/
 
 /*
 
