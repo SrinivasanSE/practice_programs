@@ -2,60 +2,57 @@
 
 // Similar to Largest Rectangle in Histogram logic
 
-
 class Solution {
+  // Previous Smaller Element (PSE)
+  getPSE(arr) {
+    const n = arr.length;
+    const left = new Array(n).fill(0); // default 0 if none exists
+    const stk = [];
 
-    // Previous Smaller Element (PSE)
-    getPSE(arr) {
-        const n = arr.length;
-        const left = new Array(n).fill(0); // default 0 if none exists
-        const stk = [];
-
-        for (let i = 0; i < n; i++) {
-            while (stk.length && arr[stk.at(-1)] >= arr[i]) {
-                stk.pop();
-            }
-            left[i] = stk.length ? arr[stk.at(-1)] : 0;
-            stk.push(i);
-        }
-
-        return left;
+    for (let i = 0; i < n; i++) {
+      while (stk.length && arr[stk.at(-1)] >= arr[i]) {
+        stk.pop();
+      }
+      left[i] = stk.length ? arr[stk.at(-1)] : 0;
+      stk.push(i);
     }
 
-    // Next Smaller Element (NSE)
-    getNSE(arr) {
-        const n = arr.length;
-        const right = new Array(n).fill(0);
-        const stk = [];
+    return left;
+  }
 
-        for (let i = n - 1; i >= 0; i--) {
-            while (stk.length && arr[stk.at(-1)] >= arr[i]) {
-                stk.pop();
-            }
-            right[i] = stk.length ? arr[stk.at(-1)] : 0;
-            stk.push(i);
-        }
+  // Next Smaller Element (NSE)
+  getNSE(arr) {
+    const n = arr.length;
+    const right = new Array(n).fill(0);
+    const stk = [];
 
-        return right;
+    for (let i = n - 1; i >= 0; i--) {
+      while (stk.length && arr[stk.at(-1)] >= arr[i]) {
+        stk.pop();
+      }
+      right[i] = stk.length ? arr[stk.at(-1)] : 0;
+      stk.push(i);
     }
 
-    findMaxDiff(arr) {
-        const n = arr.length;
+    return right;
+  }
 
-        const left = this.getPSE(arr);     // LS – previous smaller
-        const right = this.getNSE(arr);    // RS – next smaller
+  findMaxDiff(arr) {
+    const n = arr.length;
 
-        let max = -1;
+    const left = this.getPSE(arr); // LS – previous smaller
+    const right = this.getNSE(arr); // RS – next smaller
 
-        for (let i = 0; i < n; i++) {
-            const diff = Math.abs(left[i] - right[i]);
-            max = Math.max(max, diff);
-        }
+    let max = -1;
 
-        return max;
+    for (let i = 0; i < n; i++) {
+      const diff = Math.abs(left[i] - right[i]);
+      max = Math.max(max, diff);
     }
+
+    return max;
+  }
 }
-
 
 /*
 
@@ -66,36 +63,34 @@ O(n) & O(n)
 */
 
 function findMaxDiff(arr) {
-    const n = arr.length;
-    const stk = [];
-    let mxDiff = 0;
+  const n = arr.length;
+  const stk = [];
+  let mxDiff = 0;
 
-    let currIdx, L, R;
+  let  L, R;
 
-    for (let i = 0; i <= n; i++) {
+  for (let i = 0; i <= n; i++) {
+    // flush while
+    while (stk.length > 0 && (i === n || arr[stk[stk.length - 1]] > arr[i])) {
+      stk.pop();
 
-        // flush while
-        while (stk.length > 0 && (i === n || arr[stk[stk.length - 1]] > arr[i])) {
-            currIdx = stk.pop();
+      // NSE (right smaller)
+      R = i === n ? 0 : arr[i];
 
-            // NSE (right smaller)
-            R = (i === n) ? 0 : arr[i];
+      // PSE (left smaller)
+      L = stk.length === 0 ? 0 : arr[stk[stk.length - 1]];
 
-            // PSE (left smaller)
-            L = (stk.length === 0) ? 0 : arr[stk[stk.length - 1]];
-
-            mxDiff = Math.max(mxDiff, Math.abs(R - L));
-        }
-
-        // do NOT push the sentinel 'n'
-        if (i < n) {
-
-            // avoid consecutive duplicates
-            if (stk.length === 0 || arr[stk[stk.length - 1]] !== arr[i]) {
-                stk.push(i);
-            }
-        }
+      mxDiff = Math.max(mxDiff, Math.abs(R - L));
     }
 
-    return mxDiff;
+    // do NOT push the sentinel 'n'
+    if (i < n) {
+      // avoid consecutive duplicates, there is no need as all of them will give the same result only
+      if (stk.length === 0 || arr[stk[stk.length - 1]] !== arr[i]) {
+        stk.push(i);
+      }
+    }
+  }
+
+  return mxDiff;
 }
