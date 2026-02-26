@@ -16,7 +16,7 @@ var numberOfSubstrings = function (s) {
     count = 0;
 
   for (let i = 0; i < n; i++) {
-    (aC = 0), (bC = 0), (cC = 0);
+    ((aC = 0), (bC = 0), (cC = 0));
     for (let j = i; j < n; j++) {
       if (s[j] === "a") aC++;
       else if (s[j] === "b") bC++;
@@ -57,7 +57,7 @@ var numberOfSubstrings = function (s) {
         hashmap.delete(s[left]);
       }
 
-      left += 1;
+      left++;
     }
   }
 

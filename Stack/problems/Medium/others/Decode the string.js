@@ -66,8 +66,8 @@ O(n) & O(n)
 
 */
 
- //  Instead of maintaining a separate integer stack for storing repetition counts, we store the digits directly in the main stack.
-  // The key observation is that the number always appears before the opening bracket '['. This allows us to retrieve it later without needing an extra stack.
+//  Instead of maintaining a separate integer stack for storing repetition counts, we store the digits directly in the main stack.
+// The key observation is that the number always appears before the opening bracket '['. This allows us to retrieve it later without needing an extra stack.
 
 class Solution {
   decodedString(s) {

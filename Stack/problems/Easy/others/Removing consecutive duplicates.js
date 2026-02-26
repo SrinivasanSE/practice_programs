@@ -1,46 +1,57 @@
-// https://www.geeksforgeeks.org/problems/removing-consecutive-duplicates-1587115621/1?page=1&category=Stack&difficulty=Easy&status=unsolved&sortBy=submissions
+// https://www.geeksforgeeks.org/problems/consecutive-elements2306/1
 
-class Solution {
-  //Function to remove consecutive duplicates from given string using Stack.
-  removeConsecutiveDuplicates(s) {
-    //your code here
-    let str = "";
-    for (let i = 0; i < s.length; i++) {
-      if (str.length === 0) {
-        str += s[i];
-      } else {
-        if (str[str.length - 1] != s[i]) {
-          str += s[i];
-        }
-      }
+/*
+
+Stack
+
+O(n) & O(n)
+
+*/
+
+function removeDuplicates(str) {
+  let st = [];
+  let n = str.length;
+
+  // Traverse through the string
+  for (let i = 0; i < n; i++) {
+    // If stack is empty or current char is not equal to top of stack, push it
+    if (st.length === 0 || st[st.length - 1] !== str[i]) {
+      st.push(str[i]);
     }
-
-    return str;
+    // If current char is same as top of stack, skip adding it
   }
+
+  // Build result from stack
+  return st.join(""); // Stack already maintains order
 }
 
-class Solution {
-  //Function to remove consecutive duplicates from given string using Stack.
-  removeConsecutiveDuplicates(s) {
-    let temp = s.split("");
+/*
 
-    let stack = [];
-    let res = "";
-    stack.push(temp[0]);
-    let top = 0;
+Sliding window
 
-    for (let i = 1; i < temp.length; i++) {
-      if (temp[i] != stack[top]) {
-        res += stack[top]; // adding stack top to the res
-        stack.pop();
-        stack.push(temp[i]);
-      }
+O(n) & O(n)
+
+*/
+
+function removeDuplicates(str) {
+  let n = str.length;
+  if (n === 0) return str;
+
+  let result = [];
+  let i = 0;
+
+  // Traverse through the string using a sliding window
+  while (i < n) {
+    // Add current character
+    result.push(str[i]);
+
+    // Skip all consecutive duplicates
+    while (i + 1 < n && str[i] === str[i + 1]) {
+      i++;
     }
-
-    res += stack[top];
-
-    return res;
+    i++;
   }
+  return result.join("");
 }
 
 // Removing consecutive duplicates - 2
@@ -48,39 +59,19 @@ class Solution {
 // https://www.geeksforgeeks.org/problems/removing-consecutive-duplicates-2-1587115621/1?page=1&category=Stack&difficulty=Easy&status=unsolved&sortBy=submissions
 
 class Solution {
-  //Function to remove pair of duplicates from given string using Stack.
   removePair(s) {
-    //your code here
-    let temp = s.split("");
-    let stack = [];
-    let top = -1;
+    // code here
+    const stk = [s[0]];
+    const n = s.length;
 
-    stack.push(temp[0]);
-    top += 1;
-
-    for (let i = 1; i < temp.length; i++) {
-      if (top >= 0 && stack[top] === temp[i]) {
-        stack.pop();
-        top--;
+    for (let i = 1; i < n; i++) {
+      if (stk.length > 0 && stk[stk.length - 1] == s[i]) {
+        stk.pop();
       } else {
-        stack.push(temp[i]);
-        top++;
+        stk.push(s[i]);
       }
     }
-    /*
 
-        let ans='';
-        
-        //adding all characters in the stack to the answer and returning it.
-        while(top !== -1)
-        {
-            ans = stack[top] + ans;
-            stack.pop();
-            top--;
-        }
-        return ans;
-        */
-
-    return stack.join("");
+    return stk.join("");
   }
 }
