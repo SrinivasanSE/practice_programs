@@ -19,7 +19,6 @@ class Solution {
                 start++
             }
             
-            if (prod < k)
             count += end - start + 1 // This is because only subarrays starting from start to end and ending at end are valid within the current window.
         }
         

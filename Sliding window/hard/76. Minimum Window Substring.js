@@ -45,7 +45,7 @@ var minWindow = function (s, t) {
 
 Optimal
 
-O(n + m)
+O(2n + m) & O(n)
 
 */
 

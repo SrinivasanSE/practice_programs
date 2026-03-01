@@ -14,9 +14,11 @@ class Solution {
     // your code here
     let res = -Infinity;
 
-    for (let i = 0; i <= n - k; i++) { // upto n - k
+    for (let i = 0; i <= n - k; i++) {
+      // upto n - k
       let currSum = 0;
-      for (let j = i; j < n; j++) { // upto n
+      for (let j = i; j < n; j++) {
+        // upto n
         currSum += arr[j];
         if (j - i >= k - 1) {
           res = Math.max(res, currSum);
@@ -43,7 +45,8 @@ class Solution {
       currMax;
     currMax = maxPrefixSum[0] = arr[0];
 
-    for (let i = 1; i < n; i++) { // Max subarr sum using Kadane's algo
+    for (let i = 1; i < n; i++) {
+      // Max subarr sum using Kadane's algo
       maxPrefixSum[i] = Math.max(maxPrefixSum[i - 1] + arr[i], arr[i]);
     }
 
@@ -105,7 +108,8 @@ class Solution {
 
       res = Math.max(res, sum);
 
-      if (last < 0) { // if negative, subtract from the sum to see if sum becomes larger
+      if (last < 0) {
+        // if negative, subtract from the sum to see if sum becomes larger
         sum -= last;
         res = Math.max(res, sum);
         last = 0;

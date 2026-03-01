@@ -55,7 +55,7 @@ const smallestSubstring = (S) => {
       res = Math.min(
         res,
         Math.max(...[zeroindex, oneindex, twoindex]) -
-          Math.min(...[zeroindex, oneindex, twoindex])
+          Math.min(...[zeroindex, oneindex, twoindex]),
       );
   }
 

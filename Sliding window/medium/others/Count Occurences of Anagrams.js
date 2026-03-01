@@ -65,32 +65,24 @@ function isAnagram(freq1) {
 class Solution {
   search(pat, txt) {
     // code here
+    const freq = new Array(26).fill(0);
 
-    const freq1 = new Array(26).fill(0);
-
-    const m = pat.length;
     const n = txt.length;
-
-    for (let i = 0; i < m; i++) {
-      freq1[pat.charCodeAt(i) - 97]++;
-    }
-
-    for (let i = 0; i < m - 1; i++) {
-      freq1[txt.charCodeAt(i) - 97]--;
-    }
-
+    const m = pat.length;
     let count = 0;
 
-    for (let i = m - 1; i < n; i++) {
-      freq1[txt.charCodeAt(i) - 97]--;
-
-      if (isAnagram(freq1)) {
-        count += 1;
-      }
-
-      freq1[txt.charCodeAt(i - m + 1) - 97]++; // excluding the char which is going out of the window
+    for (let i = 0; i < m; i++) {
+      freq[pat[i].charCodeAt(0) - 97]++;
     }
 
+    for (let i = 0; i < n; i++) {
+      freq[txt[i].charCodeAt(0) - 97]--;
+
+      if (i >= m - 1) {
+        if (isAnagram(freq)) count++;
+        freq[txt[i - (m - 1)].charCodeAt(0) - 97]++;
+      }
+    }
     return count;
   }
 }

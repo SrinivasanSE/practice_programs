@@ -53,12 +53,15 @@ class Solution {
     let negI = 0;
     let res = [];
 
-    for (let i = k - 1; i < n; i++) { // start from k - 1
-      while (negI < i && (negI <= i - k || arr[negI] >= 0)) { // keep moving negative index when the index it's out of the window or positive
+    for (let i = k - 1; i < n; i++) {
+      // start from k - 1
+      while (negI < i && (negI <= i - k || arr[negI] >= 0)) {
+        // keep moving negative index when the index it's out of the window or positive
         negI++;
       }
 
-      if (negI < n && arr[negI] < 0) { // if the current index is within n and the element is negative, push it.
+      if (negI < n && arr[negI] < 0) {
+        // if the current index is within n and the element is negative, push it.
         res.push(arr[negI]);
       } else {
         res.push(0);
