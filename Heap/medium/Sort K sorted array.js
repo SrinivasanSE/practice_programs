@@ -7,28 +7,28 @@ O(nlogk) & O(k)
 */
 
 class Solution {
-    nearlySorted(arr, k) {
-        // code
-        const heap = new MinHeap()
-        
-        for(let i = 0; i < k; i++) { // push k elements first
-            heap.push(arr[i])
-        }
-        const n = arr.length
-        let index = 0
-        for(let i = k; i < n; i++) {
-            heap.push(arr[i])
-            arr[index] = heap.pop() // by popping here from the heap, we can get the smallest element and the smallest element will be at the distance of k atmost
-            index+=1
-        }
-        
-        while(!heap.isEmpty()) {
-            arr[index] = heap.pop()
-            index++
-        }
-    }
-}
+  nearlySorted(arr, k) {
+    // code
+    const heap = new MinHeap();
 
+    for (let i = 0; i < k; i++) {
+      // push k elements first
+      heap.push(arr[i]);
+    }
+    const n = arr.length;
+    let index = 0;
+    for (let i = k; i < n; i++) {
+      heap.push(arr[i]);
+      arr[index] = heap.pop(); // by popping here from the heap, we can get the smallest element and the smallest element will be at the distance of k atmost
+      index += 1;
+    }
+
+    while (!heap.isEmpty()) {
+      arr[index] = heap.pop();
+      index++;
+    }
+  }
+}
 
 /*
 
