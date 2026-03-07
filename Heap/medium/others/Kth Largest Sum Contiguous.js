@@ -76,9 +76,9 @@ class Solution {
 
 /*
 
-Optimal
+Optimal - Min Heap
 
-O(n^2logk) & O(1)
+O(n^2logk) & O(k)
 
 */
 

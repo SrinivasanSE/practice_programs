@@ -23,8 +23,7 @@ function decreasingArray(arr) {
 
 /*
 
-The idea is to traverse the array from left to right while keeping track of the smallest value seen so far in a  min-heap. If the current element exceeds the smallest value so far, then it is reduced and the difference is added to the total operations. This ensures the sequence stays non-increasing as we move forward, while making only the necessary adjustments.
-
+The heap ensures we always adjust the smallest element first.If we increase a bigger element first, the cost becomes larger later. So fixing the smallest first is optimal.
 */
 
 class Solution {
@@ -39,7 +38,25 @@ class Solution {
         heap.extractMin();
         heap.insert(arr[i]);
       }
-      heap.insert(arr[i]); // why do we push again?
+      heap.insert(arr[i]); 
+      /*
+      Why do we insert again here?
+
+      we are keeping the current element as another pending value.
+
+      Think of it like this:
+
+      Each element in the heap represents a number that must eventually match the final value.
+
+      When we processed 3, we:
+
+      Converted 1 → 3
+
+      But 3 itself must also participate in future comparisons
+
+      So we insert it again.
+
+      */
     }
     return ans;
   }

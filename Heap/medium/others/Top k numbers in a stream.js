@@ -3,6 +3,8 @@
 
 // Using maxheap
 
+// O(N^2LogN) & O(NK)
+
 function topKFrequentUntilEachIndex(arr, N, K) {
     const freqMap = new Map();
     const result = [];
@@ -31,6 +33,8 @@ function topKFrequentUntilEachIndex(arr, N, K) {
 }
 
 // Using minheap
+
+// O(N^2LogK) & O(NK)
 
 function topKFrequentUntilEachIndex(arr, N, K) {
     const freqMap = new Map();

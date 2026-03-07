@@ -27,7 +27,6 @@ class Solution {
     let ans = 0;
     while (!heap.isEmpty()) {
       const val = heap.extractMax();
-      //console.log(char, val)
       ans += val * val;
     }
 
