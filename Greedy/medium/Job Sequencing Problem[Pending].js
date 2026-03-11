@@ -15,15 +15,17 @@ class Solution {
     // code here
     let jobs = [];
     const n = deadline.length;
+    let maxDeadline = 0
 
     for (let i = 0; i < n; i++) {
+      maxDeadline = Math.max(maxDeadline, deadline[i])
       jobs.push({ deadline: deadline[i], profit: profit[i] });
     }
 
     jobs.sort((a, b) => b.profit - a.profit); // sort by profit in desc order
     let totalJobs = 0,
       maxProfit = 0;
-    let slots = new Array(Math.max(...deadline) + 1).fill(0);
+    let slots = new Array(maxDeadline + 1).fill(0);
     for (let job of jobs) {
       for (let j = job.deadline; j >= 1; j--) {
         // check if any slot is available and try to place at the end as much as possible
@@ -89,7 +91,7 @@ class Solution {
 
 /*
 
-Optimal - yet to understand
+Optimal - DSU
 
 */
 
