@@ -159,18 +159,18 @@ function verticalOrder(root) {
     q.enqueue([root, 0]);
 
     let mn = 0, mx = 0;
-
+ 
     while (!q.isEmpty()) {
-        const [node, val] = q.dequeue();
+        const [node, col] = q.dequeue();
 
-        mn = Math.min(mn, val);
-        mx = Math.max(mx, val);
+        mn = Math.min(mn, col);
+        mx = Math.max(mx, col);
 
-        if (!lst.has(val)) lst.set(val, []);
-        lst.get(val).push(node.data);
+        if (!lst.has(col)) lst.set(col, []);
+        lst.get(col).push(node.data);
 
-        if (node.left) q.enqueue([node.left, val - 1]);
-        if (node.right) q.enqueue([node.right, val + 1]);
+        if (node.left) q.enqueue([node.left, col - 1]);
+        if (node.right) q.enqueue([node.right, col + 1]);
     }
 
     // Build the result in vertical order

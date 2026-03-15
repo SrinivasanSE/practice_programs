@@ -24,12 +24,14 @@ var widthOfBinaryTree = function (root) {
 
     const start = firstIndexAtLevel.get(level);
 
+    const normalizedIndex = index - start;
+
     // width of current level
-    maxWidth = Math.max(maxWidth, index - start + 1);
+    maxWidth = Math.max(maxWidth, normalizedIndex + 1);
 
     // go left and right
-    dfs(node.left, level + 1, index * 2);
-    dfs(node.right, level + 1, index * 2 + 1);
+    dfs(node.left, level + 1, normalizedIndex * 2);
+    dfs(node.right, level + 1, normalizedIndex * 2 + 1);
   };
 
   // start index from 1 (same as your BFS version)
@@ -37,7 +39,6 @@ var widthOfBinaryTree = function (root) {
 
   return maxWidth;
 };
-
 
 /*
 

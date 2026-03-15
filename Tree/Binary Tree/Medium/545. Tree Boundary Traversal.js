@@ -8,68 +8,101 @@ O(n) & O(n)
 
 */
 
-
-const isLeaf = (node) => node.left == null && node.right == null
+const isLeaf = (node) => node.left == null && node.right == null;
 
 const leftBoundary = (node, res) => {
-    if (!node) return
-    let curr = node
+  if (!node) return;
+  let curr = node;
 
-    while (!isLeaf(curr)) {
+  while (!isLeaf(curr)) {
+    res.push(curr.data);
+    if (curr.left)
+      // go to left first
+      curr = curr.left;
+    else curr = curr.right;
+  }
 
-        res.push(curr.data)
-        if (curr.left) // go to left first
-            curr = curr.left
-        else
-            curr = curr.right
-    }
-
-    return res
-}
+  return res;
+};
 
 const rightBoundary = (node, res) => {
-    if (!node) return
-    let curr = node
-    let temp = []
-    while (!isLeaf(curr)) {
-        temp.push(curr.data)
-        if (curr.right) // go to right first
-            curr = curr.right
-        else
-            curr = curr.left
-    }
+  if (!node) return;
+  let curr = node;
+  let temp = [];
+  while (!isLeaf(curr)) {
+    temp.push(curr.data);
+    if (curr.right)
+      // go to right first
+      curr = curr.right;
+    else curr = curr.left;
+  }
 
-    for (let i = temp.length - 1; i >= 0; i--) // move from temp to res
-        res.push(temp[i]);
+  for (
+    let i = temp.length - 1;
+    i >= 0;
+    i-- // move from temp to res
+  )
+    res.push(temp[i]);
 
-    return res
-}
-
+  return res;
+};
 
 const leaves = (node, res) => {
-    if (node == null) return
+  if (node == null) return;
 
-    if (isLeaf(node)) {
-        res.push(node.data)
-        return
+  if (isLeaf(node)) {
+    res.push(node.data);
+    return;
+  }
+
+  leaves(node.left, res);
+  leaves(node.right, res);
+};
+
+// Iterative version using morris
+
+function collectLeaves(root, res) {
+  let current = root;
+
+  while (current) {
+    if (current.left === null) {
+      // If it's a leaf node
+      if (current.right === null) res.push(current.data);
+
+      current = current.right;
+    } else {
+      // Find the inorder predecessor
+      let predecessor = current.left;
+      while (predecessor.right && predecessor.right !== current) {
+        predecessor = predecessor.right;
+      }
+
+      if (predecessor.right === null) {
+        predecessor.right = current;
+        current = current.left;
+      } else {
+        // If its predecessor is a leaf node
+        if (predecessor.left === null) res.push(predecessor.data);
+
+        predecessor.right = null;
+        current = current.right;
+      }
     }
-
-    leaves(node.left, res)
-    leaves(node.right, res)
+  }
 }
 
-
 class Solution {
-    boundaryTraversal(root) { // need to traverse the tree in anti clockwise order
-        // code here
-        if (root == null) return []
-        let res = []
-        if (!isLeaf(root)) res.push(root.data)
-        leftBoundary(root.left, res) // traverse the left nodes until the leaves node
-        leaves(root, res) // collect the leaf nodes using inorder traversal
-        rightBoundary(root.right, res) // traverse the right side nodes until the leaves node, we need to store it in a temp list and move it back to the res 
-        // since the right boundary should be be traversed from bottom to top
+  boundaryTraversal(root) {
+    // need to traverse the tree in anti clockwise order
+    // code here
+    if (root == null) return [];
+    let res = [];
+    if (!isLeaf(root)) res.push(root.data);
+    leftBoundary(root.left, res); // traverse the left nodes until the leaves node
+    leaves(root, res); // collect the leaf nodes using inorder traversal
+    rightBoundary(root.right, res); // traverse the right side nodes until the leaves node, we need to store it in a temp list and move it back to the res
+    // since the right boundary should be be traversed from bottom to top
 
-        return res
-    }
+    return res;
+  }
 }
