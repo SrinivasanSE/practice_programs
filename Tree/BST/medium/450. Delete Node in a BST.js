@@ -271,6 +271,7 @@ var deleteNode = function (root, key) {
               12 20   ← duplicate still exists
 
       Step 3: Delete the duplicate successor (12) from right subtree
+      Since the duplicate node is a leaf node, null will be returned which deletes the nodes
 
       AFTER deletion:
 

@@ -114,3 +114,40 @@ class Solution {
     return res;
   }
 }
+
+// Combined - Both pred and succ
+
+const rightMost = (node) => {
+  while (node.right) node = node.right;
+  return node;
+};
+
+const leftMost = (node) => {
+  while (node.left) node = node.left;
+  return node;
+};
+
+class Solution {
+  findPreSuc(root, key) {
+    // code here
+    let curr = root,
+      pre = null,
+      succ = null;
+
+    while (curr) {
+      if (curr.data < key) {
+        pre = curr;
+        curr = curr.right;
+      } else if (curr.data > key) {
+        succ = curr;
+        curr = curr.left;
+      } else {
+        if (curr.left) pre = rightMost(curr.left);
+        if (curr.right) succ = leftMost(curr.right);
+        break;
+      }
+    }
+
+    return [pre, succ];
+  }
+}

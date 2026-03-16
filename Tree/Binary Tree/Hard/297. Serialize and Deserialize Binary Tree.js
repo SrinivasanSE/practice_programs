@@ -16,7 +16,7 @@ var serialize = function (root) {
   let str = "";
   if (root == null) return str;
   const q = [root];
-  while (q.length > 0) {
+  while (q.length > 0) { 
     const node = q.shift();
 
     if (!node) str += ",#";
@@ -44,7 +44,7 @@ var deserialize = function (data) {
   while (q.length > 0) {
     const node = q.shift();
 
-    // we are not checking for # and assigning null explicitly since by default it's already null while creating the node itself.
+    // we are not checking for # and not assigning null explicitly since by default it's already null while creating the node itself.
 
     if (data[i] != "#") {
       node.left = new TreeNode(+data[i]);
