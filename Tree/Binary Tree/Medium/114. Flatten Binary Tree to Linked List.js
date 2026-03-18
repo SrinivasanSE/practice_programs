@@ -8,7 +8,6 @@ O(n) & O(n)
 
 */
 
-
 /*
 Example Tree (BEFORE flatten):
 
@@ -70,7 +69,7 @@ var flatten = function (root) {
     */
 
     root.right = prev; // attach current node to the flattened list
-    root.left = null;  // left must be null for linked list
+    root.left = null; // left must be null for linked list
 
     /*
       Step 4: Move `prev` pointer
@@ -88,7 +87,6 @@ var flatten = function (root) {
   return root;
 };
 
-
 /*
 
 Iterative - Stack
@@ -103,11 +101,10 @@ var flatten = function (root) {
 
   // Stack to simulate preorder traversal (root → left → right)
   let stk = [root],
-      curr;
+    curr;
 
   // Continue until all nodes are processed
   while (stk.length > 0) {
-
     // Pop the top node from the stack
     curr = stk.pop();
 
@@ -146,7 +143,6 @@ var flatten = function (root) {
   // Root now represents the head of the flattened linked list
   return root;
 };
-
 
 /*
 

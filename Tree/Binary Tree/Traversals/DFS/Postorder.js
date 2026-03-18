@@ -9,15 +9,15 @@ O(n) & O(n)
 
 */
 
-var inorderTraversal = function (root) {
+var postorderTraversal = function (root) {
   const nodes = [];
 
   const traversal = (node) => {
     if (node == null) return;
 
     traversal(node.left);
-    nodes.push(node.val);
     traversal(node.right);
+    nodes.push(node.val);
   };
 
   traversal(root);
