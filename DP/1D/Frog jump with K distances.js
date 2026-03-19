@@ -81,6 +81,7 @@ function frogJumpDP(heights, k) {
 Space optimised
 
 O(n*k) & O(k)
+
 */
 
 function frogJumpSpaceEfficient(heights, k) {
