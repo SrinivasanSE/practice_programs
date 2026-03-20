@@ -119,10 +119,12 @@ class Solution {
     let dp = new Array(sum + 1).fill(false);
 
     dp[0] = true;
-    dp[arr[0]] = true;
+    if (arr[0] <= sum)
+      dp[arr[0]] = true;
 
     for (let i = 1; i < n; i++) {
-      for (let target = sum; target >= arr[i]; target--) { // we can only run till arr[i] and run in reverse to use single dp arr and no need of curr and prev arr
+      for (let target = sum; target >= arr[i]; target--) {
+        // we can only run till arr[i] and run in reverse to use single dp arr and no need of curr and prev arr
         dp[target] = dp[target] || dp[target - arr[i]];
         if (dp[sum]) return true;
       }

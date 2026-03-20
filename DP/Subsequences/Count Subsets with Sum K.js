@@ -127,9 +127,8 @@ class Solution {
     if (arr[0] != 0 && arr[0] <= k) prev[arr[0]] = 1;
 
     for (let i = 1; i < n; i++) {
-      for (let target = k; target >= 0; target--) {
-        prev[target] =
-          prev[target] + (target >= arr[i] ? prev[target - arr[i]] : 0);
+      for (let target = k; target >= arr[i]; target--) {
+        prev[target] = prev[target] + prev[target - arr[i]];
       }
     }
 

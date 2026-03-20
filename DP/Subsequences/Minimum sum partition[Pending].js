@@ -34,9 +34,9 @@ class Solution { // No need to split the partition equally with same length and 
     if (arr[0] <= totalSum) prev[arr[0]] = true;
 
     for (let i = 1; i < n; i++) {
-      for (let target = totalSum; target >= 0; target--) {
+      for (let target = totalSum; target >= arr[i]; target--) {
         prev[target] =
-          prev[target] || (target >= arr[i] ? prev[target - arr[i]] : false);
+          prev[target] || prev[target - arr[i]]
       }
     }
 
