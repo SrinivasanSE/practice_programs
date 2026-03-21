@@ -81,6 +81,7 @@ var longestPalindromeSubseq = function (s) {
   }
 
   for (let i = n - 1; i >= 0; i--) {
+    // can be n - 2 as well since the inner loop does not run anyway for the first iteration
     // start from reverse and fill the dp
     for (let j = i + 1; j < n; j++) {
       // start from i + 1
@@ -106,7 +107,7 @@ O(n^2) & O(2*n)
 var longestPalindromeSubseq = function (s) {
   const n = s.length;
 
-  let prev = new Array(n).fill(1); // why do we init all as 1?
+  let prev = new Array(n).fill(1);
   let curr = new Array(n).fill(0);
 
   for (let i = n - 1; i >= 0; i--) {

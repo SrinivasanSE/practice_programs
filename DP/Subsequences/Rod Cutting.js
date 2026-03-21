@@ -113,13 +113,12 @@ class Solution {
     const n = price.length;
     const prev = new Array(n + 1).fill(0);
 
+    // Start from 0 and initial mapping not needed
     for (let i = 0; i < n; i++) {
-      // Start from 0
-      for (let inch = 0; inch <= n; inch++) {
+      for (let inch = i + 1; inch <= n; inch++) {
         const notPick = prev[inch];
-        let pick = -1e9;
         const rodLength = i + 1;
-        if (rodLength <= inch) pick = price[i] + prev[inch - rodLength];
+        let pick = price[i] + prev[inch - rodLength];
         prev[inch] = Math.max(pick, notPick);
       }
     }

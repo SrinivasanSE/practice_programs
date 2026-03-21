@@ -31,7 +31,7 @@ class Solution {
       return Math.max(
         count,
         findCount(i1, i2 - 1, 0),
-        findCount(i1 - 1, i2, 0)
+        findCount(i1 - 1, i2, 0),
       ); // no match, reset the count to 0
     };
 
@@ -102,5 +102,40 @@ class Solution {
     }
 
     return max;
+  }
+}
+
+// Print the string as well
+
+class Solution {
+  longCommSubstr(s1, s2) {
+    let maxLen = 0;
+    let endIndex = -1;
+
+    const n1 = s1.length,
+      n2 = s2.length;
+    const dp = new Array(n2 + 1).fill(0);
+
+    for (let i1 = 1; i1 <= n1; i1++) {
+      let prev = 0;
+      for (let i2 = 1; i2 <= n2; i2++) {
+        let temp = dp[i2];
+
+        if (s1[i1 - 1] == s2[i2 - 1]) {
+          dp[i2] = 1 + prev;
+
+          if (dp[i2] > maxLen) {
+            maxLen = dp[i2];
+            endIndex = i1 - 1;
+          }
+        } else {
+          dp[i2] = 0;
+        }
+
+        prev = temp;
+      }
+    }
+
+    return s1.substring(endIndex - maxLen + 1, endIndex + 1);
   }
 }

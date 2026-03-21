@@ -15,7 +15,7 @@ var longestCommonSubsequence = function (text1, text2) {
   const findLength = (i1, i2) => {
     if (i1 === 0 || i2 === 0) return 0; // since we follow 1 based indexing, we should check for 0 instead of < 0
 
-    if (text1[i1] === text2[i2]) {
+    if (text1[i1 - 1] === text2[i2 - 1]) {
       // if both the chars are same, we can move to the previous char
       return 1 + findLength(i1 - 1, i2 - 1);
     }
@@ -38,24 +38,24 @@ var longestCommonSubsequence = function (text1, text2) {
   const n1 = text1.length,
     n2 = text2.length;
 
-  const dp = Array.from({ length: n1 }, () => new Array(n2 + 1).fill(-1));
+  const dp = Array.from({ length: n1 + 1 }, () => new Array(n2 + 1).fill(-1));
 
   const findLength = (i1, i2) => {
     if (i1 < 0 || i2 < 0) return 0;
 
     if (dp[i1][i2] != -1) return dp[i1][i2];
 
-    if (text1[i1] === text2[i2]) {
+    if (text1[i1 - 1] === text2[i2 - 1]) {
       return (dp[i1][i2] = 1 + findLength(i1 - 1, i2 - 1));
     }
 
     return (dp[i1][i2] = Math.max(
       findLength(i1 - 1, i2),
-      findLength(i1, i2 - 1)
+      findLength(i1, i2 - 1),
     ));
   };
 
-  return findLength(n1 - 1, n2 - 1);
+  return findLength(n1, n2);
 };
 
 /*
@@ -122,7 +122,6 @@ Space ops - one arr
 O(n1*n2) & O(n2)
 
 */
-
 
 // further optimised, curr arr not needed
 
