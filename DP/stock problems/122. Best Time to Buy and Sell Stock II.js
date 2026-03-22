@@ -252,15 +252,26 @@ O(n) & O(1)
 
 var maxProfit = function (prices) {
   const n = prices.length;
+  if (n === 0) return 0;
 
-  let hold = -prices[0],
-    cash = 0,
-    prevCash;
-  for (let i = 0; i < n; i++) {
-    prevCash = cash;
+  // cash → max profit when we DO NOT hold a stock
+  // hold → max profit when we DO hold a stock
+
+  let cash = 0; // initially, no stock, no profit
+  let hold = -prices[0]; // we buy on day 0
+
+  for (let i = 1; i < n; i++) {
+    // store previous cash BEFORE updating
+    const prevCash = cash;
+
+    // Option 1: do nothing
+    // Option 2: sell stock today
     cash = Math.max(cash, hold + prices[i]);
+
+    // Option 1: do nothing (keep holding)
+    // Option 2: buy today using previous cash
     hold = Math.max(hold, prevCash - prices[i]);
   }
 
-  return cash;
+  return cash; // final profit must be in "cash" (no stock held)
 };

@@ -18,11 +18,11 @@ var isMatch = function (s, p) {
     if (i === 0 && j === 0) return true;
 
     // ❌ Base Case 2: pattern empty but string not empty → no match
-    if (i > 0 && j === 0) return false;
+    if (j === 0) return false;
 
     // ✅ Base Case 3: string empty but pattern not empty
     // Only possible match if the remaining pattern characters are all '*'
-    if (j > 0 && i === 0) {
+    if (i === 0) {
       for (let k = 0; k < j; k++) {
         if (p[k] != "*") return false;
       }
@@ -45,7 +45,7 @@ var isMatch = function (s, p) {
     }
 
     // 💾 Store the result before returning
-    return (dp[i][j] = flag);
+    return flag
   };
 
   // Start recursion with full lengths
@@ -234,7 +234,7 @@ var isMatch = function (s, p) {
 
   for (let i = 1; i <= n1; i++) {
     prev = dp[0]; // store previous diagonal
-    dp[0] = false; // pattern empty can't match non-empty string
+    dp[0] = false; // pattern empty can't match non-empty string dp[1][0] means string is not empty, but pattern is empty which is false
 
     for (let j = 1; j <= n2; j++) {
       temp = dp[j]; // store dp[i-1][j] before it gets overwritten, this will be used in the next iteration as prev, dp[j - 1]

@@ -11,7 +11,6 @@ O(2^n1*2*n^2) & O(n1)
 var numDistinct = function (s, t) {
   const n1 = s.length,
     n2 = t.length;
-  const dp = Array.from({ length: n1 + 1 }, () => new Array(n2 + 1).fill(-1));
 
   const findCount = (i, j) => {
     if (i < j) return 0; // If the string s is shorter than the string t (i < j), then it is impossible for s to contain t as a subsequence.
@@ -20,7 +19,7 @@ var numDistinct = function (s, t) {
 
     if (s[i - 1] === t[j - 1]) {
       // when the char matches, move to the before char and stay at the same char and check if the char from t can be matched by another same char in the front
-      return (dp[i][j] = findCount(i - 1, j - 1) + findCount(i - 1, j));
+      return findCount(i - 1, j - 1) + findCount(i - 1, j);
     }
 
     return findCount(i - 1, j); // no match, so move the s string, so that we can check if t's char can at least match with other chars in the front of s
