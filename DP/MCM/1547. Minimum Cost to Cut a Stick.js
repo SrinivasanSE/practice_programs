@@ -88,3 +88,27 @@ var minCost = function (n, cuts) {
   // Step 4: answer for full stick [0, n]
   return dp[0][m - 1];
 };
+
+var minCost = function (n, cuts) {
+  const c = cuts.length;
+  cuts.sort((a, b) => a - b);
+  cuts.unshift(0);
+  cuts.push(n);
+
+  const dp = Array.from({ length: c + 2 }, () => new Array(c + 1).fill(0));
+
+  for (let i = c; i >= 1; i--) {
+    for (let j = i; j <= c; j++) {
+      let min = 1e9,
+        cost;
+      for (let ind = i; ind <= j; ind++) {
+        cost = cuts[j + 1] - cuts[i - 1] + dp[i][ind - 1] + dp[ind + 1][j];
+        min = Math.min(min, cost);
+      }
+
+      dp[i][j] = min;
+    }
+  }
+
+  return dp[1][c];
+};

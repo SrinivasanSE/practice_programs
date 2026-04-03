@@ -6,7 +6,6 @@ We assume the baloon to be bursted is the last baloon, so at each recursion flow
 
 */
 
-
 /*
 
 Recursion/Memo
@@ -15,46 +14,45 @@ O(n^3) & O(n^2) + O(n)
 
 */
 
-
 var maxCoins = function (nums) {
-    // Add virtual balloons with value 1 at both ends
-    // This simplifies boundary cases
-    nums = [1, ...nums, 1];
-    const n = nums.length;
+  // Add virtual balloons with value 1 at both ends
+  // This simplifies boundary cases
+  nums = [1, ...nums, 1];
+  const n = nums.length;
 
-    // dp[i][j] stores the maximum coins obtainable
-    // by bursting all balloons between index i and j (exclusive)
-    const dp = Array.from({ length: n }, () => new Array(n).fill(-1));
+  // dp[i][j] stores the maximum coins obtainable
+  // by bursting all balloons between index i and j (exclusive)
+  const dp = Array.from({ length: n }, () => new Array(n).fill(-1));
 
-    // Recursive helper function
-    const f = (i, j) => {
-        // Base case: no balloons between i and j
-        // (i.e., segment empty)
-        if (j - i <= 1) return 0;
+  // Recursive helper function
+  const f = (i, j) => {
+    // Base case: no balloons between i and j
+    // (i.e., segment empty)
+    if (j - i <= 1) return 0;
 
-        // Memoization check: reuse already computed result
-        if (dp[i][j] !== -1) return dp[i][j];
+    // Memoization check: reuse already computed result
+    if (dp[i][j] !== -1) return dp[i][j];
 
-        let max = Number.MIN_SAFE_INTEGER;
+    let max = Number.MIN_SAFE_INTEGER;
 
-        // Try every possible balloon 'k' between i and j
-        // as the last one to burst in this subarray
-        for (let k = i + 1; k < j; k++) {
-            // Coins gained by bursting balloon 'k' last
-            // + coins gained from left subarray (i,k)
-            // + coins gained from right subarray (k,j)
-            const coins = nums[i] * nums[k] * nums[j] + f(i, k) + f(k, j);  
+    // Try every possible balloon 'k' between i and j
+    // as the last one to burst in this subarray
+    for (let k = i + 1; k < j; k++) {
+      // Coins gained by bursting balloon 'k' last
+      // + coins gained from left subarray (i,k)
+      // + coins gained from right subarray (k,j)
+      const coins = nums[i] * nums[k] * nums[j] + f(i, k) + f(k, j);
 
-            // Choose the maximum over all possible 'k'
-            max = Math.max(max, coins);
-        }
+      // Choose the maximum over all possible 'k'
+      max = Math.max(max, coins);
+    }
 
-        // Store result for future use and return it
-        return dp[i][j] = max;
-    };
+    // Store result for future use and return it
+    return (dp[i][j] = max);
+  };
 
-    // We compute for the full range (0, n-1)
-    return f(0, n - 1);
+  // We compute for the full range (0, n-1)
+  return f(0, n - 1);
 };
 
 /*
@@ -65,37 +63,34 @@ O(n^3) & O(n^2)
 
 */
 
-
 var maxCoins = function (nums) {
-    // Add virtual balloons at both ends
-    nums = [1, ...nums, 1];
-    const n = nums.length;
+  // Add virtual balloons at both ends
+  nums = [1, ...nums, 1];
+  const n = nums.length;
 
-    // dp[i][j] = max coins from bursting balloons between i and j (exclusive)
-    const dp = Array.from({ length: n }, () => new Array(n).fill(0));
+  // dp[i][j] = max coins from bursting balloons between i and j (exclusive)
+  const dp = Array.from({ length: n }, () => new Array(n).fill(0));
 
-    // We fill dp bottom-up, starting from smaller segments
-    // i goes backward because smaller i means smaller intervals first
-    for (let i = n - 1; i >= 0; i--) {
-        for (let j = i + 2; j < n; j++) {
-            // Only segments where j-i > 1 contain at least one balloon
-            let max = Number.MIN_SAFE_INTEGER;
+  // We fill dp bottom-up, starting from smaller segments
+  // i goes backward because smaller i means smaller intervals first
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = i + 2; j < n; j++) {
+      // Only segments where j-i > 1 contain at least one balloon
+      let max = Number.MIN_SAFE_INTEGER;
 
-            // Try each possible last balloon 'k' between i and j
-            for (let k = i + 1; k < j; k++) {
-                const coins = nums[i] * nums[k] * nums[j] + dp[i][k] + dp[k][j];
-                max = Math.max(max, coins);
-            }
+      // Try each possible last balloon 'k' between i and j
+      for (let k = i + 1; k < j; k++) {
+        const coins = nums[i] * nums[k] * nums[j] + dp[i][k] + dp[k][j];
+        max = Math.max(max, coins);
+      }
 
-            dp[i][j] = max;
-        }
+      dp[i][j] = max;
     }
+  }
 
-    // Final answer is the full segment (0, n-1)
-    return dp[0][n - 1];
+  // Final answer is the full segment (0, n-1)
+  return dp[0][n - 1];
 };
-
-
 
 /*
 
@@ -113,3 +108,26 @@ it goes on like this.
 
 
 */
+
+var maxCoins = function (nums) {
+  const n = nums.length;
+
+  nums.unshift(1);
+  nums.push(1);
+
+  const dp = Array.from({ length: n + 2 }, () => new Array(n + 2).fill(0));
+
+  for (let i = n; i >= 1; i--) {
+    for (let j = i; j <= n; j++) {
+      let max = Number.MIN_SAFE_INTEGER;
+      for (let k = i; k <= j; k++) {
+        let coins =
+          nums[i - 1] * nums[k] * nums[j + 1] + dp[i][k - 1] + dp[k + 1][j];
+        max = Math.max(max, coins);
+      }
+      dp[i][j] = max;
+    }
+  }
+
+  return dp[1][n];
+};
