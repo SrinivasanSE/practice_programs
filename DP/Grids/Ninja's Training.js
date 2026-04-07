@@ -106,7 +106,7 @@ class Solution {
     // your code here
     const n = arr.length;
 
-    const dp = Array.from({ length: n }, () => new Array(3).fill(-1));
+    const dp = Array.from({ length: n }, () => new Array(3).fill(0));
 
     if (n === 1) {
       return Math.max(arr[0][0], arr[0][1], arr[0][2]);

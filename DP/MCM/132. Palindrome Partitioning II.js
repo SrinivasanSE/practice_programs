@@ -81,7 +81,7 @@ var minCut = function (s) {
         for (let j = i; j < n; j++) {
             // A substring s[i..j] is palindrome if:
             // - Ends match AND
-            // - Substring length < 2 (single char) OR middle substring is palindrome
+            // - Substring length < 2 (single char) OR middle substring is palindrome (if s[i + 1, j - 1] is a palindrome, then s[i, j] will be palindrome if end chars match)
             if (s[i] === s[j] && (j - i <= 1 || isPalindrome[i + 1][j - 1])) { // when i is 5, we would have already computed the value of i = 6
                 isPalindrome[i][j] = true;
             }

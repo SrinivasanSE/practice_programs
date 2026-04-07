@@ -47,7 +47,7 @@ O(n) & O(n)
 
 var rob = function (nums) {
   let n = nums.length;
-  const dp = new Array(n + 1).fill(-1);
+  const dp = new Array(n).fill(-1);
   const find = (ind) => {
     if (ind < 0) return 0;
     if (ind === 0) {
@@ -95,18 +95,20 @@ O(n) & O(1)
 */
 
 var rob = function (nums) {
-  let n = nums.length;
-  let prev1 = nums[0],
-    prev2 = null;
-  let skip, rob;
-  for (let i = 1; i < n; i++) {
-    skip = prev1;
-    rob = i > 1 ? prev2 + nums[i] : nums[i];
-    prev2 = prev1;
-    prev1 = Math.max(skip, rob);
+  const n = nums.length;
+  if (n == 1) return nums[0];
+  let prev1, prev;
+  prev1 = nums[0];
+  prev = Math.max(nums[0], nums[1]);
+
+  for (let i = 2; i < n; i++) {
+    const notPick = prev;
+    let pick = nums[i] + prev1;
+    prev1 = prev;
+    prev = Math.max(pick, notPick);
   }
 
-  return prev1;
+  return prev;
 };
 
 // Greedy approach won't give the correct ans for this, but the approach is this
