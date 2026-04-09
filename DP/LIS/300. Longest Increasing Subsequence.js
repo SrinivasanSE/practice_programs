@@ -52,7 +52,7 @@ var lengthOfLIS = function (nums) {
       const notPick = dp[i + 1][prev + 1];
       let pick = 0;
       if (prev === -1 || nums[prev] < nums[i]) {
-        pick = 1 + dp[i + 1][i + 1]; // why i + 1 for prev?
+        pick = 1 + dp[i + 1][i + 1]; // we use i + 1 since prev index is shifted by 1
       }
 
       dp[i][prev + 1] = Math.max(pick, notPick);
@@ -94,7 +94,7 @@ var lengthOfLIS = function (nums) {
 
 /*
 
-Better
+Better Approach
 
 O(n^2) & O(n)
 

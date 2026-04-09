@@ -75,25 +75,21 @@ var maxProfit = function (k, prices) {
 
 var maxProfit = function (k, prices) {
   const n = prices.length;
+  const dp = new Array(2 * k + 1).fill(0);
 
-  let dp = new Array(k * 2 + 1).fill(0);
-
-  let prev, temp;
   for (let i = n - 1; i >= 0; i--) {
-    prev = 0;
-    for (let tCount = k * 2 - 1; tCount >= 0; tCount--) {
-      temp = dp[tCount];
-      if (tCount % 2 === 0) {
-        const buy = -prices[i] + prev;
-        const notBuy = dp[tCount];
-        dp[tCount] = Math.max(buy, notBuy);
+    for (let count = 0; count < 2 * k; count++) {
+      if (count % 2 == 0) {
+        const buy = -prices[i] + dp[count + 1];
+        const notBuy = dp[count];
+        dp[count] = Math.max(buy, notBuy);
       } else {
-        const sell = prices[i] + prev;
-        const notSell = dp[tCount];
-        dp[tCount] = Math.max(sell, notSell);
+        const sell = prices[i] + dp[count + 1];
+        const notSell = dp[count];
+        dp[count] = Math.max(sell, notSell);
       }
-      prev = temp;
     }
   }
+
   return dp[0];
 };

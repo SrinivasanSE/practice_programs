@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/
 
+// Similar to 122
+
 /*
 
 Recursion
@@ -11,12 +13,9 @@ O(2^n & O(n)
 var maxProfit = function (prices) {
   const n = prices.length;
 
-  const dp = Array.from({ length: n + 1 }, () => new Array(2).fill(-1));
-
   const findProfit = (i, canBuy) => {
     if (i >= n) return 0; // should be >= n as i + 2 can go beyond n as well
 
-    if (dp[i][canBuy] != -1) return dp[i][canBuy];
 
     if (canBuy) {
       const buy = -prices[i] + findProfit(i + 1, 0);
