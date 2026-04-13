@@ -1,3 +1,8 @@
+
+## 2DP problems
+
+We need to traverse the 2d arr and find the no of ways or min/max sum.
+
 1. Unique Paths
 
 we use m and n index.
@@ -35,3 +40,13 @@ Have 3 options, go bottom or bottomRight or bottomLeft. We need to add square[i]
 Take min of all 3.
 The result will be min of the first row in dp since we have multiple starting points.
 1DP of two arr required and not possible with only 1 arr.
+
+
+## 3dp problems
+
+6) Cherry Pickup II
+
+We use i, j1, j2 index.
+We start from the first row, recursion from 0, 0, n - 1 and i = n - 2, j1 = n - 1 and j2 = 0 in tabulation
+We need to use two for loops which goes from -1 to 1 and find the max of all of them
+2dp ops is possible using two arrs.

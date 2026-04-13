@@ -50,6 +50,6 @@ class Solution { // No need to split the partition equally with same length and 
       }
     }
 
-    return totalSum - 2 * minPossibleClosestSum; // s1 = min, s2 = totalSum - min, (s1 - s2) -> totalSum - 2*min
+    return totalSum - 2 * minPossibleClosestSum; // s1 = min, s2 = totalSum - min, (s2 - s1) -> totalSum - 2*min
   }
 }
