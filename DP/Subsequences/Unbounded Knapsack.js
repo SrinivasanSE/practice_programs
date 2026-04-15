@@ -15,10 +15,7 @@ class Solution {
 
     const findProfit = (ind, capacity) => {
       if (ind === 0) {
-        if (wt[ind] <= capacity)
-          // this condition is not needed, if the wt[ind] is greater, 0 will be returned anyway
           return Math.floor(capacity / wt[ind]) * val[ind];
-        return 0;
       }
 
       const notPick = findProfit(ind - 1, capacity);

@@ -23,7 +23,7 @@ class Solution {
       const notPick = findMaxValue(ind - 1, inches);
       let pick = -1e9;
       const rodLength = ind + 1;
-      if (rodLength <= inches - 1)
+      if (rodLength <= inches)
         pick = price[ind] + findMaxValue(ind, inches - rodLength);
       return Math.max(pick, notPick);
     };

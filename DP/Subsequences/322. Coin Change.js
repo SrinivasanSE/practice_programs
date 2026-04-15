@@ -78,8 +78,6 @@ O(n*amount) & O(n*amount)
 var coinChange = function (coins, amount) {
   const n = coins.length;
 
-  if (n === 1 && amount % coins[0] != 0) return -1;
-
   const dp = Array.from({ length: n }, () => new Array(amount + 1));
 
   for (let i = 0; i <= amount; i++) {
@@ -117,8 +115,6 @@ O(n*amount) & O(amount)
 
 var coinChange = function (coins, amount) {
   const n = coins.length;
-
-  if (n === 1 && amount % coins[0] != 0) return -1;
 
   let prev = new Array(amount + 1);
 
