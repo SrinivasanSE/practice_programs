@@ -107,7 +107,7 @@ O(n^2) & O(2*n)
 var longestPalindromeSubseq = function (s) {
   const n = s.length;
 
-  let prev = new Array(n).fill(1);
+  let prev = new Array(n).fill(0);
   let curr = new Array(n).fill(0);
 
   for (let i = n - 1; i >= 0; i--) {
@@ -136,9 +136,10 @@ O(n^2) & O(n)
 var longestPalindromeSubseq = function (s) {
   let n = s.length;
 
-  let dp = new Array(n).fill(1);
+  let dp = new Array(n).fill(0);
 
   for (let i = n - 1; i >= 0; i--) {
+    dp[i] = 1
     let prev = 0; // stores dp[i+1][j-1] from previous iteration
     for (let j = i + 1; j < n; j++) {
       let temp = dp[j]; // save current dp[j] (which is dp[i+1][j]) before overwriting
