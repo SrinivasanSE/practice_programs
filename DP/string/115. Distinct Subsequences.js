@@ -122,25 +122,27 @@ var numDistinct = function (s, t) {
 };
 
 // Space optimised further, curr arr removed. We can notice that curr array is not used to calculate in the current iteration, so curr arr is not needed
-// and we need to run the loop in reverse, so that we don't overwrite the arr
 
 var numDistinct = function (s, t) {
-  const n1 = s.length,
-    n2 = t.length;
-  if (n1 < n2) return 0;
-  let dp = new Array(n2 + 1).fill(0);
+  const m = s.length;
+  const n = t.length;
 
-  dp[0] = 1;
+  const dp = new Array(n + 1).fill(0);
 
-  for (let i = 1; i <= n1; i++) {
-    for (let j = n2; j >= 1; j--) {
-      // run the loop from end, if we run from start, for j = 2, we will need dp[1]
-      // and we would overwritten that already in the previous iteration, but if we run from end, we won't overwrite
-      if (s[i - 1] === t[j - 1]) {
-        dp[j] += dp[j - 1];
+  let prev, temp;
+
+  for (let i = 1; i <= m; i++) {
+    dp[0] = 1;
+    prev = dp[0];
+    for (let j = 1; j <= n; j++) {
+      temp = dp[j];
+      if (s[i - 1] == t[j - 1]) {
+        dp[j] = prev + dp[j];
       }
+
+      prev = temp;
     }
   }
 
-  return dp[n2];
+  return dp[n];
 };
