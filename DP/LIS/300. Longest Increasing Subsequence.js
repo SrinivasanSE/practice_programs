@@ -152,7 +152,7 @@ var lengthOfLIS = function (nums) {
   for (let i = 1; i < n; i++) {
     // If current number is greater than the largest element in dp,
     // it extends the LIS — so we push it to dp
-    if (dp[dp.length - 1] < nums[i]) {
+    if (dp[len - 1] < nums[i]) {
       dp.push(nums[i]);
       len++;
     }
