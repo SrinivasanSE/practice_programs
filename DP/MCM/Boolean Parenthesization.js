@@ -106,7 +106,7 @@ var countWays = function (s) {
   // Base case: single symbols
   for (let i = 0; i < n; i++) {
     if (s[i] === "T") dp[i][i][1] = 1;
-    if (s[i] === "F") dp[i][i][0] = 1;
+    else dp[i][i][0] = 1;
   }
 
   // len = length of substring (always odd: operand op operand ...)

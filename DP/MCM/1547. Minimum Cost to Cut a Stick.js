@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/
 
+// Look at the last dp approach
+
 /*
 
 Recursion/Memo

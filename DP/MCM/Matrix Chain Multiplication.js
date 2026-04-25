@@ -70,7 +70,7 @@ class Solution {
 
     for (let i = 0; i < n; i++) dp[i][i] = 0; // Base case
 
-    for (let i = n - 2; i >= 1; i--) {
+    for (let i = n - 1; i >= 1; i--) {
       // start from end and go till 1 only as we are doing i - 1 inside
       for (let j = i + 1; j < n; j++) {
         // j should be bigger than i, so j should start from i + 1
