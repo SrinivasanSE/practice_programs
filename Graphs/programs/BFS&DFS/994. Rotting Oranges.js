@@ -61,7 +61,7 @@ var orangesRotting = function (grid) {
     const [row, col, t] = q.shift();
 
     // Track maximum time reached
-    time = Math.max(time, t);
+    time = t;
 
     for (let r = 0; r < 4; r++) {
       let nRow = row + dRow[r];
