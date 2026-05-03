@@ -18,9 +18,7 @@ class Solution {
     const n = grid[0].length;
 
     // visited[r][c] → whether this cell is already processed
-    const vis = Array.from({ length: m }, () =>
-      new Array(n).fill(false)
-    );
+    const vis = Array.from({ length: m }, () => new Array(n).fill(false));
 
     // DFS to mark all connected land cells
     const dfs = (r, c) => {
@@ -73,7 +71,7 @@ class Solution {
 
 /*
 
-DFS
+BFS
 
 O(m*n) & O(m*n)
 
@@ -84,9 +82,7 @@ class Solution {
     const m = grid.length;
     const n = grid[0].length;
 
-    const vis = Array.from({ length: m }, () =>
-      new Array(n).fill(false)
-    );
+    const vis = Array.from({ length: m }, () => new Array(n).fill(false));
 
     const bfs = (r, c) => {
       // Queue for BFS traversal
@@ -138,4 +134,3 @@ class Solution {
     return cnt;
   }
 }
-

@@ -122,8 +122,10 @@ var ladderLength = function (beginWord, endWord, wordList) {
   }
 
   // Visited set to avoid revisiting words (prevents cycles)
-  const vis = new Set();
-  vis.add(beginWord);
+  const set = new Set();
+   // Remove beginWord from set if present to avoid revisiting
+  if (set.has(beginWord)) set.delete(beginWord);
+ 
 
   // BFS queue: [currentWord, transformationLevel]
   // Level = length of transformation sequence so far
@@ -150,9 +152,8 @@ var ladderLength = function (beginWord, endWord, wordList) {
         // BFS guarantees minimal level
         if (nei == endWord) return level + 1;
 
-        // If neighbor has not been visited
-        if (!vis.has(nei)) {
-          vis.add(nei); // mark visited
+        if (set.has(nei)) {
+          set.add(nei); // mark visited
           q.push([nei, level + 1]); // push to next BFS level
         }
       }
