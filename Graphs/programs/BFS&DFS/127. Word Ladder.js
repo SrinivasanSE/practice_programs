@@ -157,12 +157,12 @@ var ladderLength = function (beginWord, endWord, wordList) {
           q.push([nei, level + 1]); // push to next BFS level
         }
       }
-    }
 
-    // Optimization:
-    // Once a pattern is processed, clear it so it won't be reused
-    // This avoids redundant neighbor expansions
-    patternMap.set(pattern, []);
+      // Optimization:
+      // Once a pattern is processed, clear it so it won't be reused
+      // This avoids redundant neighbor expansions
+      patternMap.set(pattern, []);
+    }
   }
 
   // If BFS ends without reaching endWord
