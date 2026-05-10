@@ -45,7 +45,7 @@ var shortestPathBinaryMatrix = function (grid) {
 
     // If destination is reached, return immediately
     // BFS guarantees this is the shortest path
-    if (r == dest[0] && c == dest[1]) {
+    if (r == dest[0] && c == dest[1]) { // not adding here is failing one testcase when the grid is [[0]]
       return d;
     }
 

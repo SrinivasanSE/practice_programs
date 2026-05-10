@@ -1,4 +1,4 @@
-// https://www.geeksforgeeks.org/problems/shortest-path-in-weighted-undirected-graph/1
+// https://www.geeksforgeeks.org/problems/nshortest-path-in-weighted-undirected-graph/1
 
 /*
 

@@ -8,6 +8,26 @@ O(V + E) & O(V + E)
 
 */
 
+// Topo sort can be done using dfs also
+
+/*
+
+Without topo sort:
+
+A node may be processed before all paths leading to it are known.
+
+Topological order guarantees:
+
+Every node is processed ONLY AFTER all its parents.
+
+So when you process a node:
+
+its shortest distance is already final.
+
+That is the key reason topo sort is required for DAG shortest path.
+
+*/
+
 class Solution {
   shortestPath(V, edges) {
     // ---------------------------------------
@@ -56,6 +76,7 @@ class Solution {
 
     for (let u of topo) {
       if (dist[u] !== Infinity) {
+        // Only process nodes that are actually reachable from source
         for (let [v, wt] of adj[u]) {
           if (dist[u] + wt < dist[v]) {
             dist[v] = dist[u] + wt;
@@ -75,6 +96,60 @@ class Solution {
   }
 }
 
+/*
+
+DFS
+
+*/
+
+class Solution {
+  shortestPath(V, E, edges) {
+    // code here.
+
+    const adj = Array.from({ length: V }, () => []);
+    const vis = new Array(V).fill(0);
+    const stk = [];
+    for (let [u, v, w] of edges) {
+      adj[u].push([v, w]);
+    }
+
+    const dfs = (node) => {
+      vis[node] = 1;
+
+      for (let [nei, w] of adj[node]) {
+        if (!vis[nei]) dfs(nei);
+      }
+
+      stk.push(node);
+    };
+
+    for (let i = 0; i < V; i++) {
+      if (!vis[i]) {
+        dfs(i);
+      }
+    }
+
+    const dist = new Array(V).fill(Infinity);
+    dist[0] = 0;
+
+    while (stk.length > 0) {
+      const curr = stk.pop();
+      if (dist[curr] != Infinity) {
+        for (let [v, w] of adj[curr]) {
+          if (dist[curr] + w < dist[v]) {
+            dist[v] = dist[curr] + w;
+          }
+        }
+      }
+    }
+
+    for (let i = 0; i < V; i++) {
+      if (dist[i] == Infinity) dist[i] = -1;
+    }
+
+    return dist;
+  }
+}
 
 /*
 
@@ -84,49 +159,43 @@ O(V*E) & O(V)
 
 */
 
-
 class Solution {
-    shortestPath(n, m, edges) {
-        // -----------------------------------------
-        // STEP 1: Distance initialization
-        // -----------------------------------------
-        // dist[i] = shortest distance from source (0) to node i
-        const dist = new Array(n).fill(Infinity);
+  shortestPath(n, m, edges) {
+    // -----------------------------------------
+    // STEP 1: Distance initialization
+    // -----------------------------------------
+    // dist[i] = shortest distance from source (0) to node i
+    const dist = new Array(n).fill(Infinity);
 
-        // Distance from source to itself is always 0
-        dist[0] = 0;
+    // Distance from source to itself is always 0
+    dist[0] = 0;
 
-        // -----------------------------------------
-        // STEP 2: Relax all edges (n - 1) times
-        // -----------------------------------------
-        // Why (n - 1)?
-        // In the worst case, the longest simple path
-        // can have at most (n - 1) edges.
-        for (let i = 0; i < n - 1; i++) {
-
-            // Try to relax every edge
-            for (let [src, dest, weight] of edges) {
-
-                // If source is reachable AND
-                // going through src gives a shorter path to dest
-                if (
-                    dist[src] !== Infinity &&
-                    dist[src] + weight < dist[dest]
-                ) {
-                    dist[dest] = dist[src] + weight;
-                }
-            }
+    // -----------------------------------------
+    // STEP 2: Relax all edges (n - 1) times
+    // -----------------------------------------
+    // Why (n - 1)?
+    // In the worst case, the longest simple path
+    // can have at most (n - 1) edges.
+    for (let i = 0; i < n - 1; i++) {
+      // Try to relax every edge
+      for (let [src, dest, weight] of edges) {
+        // If source is reachable AND
+        // going through src gives a shorter path to dest
+        if (dist[src] !== Infinity && dist[src] + weight < dist[dest]) {
+          dist[dest] = dist[src] + weight;
         }
-
-        // -----------------------------------------
-        // STEP 3: Convert unreachable nodes to -1
-        // -----------------------------------------
-        for (let i = 0; i < n; i++) {
-            if (dist[i] === Infinity) {
-                dist[i] = -1;
-            }
-        }
-
-        return dist;
+      }
     }
+
+    // -----------------------------------------
+    // STEP 3: Convert unreachable nodes to -1
+    // -----------------------------------------
+    for (let i = 0; i < n; i++) {
+      if (dist[i] === Infinity) {
+        dist[i] = -1;
+      }
+    }
+
+    return dist;
+  }
 }
