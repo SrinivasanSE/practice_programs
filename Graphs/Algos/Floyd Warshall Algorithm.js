@@ -33,6 +33,11 @@ dist[i][j] = min(
     dist[i][k] + dist[k][j]
 )
 
+The algorithm relies on the principle of optimal substructure, meaning:
+
+If the shortest path from i to j passes through some vertex k, then the path from i to k and the path from k to j must also be shortest paths.
+The iterative approach ensures that by the time vertex k is considered, all shortest paths using only vertices 0 to k-1 have already been computed.
+
     */
 
 // O(V^3) & O(V^2)
@@ -56,7 +61,11 @@ function floydWarshall(n, edges) {
   for (let via = 0; via < n; via++) {
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
-        if (dist[i][via] + dist[via][j] < dist[i][j]) {
+        if (
+          dist[i][via] != INF &&
+          dist[via][j] != INF &&
+          dist[i][via] + dist[via][j] < dist[i][j]
+        ) {
           dist[i][j] = dist[i][via] + dist[via][j];
         }
       }

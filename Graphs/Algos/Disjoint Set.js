@@ -157,7 +157,7 @@ class DisJointSet {
         Attach smaller rank tree
         under larger rank tree
         */
-    if (this.rank[edgeUPar] < this.rank[edgeVPar]) {
+    if (this.rank[edgeUPar] < this.rank[edgeVPar]) { 
       this.parent[edgeUPar] = edgeVPar;
     } else if (this.rank[edgeUPar] > this.rank[edgeVPar]) {
       this.parent[edgeVPar] = edgeUPar;

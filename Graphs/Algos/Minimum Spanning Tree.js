@@ -165,7 +165,6 @@ O(E log E) & O(V)
 
 class Solution {
   spanningTree(V, edges) {
-
     /*
       STEP 1: Sort all edges by weight (ascending)
 
@@ -213,7 +212,6 @@ class Solution {
       STEP 3: Process edges in increasing order
     */
     for (let [u, v, w] of edges) {
-
       /*
         Check if u and v belong to DIFFERENT components
 
@@ -222,7 +220,6 @@ class Solution {
         - Safe to include in MST
       */
       if (ds.findPar(u) !== ds.findPar(v)) {
-
         // Add edge weight to MST total
         mstWeight += w;
 
@@ -260,7 +257,7 @@ class Solution {
     */
     return {
       weight: mstWeight,
-      mst: mstEdges
+      mst: mstEdges,
     };
   }
 }

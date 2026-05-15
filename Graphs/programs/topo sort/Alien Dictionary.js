@@ -136,11 +136,6 @@ class Solution {
 
 // DFS
 
-/**
- * @param {string[]} words
- * @return {string}
- */
-
 class Solution {
   findOrder(words) {
     // code here
