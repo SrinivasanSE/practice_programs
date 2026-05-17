@@ -6,7 +6,15 @@ A cycle exists if during DFS:
 
 we reach a node that is already in the current DFS path
 
-BFS is not possible because it does not maintain recursion path information.
+Undirected graph logic won't work because the neighbor node might be visited by some other path and another node might be visiting the same node using another path, but it might not be a cycle
+
+3 - 4 - 5 is a path
+3 - 7 - 5 is a path
+5 can be visited by both path, but the below graph is not a cycle. So the undirected graph logic will return as true which is wrong.
+ex: 3 --> 4
+    |     | -> Directed edge
+    7 --> 5 
+          
 
 */
 

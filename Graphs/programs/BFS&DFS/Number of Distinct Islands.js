@@ -2,7 +2,7 @@
 
 /*
 
-BFS
+DFS
 
 O(m*n) & O(m*n)
 

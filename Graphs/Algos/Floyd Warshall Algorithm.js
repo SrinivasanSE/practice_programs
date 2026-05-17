@@ -73,6 +73,7 @@ function floydWarshall(n, edges) {
   }
 
   // Negative cycle detection
+  // Normally: Distance from a node to itself is 0. If the total cycle weight is negative, it will become negative.
   for (let i = 0; i < n; i++) {
     if (dist[i][i] < 0) {
       console.log("Negative cycle exists");

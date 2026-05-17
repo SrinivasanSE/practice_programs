@@ -132,7 +132,7 @@ var criticalConnections = function (n, connections) {
           bridges.push([node, nei]);
         }
       }
-      // Case 2: Neighbor is already visited → Back Edge
+      // Case 2: Neighbor is already visited → Back Edge (Edge which is not from the parent)
       else {
         /**
          * Back edge found

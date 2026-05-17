@@ -42,7 +42,7 @@ class Solution {
 
       // Relax all adjacent edges
       for (let [nei, w] of adj[node]) {
-        const newDist = dist[node] + w;
+        const newDist = d + w;
 
         if (newDist < dist[nei]) {
           dist[nei] = newDist;

@@ -1,7 +1,5 @@
 // https://leetcode.com/problems/making-a-large-island/description/
 
-
-
 /*
 
 Core Intuition (Very Important)
@@ -44,8 +42,8 @@ var largestIsland = function (grid) {
   // 4-directional movement
   const dr = [
     [-1, 0], // up
-    [0, 1],  // right
-    [1, 0],  // down
+    [0, 1], // right
+    [1, 0], // down
     [0, -1], // left
   ];
 
@@ -56,7 +54,6 @@ var largestIsland = function (grid) {
   // -------------------------------
   for (let row = 0; row < n; row++) {
     for (let col = 0; col < n; col++) {
-
       // Count zeros (used for edge cases later)
       if (grid[row][col] === 0) {
         countOfZeros++;
@@ -73,8 +70,10 @@ var largestIsland = function (grid) {
 
         // If neighbor is valid and land, union them
         if (
-          nRow >= 0 && nRow < n &&
-          nCol >= 0 && nCol < n &&
+          nRow >= 0 &&
+          nRow < n &&
+          nCol >= 0 &&
+          nCol < n &&
           grid[nRow][nCol] === 1
         ) {
           const adj = nRow * n + nCol;
@@ -97,7 +96,6 @@ var largestIsland = function (grid) {
 
   for (let row = 0; row < n; row++) {
     for (let col = 0; col < n; col++) {
-
       // Only flip zeros
       if (grid[row][col] === 1) continue;
 
@@ -109,8 +107,10 @@ var largestIsland = function (grid) {
         const nCol = col + c;
 
         if (
-          nRow >= 0 && nRow < n &&
-          nCol >= 0 && nCol < n &&
+          nRow >= 0 &&
+          nRow < n &&
+          nCol >= 0 &&
+          nCol < n &&
           grid[nRow][nCol] === 1
         ) {
           const adj = nRow * n + nCol;

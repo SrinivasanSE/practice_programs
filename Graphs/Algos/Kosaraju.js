@@ -32,7 +32,7 @@ We can’t escape to another SCC → perfect isolation
 ------------------------------------------
 
 🪜 Algorithm Steps (High Level)
-Step 1: DFS and store nodes by finish time
+Step 1: Do Topo sort which stores nodes by finish time
 
 Run DFS on original graph
 
@@ -87,7 +87,7 @@ class Solution {
     const V = adj.length;
 
     // visited array reused for both DFS passes
-    const vis = new Array(V).fill(0);
+    let vis = new Array(V).fill(0);
 
     // Stack to store nodes in increasing order of finish time
     // (top of stack = highest finish time)
@@ -123,7 +123,7 @@ class Solution {
         (no outgoing edges to other SCCs).
         */
 
-    const dfs = (node) => {
+    const dfs = (node) => { // Topo sort
       vis[node] = 1;
 
       for (let nei of adj[node]) {
@@ -169,10 +169,8 @@ class Solution {
         CANNOT escape to another SCC.
         */
 
-    // Reset visited array for second DFS
-    for (let i = 0; i < V; i++) {
-      vis[i] = 0;
-    }
+        // Reset for reuse again
+    vis = new Array(V).fill(0)
 
     // Build reversed adjacency list
     for (let u = 0; u < V; u++) {

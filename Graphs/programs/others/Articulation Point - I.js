@@ -8,6 +8,14 @@ O(V + E) & O(V)
 
 */
 
+/*
+
+A node is an articulation point if:
+
+Removing the NODE disconnects the graph
+
+*/
+
 class Solution {
   // Function to find articulation points in an undirected graph.
   articulationPoints(V, adj) {
