@@ -71,7 +71,7 @@ class Solution {
     const n = s.length;
 
     // Outer loop: choose starting index of substring
-    for (let i = 0; i < n - 1; i++) {
+    for (let i = 0; i < n; i++) {
       // Start from the root for every new starting index
       let curr = node;
 
