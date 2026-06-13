@@ -9,30 +9,29 @@ Better
 O(N) + O(N) & O(1)
 */
 
-
-var sortColors = function(nums) {
-    let zC = 0, oC = 0
-    const n = nums.length
-    for(let num of nums) {
-        if (num === 0) {
-            zC++
-        } else if (num === 1) {
-            oC++
-        }
+var sortColors = function (nums) {
+  let zC = 0,
+    oC = 0;
+  const n = nums.length;
+  for (let num of nums) {
+    if (num === 0) {
+      zC++;
+    } else if (num === 1) {
+      oC++;
     }
+  }
 
-    for(let i = 0; i < zC; i++) {
-        nums[i] = 0
-    }
+  for (let i = 0; i < zC; i++) {
+    nums[i] = 0;
+  }
 
-    for(let i = zC; i < zC + oC; i++) {
-        nums[i] = 1
-    }
+  for (let i = zC; i < zC + oC; i++) {
+    nums[i] = 1;
+  }
 
-    for(let i = zC + oC; i < n; i++) {
-        nums[i] = 2
-    }
-
+  for (let i = zC + oC; i < n; i++) {
+    nums[i] = 2;
+  }
 };
 
 /*
@@ -48,22 +47,26 @@ The middle part i.e. arr[mid….high] is the unsorted segment.
 O(N) & O(1)
 */
 
+var sortColors = function (nums) {
+  const n = nums.length;
+  let low = 0,
+    mid = 0,
+    high = n - 1;
 
-var sortColors = function(nums) {
-    const n = nums.length
-    let low = 0, mid = 0, high = n - 1
-
-    while (mid <= high) { // notice the condition
-        if (nums[mid] === 2) { // we swap high with mid and the high index might contain 0/1, we don't move the mid since the mid will contain 0 or 1s which needs to be moved
-            [nums[high], nums[mid]] = [nums[mid], nums[high]]
-            high--
-        } else if (nums[mid] === 0) { // if it's 0, we move it to the left part and the low will contain 1, so we swap it and extend the mid
-            [nums[mid], nums[low]] = [nums[low], nums[mid]]
-            low++
-            mid++
-        } else { // if the mid is already having 1, we just shrink the window
-            mid++
-        }
+  // notice the condition 
+  while (mid <= high) {
+    if (nums[mid] === 2) {
+      // we swap high with mid and the high index might contain 0/1, we don't move the mid since the mid will contain 0 or 1s which needs to be moved
+      [nums[high], nums[mid]] = [nums[mid], nums[high]];
+      high--;
+    } else if (nums[mid] === 0) {
+      // if it's 0, we move it to the left part and the low will contain 1, so we swap it and extend the mid
+      [nums[mid], nums[low]] = [nums[low], nums[mid]];
+      low++;
+      mid++;
+    } else {
+      // if the mid is already having 1, we just shrink the window
+      mid++;
     }
-
+  }
 };

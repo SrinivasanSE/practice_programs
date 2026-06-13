@@ -37,7 +37,7 @@ function twoSum(arr, target) {
             }
             
             if (sum < target) {
-                i++
+                i++ 
             } else {
                 j--
             }
