@@ -24,10 +24,10 @@ function splitList(head) {
   const head2 = slow.next;
 
   // Make second half circular
-  fast.next = slow.next;
+  fast.next = head2;
 
   // Make first half circular
-  slow.next = head;
+  slow.next = head1;
 
   return [head1, head2];
 }
