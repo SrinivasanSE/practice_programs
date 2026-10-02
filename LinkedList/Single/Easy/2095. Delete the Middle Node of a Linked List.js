@@ -8,7 +8,7 @@ var deleteMiddle = function(head) {
     }
     let slow = head
     let fast = head
-    fast = fast.next.next
+    fast = fast.next.next // important, we need to move it forward, else slow will be null
 
     while (fast && fast.next != null) {
         slow = slow.next
@@ -25,7 +25,7 @@ class Solution {
             return null
         }
         
-        let prev = head
+        let prev = head // we use the prev to find the node before t
         let slow = head
         let fast = head
         

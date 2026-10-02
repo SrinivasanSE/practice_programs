@@ -77,9 +77,8 @@ var addTwoNumbers = function (l1, l2) {
     carry = Math.floor(l1.val / 10);
     l1.val %= 10;
 
-    if (!l1.next && carry) {
+    if (!l1.next && carry) { // since there is still a carry, we create a node here with 0, it will be replaced by carry in the next iteration
       l1.next = new ListNode(0);
-      break
     }
 
     l1 = l1.next;
